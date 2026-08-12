@@ -34,6 +34,10 @@ function collectionPath(collection, index, field) {
   return `collections.${collection}.${index}.${field}`;
 }
 
+function HiddenBinding({ path, value, type = "text" }) {
+  return <span hidden data-coruja-path={path} data-coruja-type={type} data-coruja-value={String(value ?? "")} />;
+}
+
 function previewBase() {
   if (typeof window === "undefined") return "";
   const raw = String(window.__CORUJA_PREVIEW_BASE_PATH__ || "").trim();
@@ -280,7 +284,7 @@ function FloatingWhatsapp() {
   return (
     <div className="floating-wa">
       <div><strong {...editable("global.cta.floatingTitle")}>{title}</strong><span {...editable("global.cta.floatingText")}>{text}</span></div>
-      <a href={wa} target="_blank" rel="noopener noreferrer" aria-label={label} data-coruja-event="whatsapp_click" data-coruja-event-label="floating_whatsapp" {...editable("global.cta.floatingButtonLabel")}>↗</a>
+      <a href={wa} target="_blank" rel="noopener noreferrer" aria-label={label} data-coruja-value={label} data-coruja-event="whatsapp_click" data-coruja-event-label="floating_whatsapp" {...editable("global.cta.floatingButtonLabel")}>↗</a>
     </div>
   );
 }
@@ -323,6 +327,7 @@ function ServiceCard({ service, index }) {
       <h3 {...editable(collectionPath("services", index, "title"))}>{service.title}</h3>
       <p {...editable(collectionPath("services", index, "description"))}>{service.description}</p>
       <a href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label={`service_${service.id}_whatsapp`} {...editableButton(collectionPath("services", index, "ctaLabel"), "Botão do serviço")}>{service.ctaLabel}<span>↗</span></a>
+      <HiddenBinding path={collectionPath("services", index, "whatsappMessage")} value={service.whatsappMessage} />
     </article>
   );
 }
@@ -365,6 +370,8 @@ function HomePage() {
 
   return (
     <Layout>
+      <HiddenBinding path="global.brand.logoIconUrl" value={useContent("global.brand.logoIconUrl", "")} type="image" />
+      <HiddenBinding path="pages.home.finalCta.whatsappMessage" value={finalMessage} />
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
@@ -483,7 +490,7 @@ function HomePage() {
             titlePath="pages.home.areas.title"
             descriptionPath="pages.home.areas.description"
           />
-          <div className="area-list">{areas.map((item, index) => <span key={item.id} {...editable(collectionPath("serviceAreas", index, "text"))}>{item.text}</span>)}</div>
+          <div className="area-list">{areas.map((item, index) => <span key={item.id} {...editable(collectionPath("serviceAreas", index, "text"))}>{item.text}<HiddenBinding path={collectionPath("serviceAreas", index, "city")} value={item.city} /><HiddenBinding path={collectionPath("serviceAreas", index, "state")} value={item.state} /></span>)}</div>
         </div>
       </section>
 
@@ -517,31 +524,34 @@ function ServicesPage() {
             eyebrow={useContent("pages.services.hero.eyebrow", "")}
             title={useContent("pages.services.intro.title", "")}
             description={useContent("pages.services.intro.description", "")}
+            eyebrowPath="pages.services.hero.eyebrow"
+            titlePath="pages.services.intro.title"
+            descriptionPath="pages.services.intro.description"
           />
           <div className="services-grid">{services.map((service, index) => <ServiceCard key={service.id} service={service} index={index} />)}</div>
         </div>
       </section>
       <section className="section technical-details">
         <div className="container">
-          <h2>{useContent("pages.services.detailsTitle", "")}</h2>
+          <h2 {...editable("pages.services.detailsTitle")}>{useContent("pages.services.detailsTitle", "")}</h2>
           <div className="credential-grid compact-cards">
-            {credentials.map(item => <article key={item.id}><span>{item.icon}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}
+            {credentials.map((item, index) => <article key={item.id}><span {...editable(collectionPath("credentials", index, "icon"))}>{item.icon}</span><h3 {...editable(collectionPath("credentials", index, "title"))}>{item.title}</h3><p {...editable(collectionPath("credentials", index, "description"))}>{item.description}</p></article>)}
           </div>
         </div>
       </section>
       <section className="section process-section">
         <div className="container">
-          <SectionTitle light eyebrow={useContent("pages.services.process.eyebrow", "")} title={useContent("pages.services.process.title", "")} />
+          <SectionTitle light eyebrow={useContent("pages.services.process.eyebrow", "")} title={useContent("pages.services.process.title", "")} eyebrowPath="pages.services.process.eyebrow" titlePath="pages.services.process.title" />
           <div className="process-grid">
-            {process.map(item => <article key={item.id}><span>{item.step}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}
+            {process.map((item, index) => <article key={item.id}><span {...editable(collectionPath("process", index, "step"))}>{item.step}</span><h3 {...editable(collectionPath("process", index, "title"))}>{item.title}</h3><p {...editable(collectionPath("process", index, "description"))}>{item.description}</p></article>)}
           </div>
         </div>
       </section>
       <section className="section">
         <div className="container narrow">
-          <h2 className="faq-title">{useContent("pages.services.faqTitle", "")}</h2>
+          <h2 className="faq-title" {...editable("pages.services.faqTitle")}>{useContent("pages.services.faqTitle", "")}</h2>
           <div className="faq-list">
-            {faq.map(item => <details key={item.id}><summary>{item.question}<span>+</span></summary><p>{item.answer}</p></details>)}
+            {faq.map((item, index) => <details key={item.id}><summary {...editable(collectionPath("faq", index, "question"))}>{item.question}<span>+</span></summary><p {...editable(collectionPath("faq", index, "answer"))}>{item.answer}</p></details>)}
           </div>
         </div>
       </section>
@@ -556,6 +566,7 @@ function ProjectsPage() {
   const wa = useWhatsAppUrl(projectMessage);
   return (
     <Layout>
+      <HiddenBinding path="pages.projects.whatsappMessage" value={projectMessage} />
       <PageHero page="projects" mark="P" />
       <section className="section">
         <div className="container">
@@ -563,13 +574,16 @@ function ProjectsPage() {
             eyebrow={useContent("pages.projects.hero.eyebrow", "")}
             title={useContent("pages.projects.intro.title", "")}
             description={useContent("pages.projects.intro.description", "")}
+            eyebrowPath="pages.projects.hero.eyebrow"
+            titlePath="pages.projects.intro.title"
+            descriptionPath="pages.projects.intro.description"
           />
           <div className="projects-grid projects-page">{projects.map((item, index) => <ProjectCard key={item.id} item={item} index={index} />)}</div>
         </div>
       </section>
       <section className="section clients-section">
         <div className="container">
-          <h2 className="subsection-title">{useContent("pages.projects.clientsTitle", "")}</h2>
+          <h2 className="subsection-title" {...editable("pages.projects.clientsTitle")}>{useContent("pages.projects.clientsTitle", "")}</h2>
           <div className="name-grid client-grid">{clients.map((item, index) => <span key={item.id} {...editable(collectionPath("clients", index, "name"))}>{item.name}</span>)}</div>
         </div>
       </section>
@@ -594,7 +608,7 @@ function AboutPage() {
       <section className="section">
         <div className="container about-grid">
           <div>
-            <SectionTitle eyebrow={useContent("pages.about.hero.eyebrow", "")} title={useContent("pages.about.story.title", "")} />
+            <SectionTitle eyebrow={useContent("pages.about.hero.eyebrow", "")} title={useContent("pages.about.story.title", "")} eyebrowPath="pages.about.hero.eyebrow" titlePath="pages.about.story.title" />
             <p className="lead-copy" {...editable("pages.about.story.paragraph1")}>{useContent("pages.about.story.paragraph1", "")}</p>
             <p className="lead-copy" {...editable("pages.about.story.paragraph2")}>{useContent("pages.about.story.paragraph2", "")}</p>
             <a className="btn btn-primary" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="about_whatsapp" {...editableButton("pages.about.ctaLabel", "Botão sobre")}>{useContent("pages.about.ctaLabel", "")}</a>
@@ -614,7 +628,7 @@ function AboutPage() {
       <section className="section technical-details">
         <div className="container">
           <div className="credential-grid compact-cards">
-            {credentials.map(item => <article key={item.id}><span>{item.icon}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}
+            {credentials.map((item, index) => <article key={item.id}><span {...editable(collectionPath("credentials", index, "icon"))}>{item.icon}</span><h3 {...editable(collectionPath("credentials", index, "title"))}>{item.title}</h3><p {...editable(collectionPath("credentials", index, "description"))}>{item.description}</p></article>)}
           </div>
         </div>
       </section>
@@ -678,6 +692,14 @@ function ContactPage() {
 
   return (
     <Layout>
+      <HiddenBinding path="pages.contact.info.title" value={infoTitle} />
+      <HiddenBinding path="pages.contact.info.description" value={infoDescription} />
+      <HiddenBinding path="pages.contact.form.nameLabel" value={nameLabel} />
+      <HiddenBinding path="pages.contact.form.phoneLabel" value={phoneLabel} />
+      <HiddenBinding path="pages.contact.form.emailLabel" value={emailLabel} />
+      <HiddenBinding path="pages.contact.form.serviceLabel" value={serviceLabel} />
+      <HiddenBinding path="pages.contact.form.messageLabel" value={messageLabel} />
+      <HiddenBinding path="pages.contact.form.whatsappMessage" value={introMessage} />
       <PageHero page="contact" mark="@" />
       <section className="section">
         <div className="container contact-grid">
@@ -734,6 +756,9 @@ function BlogPage() {
 
   return (
     <Layout>
+      <HiddenBinding path="pages.blog.emptyMessage" value={empty} />
+      <HiddenBinding path="pages.blog.readMoreLabel" value={readMore} />
+      <HiddenBinding path="pages.blog.backLabel" value={useContent("pages.blog.backLabel", "")} />
       <section className="page-hero">
         <div className="page-grid container"><div><Eyebrow light><span {...editable("pages.blog.eyebrow")}>{eyebrow}</span></Eyebrow><h1 {...editable("pages.blog.title")}>{title}</h1><p {...editable("pages.blog.description")}>{description}</p></div><div className="page-mark">B</div></div>
       </section>
