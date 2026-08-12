@@ -365,6 +365,9 @@ function HomePage() {
   const clients = useCollection("collections.clients");
   const brands = useCollection("collections.brands");
   const areas = useCollection("collections.serviceAreas");
+  const process = useCollection("collections.process");
+  const values = useCollection("collections.values");
+  const faq = useCollection("collections.faq");
   const finalMessage = useContent("pages.home.finalCta.whatsappMessage", "");
   const finalWa = useWhatsAppUrl(finalMessage);
 
@@ -372,6 +375,9 @@ function HomePage() {
     <Layout>
       <HiddenBinding path="global.brand.logoIconUrl" value={useContent("global.brand.logoIconUrl", "")} type="image" />
       <HiddenBinding path="pages.home.finalCta.whatsappMessage" value={finalMessage} />
+      {process.slice(0, 1).map((item, index) => <span hidden key={`process-${item.id}`}><HiddenBinding path={collectionPath("process", index, "step")} value={item.step} /><HiddenBinding path={collectionPath("process", index, "title")} value={item.title} /><HiddenBinding path={collectionPath("process", index, "description")} value={item.description} /></span>)}
+      {values.slice(0, 1).map((item, index) => <span hidden key={`value-${item.id}`}><HiddenBinding path={collectionPath("values", index, "title")} value={item.title} /><HiddenBinding path={collectionPath("values", index, "description")} value={item.description} /></span>)}
+      {faq.slice(0, 1).map((item, index) => <span hidden key={`faq-${item.id}`}><HiddenBinding path={collectionPath("faq", index, "question")} value={item.question} /><HiddenBinding path={collectionPath("faq", index, "answer")} value={item.answer} /></span>)}
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
