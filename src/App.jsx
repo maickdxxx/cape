@@ -10,6 +10,30 @@ import {
 } from "./coruja-template/content.jsx";
 import { fetchCorujaBlogPost, fetchCorujaBlogPosts } from "./coruja-template/api.js";
 
+function editable(path, type = "text", extra = {}) {
+  return { "data-coruja-path": path, "data-coruja-type": type, ...extra };
+}
+
+function editableButton(path, label, extra = {}) {
+  return editable(path, "button", {
+    "data-coruja-text-path": path,
+    "data-coruja-label": label,
+    ...extra,
+  });
+}
+
+function editableImage(path, altPath, label) {
+  return editable(path, "image", {
+    "data-coruja-src-path": path,
+    "data-coruja-alt-path": altPath,
+    "data-coruja-label": label,
+  });
+}
+
+function collectionPath(collection, index, field) {
+  return `collections.${collection}.${index}.${field}`;
+}
+
 function previewBase() {
   if (typeof window === "undefined") return "";
   const raw = String(window.__CORUJA_PREVIEW_BASE_PATH__ || "").trim();
@@ -148,8 +172,8 @@ function Brand() {
   const name = useContent("global.brand.name", "");
   const logo = useContent("global.brand.logoUrl", "");
   return (
-    <a className="brand" href={siteHref("/")}>
-      {logo ? <img src={logo} alt={name} /> : <><span className="brand-fallback">C</span><span>{name}</span></>}
+    <a className="brand" href={siteHref("/")} aria-label={name} {...editable("global.brand.name")}>
+      {logo ? <img src={logo} alt={name} {...editableImage("global.brand.logoUrl", "global.brand.name", "Logo da empresa")} /> : <><span className="brand-fallback">C</span><span>{name}</span></>}
     </a>
   );
 }
@@ -165,11 +189,11 @@ function Header() {
   const contact = useContent("global.nav.contactLabel", "Contato");
   const cta = useContent("global.cta.headerLabel", "Solicitar orçamento");
   const links = [
-    ["/servicos", services],
-    ["/projetos", projects],
-    ["/sobre", about],
-    ["/blog", blog],
-    ["/contato", contact],
+    ["/servicos", services, "global.nav.servicesLabel"],
+    ["/projetos", projects, "global.nav.projectsLabel"],
+    ["/sobre", about, "global.nav.aboutLabel"],
+    ["/blog", blog, "global.nav.blogLabel"],
+    ["/contato", contact, "global.nav.contactLabel"],
   ];
 
   return (
@@ -178,17 +202,17 @@ function Header() {
       <div className="container header-inner">
         <Brand />
         <nav className="desktop-nav" aria-label="Navegação principal">
-          {links.map(([href, label]) => <a key={href} href={siteHref(href)}>{label}</a>)}
+          {links.map(([href, label, path]) => <a key={href} href={siteHref(href)} {...editable(path)}>{label}</a>)}
         </nav>
         <div className="header-actions">
-          <a className="phone-link" href={tel} data-coruja-event="tel_click" data-coruja-event-label="header_phone">{phone}</a>
-          <a className="btn btn-accent btn-small" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="header_whatsapp" data-coruja-text-path="global.cta.headerLabel">{cta}</a>
+          <a className="phone-link" href={tel} data-coruja-event="tel_click" data-coruja-event-label="header_phone" {...editable("global.contact.phone")}>{phone}</a>
+          <a className="btn btn-accent btn-small" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="header_whatsapp" {...editableButton("global.cta.headerLabel", "Botão do cabeçalho")}>{cta}</a>
         </div>
         <details className="mobile-menu">
           <summary aria-label="Abrir menu"><span /><span /><span /></summary>
           <div className="mobile-panel">
-            {links.map(([href, label]) => <a key={href} href={siteHref(href)}>{label}</a>)}
-            <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="mobile_menu_whatsapp" data-coruja-text-path="global.cta.headerLabel">{cta}</a>
+            {links.map(([href, label, path]) => <a key={href} href={siteHref(href)} {...editable(path)}>{label}</a>)}
+            <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="mobile_menu_whatsapp" {...editableButton("global.cta.headerLabel", "Botão do menu móvel")}>{cta}</a>
           </div>
         </details>
       </div>
@@ -197,6 +221,8 @@ function Header() {
 }
 
 function Footer() {
+  const legalName = useContent("global.brand.legalName", "");
+  const brandDescription = useContent("global.brand.description", "");
   const tagline = useContent("global.footer.tagline", "");
   const copyright = useContent("global.footer.copyright", "");
   const email = useContent("global.contact.email", "");
@@ -205,6 +231,8 @@ function Footer() {
   const cnpj = useContent("global.contact.cnpj", "");
   const instagram = useContent("global.social.instagram", "");
   const instagramLabel = useContent("global.social.instagramLabel", "Instagram");
+  const facebook = useContent("global.social.facebook", "");
+  const linkedin = useContent("global.social.linkedin", "");
   const tel = useTelHref();
 
   return (
@@ -213,17 +241,21 @@ function Footer() {
       <div className="container footer-grid">
         <div className="footer-brand">
           <Brand />
-          <p>{tagline}</p>
+          <small {...editable("global.brand.legalName")}>{legalName}</small>
+          <p {...editable("global.brand.description")}>{brandDescription}</p>
+          <p {...editable("global.footer.tagline")}>{tagline}</p>
         </div>
         <div>
           <h3>Contato</h3>
-          <a href={tel} data-coruja-event="tel_click" data-coruja-event-label="footer_phone">{phone}</a>
-          <a href={`mailto:${email}`}>{email}</a>
-          {instagram && <a href={instagram} target="_blank" rel="noopener noreferrer">{instagramLabel}</a>}
+          <a href={tel} data-coruja-event="tel_click" data-coruja-event-label="footer_phone" {...editable("global.contact.phone")}>{phone}</a>
+          <a href={`mailto:${email}`} {...editable("global.contact.email")}>{email}</a>
+          {instagram && <a href={instagram} target="_blank" rel="noopener noreferrer" {...editable("global.social.instagramLabel", "url", { "data-coruja-url-path": "global.social.instagram" })}>{instagramLabel}</a>}
+          {facebook && <a href={facebook} target="_blank" rel="noopener noreferrer" {...editable("global.social.facebook", "url", { "data-coruja-url-path": "global.social.facebook" })}>Facebook</a>}
+          {linkedin && <a href={linkedin} target="_blank" rel="noopener noreferrer" {...editable("global.social.linkedin", "url", { "data-coruja-url-path": "global.social.linkedin" })}>LinkedIn</a>}
         </div>
         <div>
           <h3>Endereço</h3>
-          <p>{address}</p>
+          <p {...editable("global.contact.address")}>{address}</p>
           {cnpj && <small>CNPJ: {cnpj}</small>}
         </div>
         <div>
@@ -235,7 +267,7 @@ function Footer() {
           <a href={siteHref("/contato")}>Contato</a>
         </div>
       </div>
-      <div className="container footer-bottom">{copyright}</div>
+      <div className="container footer-bottom" {...editable("global.footer.copyright")}>{copyright}</div>
     </footer>
   );
 }
@@ -247,8 +279,8 @@ function FloatingWhatsapp() {
   const label = useContent("global.cta.floatingButtonLabel", "Abrir WhatsApp");
   return (
     <div className="floating-wa">
-      <div><strong>{title}</strong><span>{text}</span></div>
-      <a href={wa} target="_blank" rel="noopener noreferrer" aria-label={label} data-coruja-event="whatsapp_click" data-coruja-event-label="floating_whatsapp">↗</a>
+      <div><strong {...editable("global.cta.floatingTitle")}>{title}</strong><span {...editable("global.cta.floatingText")}>{text}</span></div>
+      <a href={wa} target="_blank" rel="noopener noreferrer" aria-label={label} data-coruja-event="whatsapp_click" data-coruja-event-label="floating_whatsapp" {...editable("global.cta.floatingButtonLabel")}>↗</a>
     </div>
   );
 }
@@ -260,12 +292,12 @@ function Layout({ children, post }) {
 function Eyebrow({ children, light = false }) {
   return <span className={`eyebrow ${light ? "eyebrow-light" : ""}`}><i />{children}</span>;
 }
-function SectionTitle({ eyebrow, title, description, light = false, compact = false }) {
+function SectionTitle({ eyebrow, title, description, eyebrowPath, titlePath, descriptionPath, light = false, compact = false }) {
   return (
     <div className={`section-title ${light ? "light" : ""} ${compact ? "compact" : ""}`}>
-      <Eyebrow light={light}>{eyebrow}</Eyebrow>
-      <h2>{title}</h2>
-      {description && <p>{description}</p>}
+      <Eyebrow light={light}><span {...(eyebrowPath ? editable(eyebrowPath) : {})}>{eyebrow}</span></Eyebrow>
+      <h2 {...(titlePath ? editable(titlePath) : {})}>{title}</h2>
+      {description && <p {...(descriptionPath ? editable(descriptionPath) : {})}>{description}</p>}
     </div>
   );
 }
@@ -273,7 +305,7 @@ function Stats() {
   const items = useCollection("collections.stats");
   return (
     <div className="stats">
-      {items.map(item => <div key={item.id}><strong>{item.value}</strong><span>{item.label}</span></div>)}
+      {items.map((item, index) => <div key={item.id}><strong {...editable(collectionPath("stats", index, "value"))}>{item.value}</strong><span {...editable(collectionPath("stats", index, "label"))}>{item.label}</span></div>)}
     </div>
   );
 }
@@ -284,24 +316,24 @@ function ServiceCard({ service, index }) {
   return (
     <article className="service-card">
       <div className="service-top">
-        <span className="service-icon">{service.icon}</span>
+        <span className="service-icon" {...editable(collectionPath("services", index, "icon"))}>{service.icon}</span>
         <span className="service-index">{String(index + 1).padStart(2, "0")}</span>
       </div>
-      <span className="pill">{service.highlight}</span>
-      <h3>{service.title}</h3>
-      <p>{service.description}</p>
-      <a href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label={`service_${service.id}_whatsapp`}>{service.ctaLabel}<span>↗</span></a>
+      <span className="pill" {...editable(collectionPath("services", index, "highlight"))}>{service.highlight}</span>
+      <h3 {...editable(collectionPath("services", index, "title"))}>{service.title}</h3>
+      <p {...editable(collectionPath("services", index, "description"))}>{service.description}</p>
+      <a href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label={`service_${service.id}_whatsapp`} {...editableButton(collectionPath("services", index, "ctaLabel"), "Botão do serviço")}>{service.ctaLabel}<span>↗</span></a>
     </article>
   );
 }
-function ProjectCard({ item }) {
+function ProjectCard({ item, index }) {
   return (
     <article className="project-card">
-      <div className="project-image"><img src={item.image} alt={item.imageAlt || item.title} /></div>
+      <div className="project-image"><img src={item.image} alt={item.imageAlt || item.title} {...editableImage(collectionPath("projects", index, "image"), collectionPath("projects", index, "imageAlt"), "Imagem do projeto")} /></div>
       <div className="project-copy">
-        <span className="pill">{item.category}</span>
-        <h3>{item.title}</h3>
-        <p>{item.description}</p>
+        <span className="pill" {...editable(collectionPath("projects", index, "category"))}>{item.category}</span>
+        <h3 {...editable(collectionPath("projects", index, "title"))}>{item.title}</h3>
+        <p {...editable(collectionPath("projects", index, "description"))}>{item.description}</p>
       </div>
     </article>
   );
@@ -313,7 +345,7 @@ function PageHero({ page, mark = "C" }) {
   return (
     <section className="page-hero">
       <div className="page-grid container">
-        <div><Eyebrow light>{eyebrow}</Eyebrow><h1>{title}</h1><p>{description}</p></div>
+        <div><Eyebrow light><span {...editable(`pages.${page}.hero.eyebrow`)}>{eyebrow}</span></Eyebrow><h1 {...editable(`pages.${page}.hero.title`)}>{title}</h1><p {...editable(`pages.${page}.hero.description`)}>{description}</p></div>
         <div className="page-mark" aria-hidden="true">{mark}</div>
       </div>
     </section>
@@ -336,24 +368,24 @@ function HomePage() {
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <Eyebrow light>{useContent("pages.home.hero.eyebrow", "")}</Eyebrow>
-            <h1>{useContent("pages.home.hero.title", "")}</h1>
-            <strong className="hero-accent">{useContent("pages.home.hero.titleAccent", "")}</strong>
-            <p>{useContent("pages.home.hero.description", "")}</p>
+            <Eyebrow light><span {...editable("pages.home.hero.eyebrow")}>{useContent("pages.home.hero.eyebrow", "")}</span></Eyebrow>
+            <h1 {...editable("pages.home.hero.title")}>{useContent("pages.home.hero.title", "")}</h1>
+            <strong className="hero-accent" {...editable("pages.home.hero.titleAccent")}>{useContent("pages.home.hero.titleAccent", "")}</strong>
+            <p {...editable("pages.home.hero.description")}>{useContent("pages.home.hero.description", "")}</p>
             <div className="hero-actions">
-              <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="hero_whatsapp" data-coruja-text-path="pages.home.hero.primaryCtaLabel">
+              <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="hero_whatsapp" {...editableButton("pages.home.hero.primaryCtaLabel", "Botão principal")}>
                 {useContent("pages.home.hero.primaryCtaLabel", "")}<span>↗</span>
               </a>
-              <a className="btn btn-ghost-light" href={siteHref("/servicos")}>{useContent("pages.home.hero.secondaryCtaLabel", "")}</a>
+              <a className="btn btn-ghost-light" href={siteHref("/servicos")} {...editableButton("pages.home.hero.secondaryCtaLabel", "Botão secundário")}>{useContent("pages.home.hero.secondaryCtaLabel", "")}</a>
             </div>
             <Stats />
           </div>
           <div className="hero-visual">
-            <img src={useContent("pages.home.hero.image", "")} alt={useContent("pages.home.hero.imageAlt", "")} />
+            <img src={useContent("pages.home.hero.image", "")} alt={useContent("pages.home.hero.imageAlt", "")} {...editableImage("pages.home.hero.image", "pages.home.hero.imageAlt", "Imagem principal")} />
             <div className="hero-credential">
-              <span>{useContent("pages.home.hero.sideLabel", "")}</span>
-              <strong>{useContent("pages.home.hero.sideTitle", "")}</strong>
-              <p>{useContent("pages.home.hero.sideText", "")}</p>
+              <span {...editable("pages.home.hero.sideLabel")}>{useContent("pages.home.hero.sideLabel", "")}</span>
+              <strong {...editable("pages.home.hero.sideTitle")}>{useContent("pages.home.hero.sideTitle", "")}</strong>
+              <p {...editable("pages.home.hero.sideText")}>{useContent("pages.home.hero.sideText", "")}</p>
             </div>
           </div>
         </div>
@@ -367,8 +399,11 @@ function HomePage() {
               eyebrow={useContent("pages.home.services.eyebrow", "")}
               title={useContent("pages.home.services.title", "")}
               description={useContent("pages.home.services.description", "")}
+              eyebrowPath="pages.home.services.eyebrow"
+              titlePath="pages.home.services.title"
+              descriptionPath="pages.home.services.description"
             />
-            <a className="text-link" href={siteHref("/servicos")}>{useContent("pages.home.services.ctaLabel", "")} ↗</a>
+            <a className="text-link" href={siteHref("/servicos")} {...editableButton("pages.home.services.ctaLabel", "Ver serviços")}>{useContent("pages.home.services.ctaLabel", "")} ↗</a>
           </div>
           <div className="services-grid">{services.slice(0, 6).map((service, index) => <ServiceCard key={service.id} service={service} index={index} />)}</div>
         </div>
@@ -381,11 +416,14 @@ function HomePage() {
             eyebrow={useContent("pages.home.credentials.eyebrow", "")}
             title={useContent("pages.home.credentials.title", "")}
             description={useContent("pages.home.credentials.description", "")}
+            eyebrowPath="pages.home.credentials.eyebrow"
+            titlePath="pages.home.credentials.title"
+            descriptionPath="pages.home.credentials.description"
           />
           <div className="credential-grid">
-            {credentials.map(item => (
+            {credentials.map((item, index) => (
               <article key={item.id}>
-                <span>{item.icon}</span><h3>{item.title}</h3><p>{item.description}</p>
+                <span {...editable(collectionPath("credentials", index, "icon"))}>{item.icon}</span><h3 {...editable(collectionPath("credentials", index, "title"))}>{item.title}</h3><p {...editable(collectionPath("credentials", index, "description"))}>{item.description}</p>
               </article>
             ))}
           </div>
@@ -399,10 +437,13 @@ function HomePage() {
               eyebrow={useContent("pages.home.projects.eyebrow", "")}
               title={useContent("pages.home.projects.title", "")}
               description={useContent("pages.home.projects.description", "")}
+              eyebrowPath="pages.home.projects.eyebrow"
+              titlePath="pages.home.projects.title"
+              descriptionPath="pages.home.projects.description"
             />
-            <a className="text-link" href={siteHref("/projetos")}>{useContent("pages.home.projects.ctaLabel", "")} ↗</a>
+            <a className="text-link" href={siteHref("/projetos")} {...editableButton("pages.home.projects.ctaLabel", "Ver projetos")}>{useContent("pages.home.projects.ctaLabel", "")} ↗</a>
           </div>
-          <div className="projects-grid">{projects.map(item => <ProjectCard key={item.id} item={item} />)}</div>
+          <div className="projects-grid">{projects.map((item, index) => <ProjectCard key={item.id} item={item} index={index} />)}</div>
         </div>
       </section>
 
@@ -413,19 +454,22 @@ function HomePage() {
             eyebrow={useContent("pages.home.clients.eyebrow", "")}
             title={useContent("pages.home.clients.title", "")}
             description={useContent("pages.home.clients.description", "")}
+            eyebrowPath="pages.home.clients.eyebrow"
+            titlePath="pages.home.clients.title"
+            descriptionPath="pages.home.clients.description"
           />
-          <div className="name-grid client-grid">{clients.map(item => <span key={item.id}>{item.name}</span>)}</div>
+          <div className="name-grid client-grid">{clients.map((item, index) => <span key={item.id} {...editable(collectionPath("clients", index, "name"))}>{item.name}</span>)}</div>
         </div>
       </section>
 
       <section className="section brands-section">
         <div className="container brand-band">
           <div>
-            <Eyebrow>{useContent("pages.home.brands.eyebrow", "")}</Eyebrow>
-            <h2>{useContent("pages.home.brands.title", "")}</h2>
-            <p>{useContent("pages.home.brands.description", "")}</p>
+            <Eyebrow><span {...editable("pages.home.brands.eyebrow")}>{useContent("pages.home.brands.eyebrow", "")}</span></Eyebrow>
+            <h2 {...editable("pages.home.brands.title")}>{useContent("pages.home.brands.title", "")}</h2>
+            <p {...editable("pages.home.brands.description")}>{useContent("pages.home.brands.description", "")}</p>
           </div>
-          <div className="brand-list">{brands.map(item => <span key={item.id}>{item.name}</span>)}</div>
+          <div className="brand-list">{brands.map((item, index) => <span key={item.id} {...editable(collectionPath("brands", index, "name"))}>{item.name}</span>)}</div>
         </div>
       </section>
 
@@ -435,19 +479,22 @@ function HomePage() {
             eyebrow={useContent("pages.home.areas.eyebrow", "")}
             title={useContent("pages.home.areas.title", "")}
             description={useContent("pages.home.areas.description", "")}
+            eyebrowPath="pages.home.areas.eyebrow"
+            titlePath="pages.home.areas.title"
+            descriptionPath="pages.home.areas.description"
           />
-          <div className="area-list">{areas.map(item => <span key={item.id}>{item.text}</span>)}</div>
+          <div className="area-list">{areas.map((item, index) => <span key={item.id} {...editable(collectionPath("serviceAreas", index, "text"))}>{item.text}</span>)}</div>
         </div>
       </section>
 
       <section className="cta-band">
         <div className="container cta-grid">
           <div>
-            <Eyebrow light>{useContent("pages.home.finalCta.eyebrow", "")}</Eyebrow>
-            <h2>{useContent("pages.home.finalCta.title", "")}</h2>
-            <p>{useContent("pages.home.finalCta.description", "")}</p>
+            <Eyebrow light><span {...editable("pages.home.finalCta.eyebrow")}>{useContent("pages.home.finalCta.eyebrow", "")}</span></Eyebrow>
+            <h2 {...editable("pages.home.finalCta.title")}>{useContent("pages.home.finalCta.title", "")}</h2>
+            <p {...editable("pages.home.finalCta.description")}>{useContent("pages.home.finalCta.description", "")}</p>
           </div>
-          <a className="btn btn-accent" href={finalWa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="home_final_whatsapp" data-coruja-text-path="pages.home.finalCta.buttonLabel">
+          <a className="btn btn-accent" href={finalWa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="home_final_whatsapp" {...editableButton("pages.home.finalCta.buttonLabel", "Botão final")}>
             {useContent("pages.home.finalCta.buttonLabel", "")}<span>↗</span>
           </a>
         </div>
@@ -517,19 +564,19 @@ function ProjectsPage() {
             title={useContent("pages.projects.intro.title", "")}
             description={useContent("pages.projects.intro.description", "")}
           />
-          <div className="projects-grid projects-page">{projects.map(item => <ProjectCard key={item.id} item={item} />)}</div>
+          <div className="projects-grid projects-page">{projects.map((item, index) => <ProjectCard key={item.id} item={item} index={index} />)}</div>
         </div>
       </section>
       <section className="section clients-section">
         <div className="container">
           <h2 className="subsection-title">{useContent("pages.projects.clientsTitle", "")}</h2>
-          <div className="name-grid client-grid">{clients.map(item => <span key={item.id}>{item.name}</span>)}</div>
+          <div className="name-grid client-grid">{clients.map((item, index) => <span key={item.id} {...editable(collectionPath("clients", index, "name"))}>{item.name}</span>)}</div>
         </div>
       </section>
       <section className="cta-band">
         <div className="container cta-grid">
-          <div><h2>{useContent("pages.projects.ctaTitle", "")}</h2><p>{useContent("pages.projects.ctaText", "")}</p></div>
-          <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="projects_whatsapp" data-coruja-text-path="pages.projects.ctaLabel">{useContent("pages.projects.ctaLabel", "")}<span>↗</span></a>
+          <div><h2 {...editable("pages.projects.ctaTitle")}>{useContent("pages.projects.ctaTitle", "")}</h2><p {...editable("pages.projects.ctaText")}>{useContent("pages.projects.ctaText", "")}</p></div>
+          <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="projects_whatsapp" {...editableButton("pages.projects.ctaLabel", "Botão de projetos")}>{useContent("pages.projects.ctaLabel", "")}<span>↗</span></a>
         </div>
       </section>
     </Layout>
@@ -548,20 +595,20 @@ function AboutPage() {
         <div className="container about-grid">
           <div>
             <SectionTitle eyebrow={useContent("pages.about.hero.eyebrow", "")} title={useContent("pages.about.story.title", "")} />
-            <p className="lead-copy">{useContent("pages.about.story.paragraph1", "")}</p>
-            <p className="lead-copy">{useContent("pages.about.story.paragraph2", "")}</p>
-            <a className="btn btn-primary" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="about_whatsapp" data-coruja-text-path="pages.about.ctaLabel">{useContent("pages.about.ctaLabel", "")}</a>
+            <p className="lead-copy" {...editable("pages.about.story.paragraph1")}>{useContent("pages.about.story.paragraph1", "")}</p>
+            <p className="lead-copy" {...editable("pages.about.story.paragraph2")}>{useContent("pages.about.story.paragraph2", "")}</p>
+            <a className="btn btn-primary" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="about_whatsapp" {...editableButton("pages.about.ctaLabel", "Botão sobre")}>{useContent("pages.about.ctaLabel", "")}</a>
           </div>
           <div className="mission-panel">
-            <article><span>01</span><h3>{useContent("pages.about.missionTitle", "")}</h3><p>{useContent("pages.about.missionText", "")}</p></article>
-            <article><span>02</span><h3>{useContent("pages.about.visionTitle", "")}</h3><p>{useContent("pages.about.visionText", "")}</p></article>
+            <article><span>01</span><h3 {...editable("pages.about.missionTitle")}>{useContent("pages.about.missionTitle", "")}</h3><p {...editable("pages.about.missionText")}>{useContent("pages.about.missionText", "")}</p></article>
+            <article><span>02</span><h3 {...editable("pages.about.visionTitle")}>{useContent("pages.about.visionTitle", "")}</h3><p {...editable("pages.about.visionText")}>{useContent("pages.about.visionText", "")}</p></article>
           </div>
         </div>
       </section>
       <section className="section values-section">
         <div className="container">
-          <h2 className="subsection-title">{useContent("pages.about.valuesTitle", "")}</h2>
-          <div className="values-grid">{values.map((item, index) => <article key={item.id}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}</div>
+          <h2 className="subsection-title" {...editable("pages.about.valuesTitle")}>{useContent("pages.about.valuesTitle", "")}</h2>
+          <div className="values-grid">{values.map((item, index) => <article key={item.id}><span>{String(index + 1).padStart(2, "0")}</span><h3 {...editable(collectionPath("values", index, "title"))}>{item.title}</h3><p {...editable(collectionPath("values", index, "description"))}>{item.description}</p></article>)}</div>
         </div>
       </section>
       <section className="section technical-details">
@@ -573,8 +620,8 @@ function AboutPage() {
       </section>
       <section className="section areas-section">
         <div className="container">
-          <h2>{useContent("pages.about.areasTitle", "")}</h2>
-          <div className="area-list">{areas.map(item => <span key={item.id}>{item.text}</span>)}</div>
+          <h2 {...editable("pages.about.areasTitle")}>{useContent("pages.about.areasTitle", "")}</h2>
+          <div className="area-list">{areas.map((item, index) => <span key={item.id} {...editable(collectionPath("serviceAreas", index, "text"))}>{item.text}</span>)}</div>
         </div>
       </section>
     </Layout>
@@ -639,15 +686,15 @@ function ContactPage() {
             <div className="contact-items">
               <a href={tel} data-coruja-event="tel_click" data-coruja-event-label="contact_phone"><span>TELEFONE</span><strong>{phone}</strong></a>
               <a href={`mailto:${email}`}><span>E-MAIL</span><strong>{email}</strong></a>
-              {instagram && <a href={instagram} target="_blank" rel="noopener noreferrer"><span>INSTAGRAM</span><strong>{instagramLabel}</strong></a>}
-              <div><span>REGIÃO</span><strong>{area}</strong></div>
-              <div><span>ATENDIMENTO</span><strong>{hours}</strong></div>
+              {instagram && <a href={instagram} target="_blank" rel="noopener noreferrer" data-coruja-url-path="global.social.instagram"><span>INSTAGRAM</span><strong {...editable("global.social.instagramLabel")}>{instagramLabel}</strong></a>}
+              <div><span>REGIÃO</span><strong {...editable("global.contact.serviceArea")}>{area}</strong></div>
+              <div><span>ATENDIMENTO</span><strong {...editable("global.contact.businessHoursWeek")}>{hours}</strong></div>
               <div><span>CNPJ</span><strong>{cnpj}</strong></div>
             </div>
           </aside>
           {formEnabled && (
             <form className="quote-form" onSubmit={submit} data-coruja-form="quote-request" data-coruja-event="form_submit" data-coruja-event-label="contact_quote_form">
-              <h2>{formTitle}</h2><p>{formDescription}</p>
+              <h2 {...editable("pages.contact.form.title")}>{formTitle}</h2><p {...editable("pages.contact.form.description")}>{formDescription}</p>
               <div className="form-row">
                 <label>{nameLabel}<input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder={namePlaceholder} /></label>
                 <label>{phoneLabel}<input required value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder={phonePlaceholder} /></label>
@@ -655,14 +702,14 @@ function ContactPage() {
               <label>{emailLabel}<input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder={emailPlaceholder} /></label>
               <label>{serviceLabel}<select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })}><option value="">{servicePlaceholder}</option>{services.map(s => <option key={s.id} value={s.title}>{s.title}</option>)}</select></label>
               <label>{messageLabel}<textarea required value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder={messagePlaceholder} /></label>
-              <button className="btn btn-accent" type="submit" data-coruja-text-path="pages.contact.form.submitText">{submitText}<span>↗</span></button>
+              <button className="btn btn-accent" type="submit" {...editableButton("pages.contact.form.submitText", "Enviar formulário")}>{submitText}<span>↗</span></button>
             </form>
           )}
         </div>
       </section>
       <section className="map-section">
         <div className="container">
-          <div className="map-heading"><h2>{mapTitle}</h2><p>{address}</p></div>
+          <div className="map-heading"><h2 {...editable("pages.contact.mapTitle")}>{mapTitle}</h2><p {...editable("global.contact.address")}>{address}</p></div>
           <div className="map-shell"><iframe title={mapTitle} src={mapSrc} loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div>
         </div>
       </section>
@@ -688,7 +735,7 @@ function BlogPage() {
   return (
     <Layout>
       <section className="page-hero">
-        <div className="page-grid container"><div><Eyebrow light>{eyebrow}</Eyebrow><h1>{title}</h1><p>{description}</p></div><div className="page-mark">B</div></div>
+        <div className="page-grid container"><div><Eyebrow light><span {...editable("pages.blog.eyebrow")}>{eyebrow}</span></Eyebrow><h1 {...editable("pages.blog.title")}>{title}</h1><p {...editable("pages.blog.description")}>{description}</p></div><div className="page-mark">B</div></div>
       </section>
       <section className="section">
         <div className="container">
