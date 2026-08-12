@@ -181,14 +181,14 @@ function Header() {
           {links.map(([href, label]) => <a key={href} href={siteHref(href)}>{label}</a>)}
         </nav>
         <div className="header-actions">
-          <a className="phone-link" href={tel}>{phone}</a>
-          <a className="btn btn-accent btn-small" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event-label="header_whatsapp">{cta}</a>
+          <a className="phone-link" href={tel} data-coruja-event="tel_click" data-coruja-event-label="header_phone">{phone}</a>
+          <a className="btn btn-accent btn-small" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="header_whatsapp" data-coruja-text-path="global.cta.headerLabel">{cta}</a>
         </div>
         <details className="mobile-menu">
           <summary aria-label="Abrir menu"><span /><span /><span /></summary>
           <div className="mobile-panel">
             {links.map(([href, label]) => <a key={href} href={siteHref(href)}>{label}</a>)}
-            <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event-label="mobile_menu_whatsapp">{cta}</a>
+            <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="mobile_menu_whatsapp" data-coruja-text-path="global.cta.headerLabel">{cta}</a>
           </div>
         </details>
       </div>
@@ -217,7 +217,7 @@ function Footer() {
         </div>
         <div>
           <h3>Contato</h3>
-          <a href={tel}>{phone}</a>
+          <a href={tel} data-coruja-event="tel_click" data-coruja-event-label="footer_phone">{phone}</a>
           <a href={`mailto:${email}`}>{email}</a>
           {instagram && <a href={instagram} target="_blank" rel="noopener noreferrer">{instagramLabel}</a>}
         </div>
@@ -248,7 +248,7 @@ function FloatingWhatsapp() {
   return (
     <div className="floating-wa">
       <div><strong>{title}</strong><span>{text}</span></div>
-      <a href={wa} target="_blank" rel="noopener noreferrer" aria-label={label} data-coruja-event-label="floating_whatsapp">↗</a>
+      <a href={wa} target="_blank" rel="noopener noreferrer" aria-label={label} data-coruja-event="whatsapp_click" data-coruja-event-label="floating_whatsapp">↗</a>
     </div>
   );
 }
@@ -290,7 +290,7 @@ function ServiceCard({ service, index }) {
       <span className="pill">{service.highlight}</span>
       <h3>{service.title}</h3>
       <p>{service.description}</p>
-      <a href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event-label={`service_${service.id}_whatsapp`}>{service.ctaLabel}<span>↗</span></a>
+      <a href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label={`service_${service.id}_whatsapp`}>{service.ctaLabel}<span>↗</span></a>
     </article>
   );
 }
@@ -341,7 +341,7 @@ function HomePage() {
             <strong className="hero-accent">{useContent("pages.home.hero.titleAccent", "")}</strong>
             <p>{useContent("pages.home.hero.description", "")}</p>
             <div className="hero-actions">
-              <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event-label="hero_whatsapp">
+              <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="hero_whatsapp" data-coruja-text-path="pages.home.hero.primaryCtaLabel">
                 {useContent("pages.home.hero.primaryCtaLabel", "")}<span>↗</span>
               </a>
               <a className="btn btn-ghost-light" href={siteHref("/servicos")}>{useContent("pages.home.hero.secondaryCtaLabel", "")}</a>
@@ -447,7 +447,7 @@ function HomePage() {
             <h2>{useContent("pages.home.finalCta.title", "")}</h2>
             <p>{useContent("pages.home.finalCta.description", "")}</p>
           </div>
-          <a className="btn btn-accent" href={finalWa} target="_blank" rel="noopener noreferrer">
+          <a className="btn btn-accent" href={finalWa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="home_final_whatsapp" data-coruja-text-path="pages.home.finalCta.buttonLabel">
             {useContent("pages.home.finalCta.buttonLabel", "")}<span>↗</span>
           </a>
         </div>
@@ -529,7 +529,7 @@ function ProjectsPage() {
       <section className="cta-band">
         <div className="container cta-grid">
           <div><h2>{useContent("pages.projects.ctaTitle", "")}</h2><p>{useContent("pages.projects.ctaText", "")}</p></div>
-          <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event-label="projects_whatsapp">{useContent("pages.projects.ctaLabel", "")}<span>↗</span></a>
+          <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="projects_whatsapp" data-coruja-text-path="pages.projects.ctaLabel">{useContent("pages.projects.ctaLabel", "")}<span>↗</span></a>
         </div>
       </section>
     </Layout>
@@ -550,7 +550,7 @@ function AboutPage() {
             <SectionTitle eyebrow={useContent("pages.about.hero.eyebrow", "")} title={useContent("pages.about.story.title", "")} />
             <p className="lead-copy">{useContent("pages.about.story.paragraph1", "")}</p>
             <p className="lead-copy">{useContent("pages.about.story.paragraph2", "")}</p>
-            <a className="btn btn-primary" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event-label="about_whatsapp">{useContent("pages.about.ctaLabel", "")}</a>
+            <a className="btn btn-primary" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="about_whatsapp" data-coruja-text-path="pages.about.ctaLabel">{useContent("pages.about.ctaLabel", "")}</a>
           </div>
           <div className="mission-panel">
             <article><span>01</span><h3>{useContent("pages.about.missionTitle", "")}</h3><p>{useContent("pages.about.missionText", "")}</p></article>
@@ -637,7 +637,7 @@ function ContactPage() {
           <aside className="contact-info">
             <SectionTitle eyebrow={useContent("pages.contact.hero.eyebrow", "")} title={infoTitle} description={infoDescription} />
             <div className="contact-items">
-              <a href={tel}><span>TELEFONE</span><strong>{phone}</strong></a>
+              <a href={tel} data-coruja-event="tel_click" data-coruja-event-label="contact_phone"><span>TELEFONE</span><strong>{phone}</strong></a>
               <a href={`mailto:${email}`}><span>E-MAIL</span><strong>{email}</strong></a>
               {instagram && <a href={instagram} target="_blank" rel="noopener noreferrer"><span>INSTAGRAM</span><strong>{instagramLabel}</strong></a>}
               <div><span>REGIÃO</span><strong>{area}</strong></div>
@@ -646,7 +646,7 @@ function ContactPage() {
             </div>
           </aside>
           {formEnabled && (
-            <form className="quote-form" onSubmit={submit} data-coruja-form="quote-request">
+            <form className="quote-form" onSubmit={submit} data-coruja-form="quote-request" data-coruja-event="form_submit" data-coruja-event-label="contact_quote_form">
               <h2>{formTitle}</h2><p>{formDescription}</p>
               <div className="form-row">
                 <label>{nameLabel}<input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder={namePlaceholder} /></label>
@@ -655,7 +655,7 @@ function ContactPage() {
               <label>{emailLabel}<input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder={emailPlaceholder} /></label>
               <label>{serviceLabel}<select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })}><option value="">{servicePlaceholder}</option>{services.map(s => <option key={s.id} value={s.title}>{s.title}</option>)}</select></label>
               <label>{messageLabel}<textarea required value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder={messagePlaceholder} /></label>
-              <button className="btn btn-accent" type="submit">{submitText}<span>↗</span></button>
+              <button className="btn btn-accent" type="submit" data-coruja-text-path="pages.contact.form.submitText">{submitText}<span>↗</span></button>
             </form>
           )}
         </div>

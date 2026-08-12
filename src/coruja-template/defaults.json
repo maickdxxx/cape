@@ -1,1 +1,500 @@
-{"global":{"brand":{"name":"CAPE Serviços e Consultoria","legalName":"CAPE SERVIÇOS E CONSULTORIA LTDA","description":"Soluções técnicas integradas em climatização, elétrica, PMOC, projetos e consultoria, com responsável técnico registrado no CREA/RJ.","logoUrl":"/logo-cape.svg","logoIconUrl":"/favicon.svg","faviconUrl":"/favicon.svg"},"contact":{"phone":"(21) 96978-3020","phoneRaw":"5521969783020","whatsappRaw":"5521969783020","whatsappDisplay":"(21) 96978-3020","whatsappMessage":"Olá! Vim pelo site da CAPE e gostaria de solicitar um orçamento.","email":"contato@grupocape.com.br","address":"Av. Ernani do Amaral Peixoto, 60, Sala 811 – Centro, Niterói – RJ, CEP 24020-074","serviceArea":"Niterói, São Gonçalo, Itaboraí e Maricá","businessHoursWeek":"Consulte a disponibilidade pelo WhatsApp","businessHoursSaturday":"","cnpj":"60.737.840/0001-63"},"seo":{"title":"CAPE Serviços e Consultoria | Climatização, Elétrica e PMOC em Niterói","description":"Climatização, instalação e manutenção de ar-condicionado, PMOC, contratos, projetos, elétrica e consultoria técnica em Niterói e região.","ogImage":"/hero-cape.svg","canonicalBase":""},"nav":{"servicesLabel":"Serviços","projectsLabel":"Projetos","aboutLabel":"Sobre","blogLabel":"Blog","contactLabel":"Contato"},"footer":{"tagline":"Climatização, elétrica e consultoria com responsabilidade técnica para residências, comércios e empresas.","copyright":"© 2026 CAPE Serviços e Consultoria. Todos os direitos reservados."},"social":{"instagram":"https://www.instagram.com/grupocape/","instagramLabel":"@grupocape","facebook":"","linkedin":""},"cta":{"headerLabel":"Solicitar orçamento","floatingTitle":"Fale com a CAPE","floatingText":"Envie sua necessidade e solicite uma avaliação.","floatingButtonLabel":"Abrir WhatsApp"},"theme":{"colors":{"primary":"#014D81","secondary":"#062F49","accent":"#E96711","background":"#F4F8FB","foreground":"#0B2130","surface":"#FFFFFF","muted":"#5E7382","border":"#D4E2EA","soft":"#E8F2F7","whatsapp":"#25D366"}}},"pages":{"home":{"hero":{"eyebrow":"CLIMATIZAÇÃO • ELÉTRICA • CONSULTORIA","title":"Soluções técnicas para ambientes que precisam funcionar com segurança.","titleAccent":"Engenharia responsável. Execução profissional.","description":"Instalação e manutenção de ar-condicionado, PMOC, contratos, projetos e serviços elétricos para residências, comércios e empresas em Niterói e região.","primaryCtaLabel":"Pedir orçamento","secondaryCtaLabel":"Conhecer serviços","image":"/hero-cape.svg","imageAlt":"Ilustração técnica de climatização e instalações elétricas da CAPE","sideLabel":"RESPONSABILIDADE TÉCNICA","sideTitle":"Engenheiro responsável registrado no CREA/RJ","sideText":"Atuação técnica com foco em segurança, conformidade e documentação adequada ao escopo do serviço."},"services":{"eyebrow":"SOLUÇÕES CAPE","title":"Um só parceiro para climatização, elétrica e manutenção técnica.","description":"Atendimento integrado para instalação, manutenção preventiva e corretiva, projetos, PMOC e consultoria.","ctaLabel":"Ver todos os serviços"},"credentials":{"eyebrow":"PADRÃO TÉCNICO","title":"Serviço pensado para reduzir improvisos e aumentar a segurança.","description":"A CAPE combina execução em campo, planejamento e responsabilidade técnica para atender necessidades residenciais, comerciais e empresariais."},"projects":{"eyebrow":"ÁREAS DE ATUAÇÃO","title":"Projetos e serviços do diagnóstico à execução.","description":"Soluções que podem envolver instalação, manutenção, projeto, laudo, plano de manutenção ou acompanhamento técnico.","ctaLabel":"Conhecer projetos e atuação"},"clients":{"eyebrow":"EXPERIÊNCIA","title":"Clientes apresentados no portfólio institucional.","description":"Empresas e instituições que fazem parte do histórico apresentado pela CAPE."},"brands":{"eyebrow":"MARCAS CREDENCIADAS","title":"Atendimento técnico em marcas reconhecidas.","description":"Credenciamentos informados pela CAPE para atendimento de climatização."},"areas":{"eyebrow":"ONDE ATENDEMOS","title":"Atendimento em Niterói e cidades da região.","description":"Consulte disponibilidade e condições para o seu endereço."},"finalCta":{"eyebrow":"PRECISA DE UMA AVALIAÇÃO?","title":"Explique o que você precisa e fale com a equipe técnica.","description":"Envie uma mensagem pelo WhatsApp com o tipo de serviço, cidade e, se possível, fotos do local ou equipamento.","buttonLabel":"Chamar no WhatsApp","whatsappMessage":"Olá! Vim pelo site da CAPE e gostaria de solicitar uma avaliação técnica."},"seo":{"title":"CAPE | Ar-condicionado, PMOC e Elétrica em Niterói","description":"Instalação e manutenção de ar-condicionado, PMOC, projetos, contratos e serviços elétricos em Niterói, São Gonçalo, Itaboraí e Maricá.","ogImage":"/hero-cape.svg"}},"services":{"hero":{"eyebrow":"SERVIÇOS","title":"Soluções técnicas para climatização, elétrica e infraestrutura.","description":"Do atendimento pontual aos contratos de manutenção, a CAPE trabalha com serviços técnicos para residências, comércios e empresas."},"intro":{"title":"Atuação completa, com escopo claro.","description":"Conheça as principais frentes de atendimento. O escopo final é definido conforme a necessidade do local, equipamento e documentação aplicável."},"detailsTitle":"Serviços e referências técnicas","process":{"eyebrow":"COMO FUNCIONA","title":"Um processo simples para organizar cada atendimento."},"faqTitle":"Dúvidas frequentes","seo":{"title":"Serviços | CAPE Serviços e Consultoria","description":"Climatização, PMOC, contratos, projetos, elétrica, energia solar, carregadores veiculares e consultoria técnica.","ogImage":"/project-climatizacao.svg"}},"projects":{"hero":{"eyebrow":"PROJETOS & CONTRATOS","title":"Planejamento técnico para instalações, manutenção e adequações.","description":"A CAPE atua em projetos e serviços que exigem organização, documentação e acompanhamento técnico."},"intro":{"title":"Soluções adaptadas ao tipo de operação.","description":"Cada projeto parte das condições reais do ambiente e do objetivo do cliente, evitando soluções genéricas."},"clientsTitle":"Histórico apresentado pela CAPE","ctaTitle":"Tem um projeto, contrato ou adequação para avaliar?","ctaText":"Envie as informações iniciais e converse com a equipe sobre o próximo passo.","ctaLabel":"Falar sobre meu projeto","whatsappMessage":"Olá! Gostaria de conversar sobre um projeto, contrato ou adequação técnica com a CAPE.","seo":{"title":"Projetos e contratos | CAPE Serviços e Consultoria","description":"Projetos de climatização e elétrica, PMOC, contratos de manutenção, laudos e consultoria técnica em Niterói e região.","ogImage":"/project-eletrica.svg"}},"about":{"hero":{"eyebrow":"SOBRE A CAPE","title":"Soluções técnicas com segurança, eficiência e responsabilidade.","description":"Conheça a proposta, os valores e a forma de atuação da CAPE Serviços e Consultoria."},"story":{"title":"Quem somos","paragraph1":"A CAPE Serviços e Consultoria é especializada em soluções técnicas nas áreas de climatização, elétrica, energia solar e consultoria, atendendo empresas e residências.","paragraph2":"A atuação prioriza segurança, eficiência, sustentabilidade e conformidade com as normas técnicas aplicáveis, com profissionais capacitados e responsável técnico registrado no CREA/RJ."},"missionTitle":"Missão","missionText":"Oferecer soluções técnicas de qualidade em climatização, elétrica e consultoria, garantindo segurança, conforto e eficiência para os clientes.","visionTitle":"Visão","visionText":"Ser referência no mercado em serviços técnicos especializados, reconhecida pela competência, confiança e inovação.","valuesTitle":"Valores que orientam o trabalho","areasTitle":"Região de atendimento","ctaLabel":"Solicitar orçamento","seo":{"title":"Sobre a CAPE | Serviços e Consultoria","description":"Conheça a CAPE, sua atuação em climatização, elétrica e consultoria e o compromisso com segurança, qualidade e responsabilidade técnica.","ogImage":"/hero-cape.svg"}},"contact":{"hero":{"eyebrow":"CONTATO","title":"Fale com a CAPE sobre o seu serviço ou projeto.","description":"Atendimento para Niterói, São Gonçalo, Itaboraí e Maricá. Envie sua solicitação pelo WhatsApp ou use os canais abaixo."},"info":{"title":"Canais de atendimento","description":"Para agilizar a avaliação, informe a cidade, o tipo de serviço e os principais detalhes do local ou equipamento."},"form":{"enabled":true,"title":"Solicite uma avaliação","description":"Preencha os dados e a mensagem será preparada para envio no WhatsApp.","nameLabel":"Nome","namePlaceholder":"Seu nome","phoneLabel":"Telefone","phonePlaceholder":"(21) 99999-9999","emailLabel":"E-mail","emailPlaceholder":"seu@email.com","serviceLabel":"Serviço","servicePlaceholder":"Selecione uma opção","messageLabel":"O que você precisa?","messagePlaceholder":"Descreva o serviço, equipamento, local ou projeto","submitText":"Enviar pelo WhatsApp","whatsappMessage":"Olá! Vim pelo site da CAPE e gostaria de solicitar uma avaliação."},"mapTitle":"Onde estamos","seo":{"title":"Contato | CAPE Serviços e Consultoria","description":"Fale com a CAPE pelo WhatsApp e solicite avaliação para climatização, PMOC, elétrica, projetos e consultoria em Niterói e região.","ogImage":"/hero-cape.svg"}},"blog":{"eyebrow":"CONTEÚDO TÉCNICO","title":"Informação para cuidar melhor de equipamentos e instalações.","description":"Conteúdos sobre climatização, PMOC, manutenção, elétrica, eficiência e segurança.","emptyMessage":"Ainda não há artigos publicados.","readMoreLabel":"Ler artigo","backLabel":"Voltar ao Blog","seo":{"title":"Blog | CAPE Serviços e Consultoria","description":"Conteúdos sobre ar-condicionado, PMOC, manutenção, elétrica e segurança técnica.","ogImage":"/hero-cape.svg"}}},"collections":{"stats":[{"id":"crea","value":"CREA/RJ","label":"responsável técnico registrado"},{"id":"cidades","value":"4 cidades","label":"região principal de atendimento"},{"id":"normas","value":"NBR / NR","label":"referências técnicas aplicáveis"}],"services":[{"id":"climatizacao","icon":"❄","title":"Climatização","description":"Instalação e manutenção de sistemas de ar-condicionado residenciais, comerciais e industriais.","highlight":"AR-CONDICIONADO","ctaLabel":"Solicitar avaliação","whatsappMessage":"Olá! Gostaria de solicitar avaliação para climatização ou ar-condicionado."},{"id":"higienizacao","icon":"✦","title":"Higienização técnica","description":"Limpeza técnica e higienização de equipamentos de climatização, conforme a necessidade do sistema.","highlight":"HIGIENIZAÇÃO","ctaLabel":"Pedir orçamento","whatsappMessage":"Olá! Gostaria de orçamento para higienização de ar-condicionado."},{"id":"pmoc","icon":"✓","title":"PMOC e contratos de manutenção","description":"Plano de Manutenção, Operação e Controle e contratos para organizar rotinas preventivas e corretivas.","highlight":"PMOC","ctaLabel":"Falar sobre PMOC","whatsappMessage":"Olá! Gostaria de informações sobre PMOC ou contrato de manutenção."},{"id":"projetos-clima","icon":"▱","title":"Projetos de climatização","description":"Planejamento técnico de soluções de climatização conforme a necessidade do ambiente e da operação.","highlight":"PROJETOS","ctaLabel":"Falar sobre projeto","whatsappMessage":"Olá! Gostaria de conversar sobre um projeto de climatização."},{"id":"eletrica","icon":"⚡","title":"Instalações elétricas","description":"Projetos, instalação de circuitos, adequações, aterramento e serviços elétricos conforme o escopo técnico.","highlight":"ELÉTRICA","ctaLabel":"Solicitar avaliação","whatsappMessage":"Olá! Gostaria de solicitar avaliação para instalação elétrica."},{"id":"manutencao-eletrica","icon":"⚙","title":"Manutenção e inspeções elétricas","description":"Manutenção preventiva e corretiva, inspeções, relatórios e recomendações para instalações elétricas.","highlight":"MANUTENÇÃO","ctaLabel":"Pedir orçamento","whatsappMessage":"Olá! Preciso de manutenção ou inspeção elétrica."},{"id":"consultoria","icon":"⌁","title":"Consultoria técnica","description":"Laudos, vistorias, POPs, adequações normativas e emissão de ART ou TRT conforme profissional e escopo aplicável.","highlight":"CONSULTORIA","ctaLabel":"Falar com a equipe","whatsappMessage":"Olá! Gostaria de informações sobre consultoria técnica, laudo ou documentação."},{"id":"solar-recarga","icon":"☀","title":"Energia solar e recarga veicular","description":"Projeto e instalação de sistemas fotovoltaicos, monitoramento e soluções de recarga para veículos elétricos.","highlight":"ENERGIA","ctaLabel":"Solicitar avaliação","whatsappMessage":"Olá! Gostaria de conversar sobre energia solar ou carregador veicular."}],"credentials":[{"id":"crea","icon":"✓","title":"Responsabilidade técnica","description":"Engenheiro responsável registrado no CREA/RJ."},{"id":"pmoc","icon":"▤","title":"PMOC e documentação","description":"Planos, laudos, vistorias e documentação técnica conforme o serviço contratado."},{"id":"normas","icon":"⚙","title":"Normas técnicas","description":"Atuação considerando referências como NR10, NBR 5410 e NBR 5419 quando aplicáveis."},{"id":"contratos","icon":"↻","title":"Manutenção contínua","description":"Contratos e rotinas preventivas e corretivas para reduzir falhas e manter a operação organizada."}],"projects":[{"id":"clima","category":"CLIMATIZAÇÃO","title":"Instalação, manutenção e projetos de climatização","description":"Soluções para ambientes residenciais, comerciais e industriais, incluindo higienização e manutenção.","image":"/project-climatizacao.svg","imageAlt":"Ilustração de sistema de climatização"},{"id":"eletrica","category":"ELÉTRICA","title":"Projetos, instalações e adequações elétricas","description":"Circuitos, inspeções, aterramento, manutenção e recomendações corretivas conforme a necessidade da instalação.","image":"/project-eletrica.svg","imageAlt":"Ilustração de projeto e quadro elétrico"},{"id":"consultoria","category":"PMOC & CONSULTORIA","title":"Planos, contratos, laudos e acompanhamento técnico","description":"Organização de manutenção, vistorias e documentação para apoiar a segurança e a operação do cliente.","image":"/project-consultoria.svg","imageAlt":"Ilustração de consultoria e verificação técnica"}],"clients":[{"id":"azevedo","name":"Azevedo & Travassos"},{"id":"deliciando","name":"Deliciando"},{"id":"baby-clinica","name":"Baby Clínica"},{"id":"uff","name":"Universidade Federal Fluminense (UFF)"},{"id":"fec","name":"Fundação Euclides da Cunha (FEC)"},{"id":"faria","name":"Diego Raphael C. de Faria Advogado"},{"id":"mane","name":"Mané"},{"id":"jp","name":"JP Refeições"},{"id":"latelier","name":"L'Atelier"},{"id":"shop-solar","name":"Shop Solar"}],"brands":[{"id":"agratto","name":"Agratto"},{"id":"elgin","name":"Elgin"},{"id":"hitachi","name":"Hitachi"},{"id":"midea","name":"Midea"},{"id":"philco","name":"Philco"},{"id":"tcl","name":"TCL"}],"process":[{"id":"contato","step":"01","title":"Entendimento da necessidade","description":"Você informa o serviço, cidade e detalhes iniciais do ambiente, equipamento ou instalação."},{"id":"avaliacao","step":"02","title":"Avaliação técnica","description":"A equipe identifica o melhor próximo passo e, quando necessário, programa avaliação no local."},{"id":"proposta","step":"03","title":"Escopo e proposta","description":"São definidos serviços, condições e documentação aplicável antes da execução."},{"id":"execucao","step":"04","title":"Execução e acompanhamento","description":"O trabalho é realizado com foco em segurança, organização e funcionamento adequado."}],"values":[{"id":"cliente","title":"Comprometimento com o cliente","description":"Entender a necessidade e propor uma solução tecnicamente adequada."},{"id":"qualidade","title":"Qualidade e segurança","description":"Priorizar segurança, desempenho e boa execução nos serviços prestados."},{"id":"etica","title":"Ética profissional","description":"Atuar com clareza, responsabilidade e respeito ao escopo contratado."},{"id":"inovacao","title":"Inovação e sustentabilidade","description":"Buscar soluções eficientes e compatíveis com a evolução das tecnologias."},{"id":"equipe","title":"Valorização da equipe técnica","description":"Reconhecer a capacitação e o trabalho dos profissionais envolvidos."}],"serviceAreas":[{"id":"niteroi","text":"Niterói"},{"id":"sao-goncalo","text":"São Gonçalo"},{"id":"itaborai","text":"Itaboraí"},{"id":"marica","text":"Maricá"}],"faq":[{"id":"regiao","question":"Quais cidades a CAPE atende?","answer":"A região principal informada inclui Niterói, São Gonçalo, Itaboraí e Maricá. Para outros locais, consulte a disponibilidade pelo WhatsApp."},{"id":"pmoc","question":"A CAPE trabalha com PMOC e contratos de manutenção?","answer":"Sim. A CAPE oferece PMOC e contratos de manutenção preventiva e corretiva, com escopo definido conforme o ambiente e os equipamentos."},{"id":"eletrica","question":"A CAPE também executa serviços elétricos?","answer":"Sim. O portfólio inclui projetos, instalações, manutenção, inspeções, aterramento e adequações elétricas."},{"id":"art","question":"É possível emitir ART ou TRT?","answer":"O portfólio prevê emissão de ART e TRT conforme o tipo de serviço, o profissional responsável e a documentação aplicável ao escopo."},{"id":"empresa","question":"Atendem empresas e residências?","answer":"Sim. A CAPE informa atendimento para residências, comércios e empresas."}]},"blog":{"enabled":true}}
+{
+  "global": {
+    "brand": {
+      "name": "CAPE Serviços e Consultoria",
+      "legalName": "CAPE SERVIÇOS E CONSULTORIA LTDA",
+      "description": "Soluções técnicas integradas em climatização, elétrica, PMOC, projetos e consultoria, com responsável técnico registrado no CREA/RJ.",
+      "logoUrl": "/logo-cape.svg",
+      "logoIconUrl": "/favicon.svg",
+      "faviconUrl": "/favicon.svg"
+    },
+    "contact": {
+      "phone": "(21) 96978-3020",
+      "phoneRaw": "5521969783020",
+      "whatsappRaw": "5521969783020",
+      "whatsappDisplay": "(21) 96978-3020",
+      "whatsappMessage": "Olá! Vim pelo site da CAPE e gostaria de solicitar um orçamento.",
+      "email": "contato@grupocape.com.br",
+      "address": "Av. Ernani do Amaral Peixoto, 60, Sala 811 – Centro, Niterói – RJ, CEP 24020-074",
+      "serviceArea": "Niterói, São Gonçalo, Itaboraí e Maricá",
+      "businessHoursWeek": "Consulte a disponibilidade pelo WhatsApp",
+      "businessHoursSaturday": "",
+      "cnpj": "60.737.840/0001-63"
+    },
+    "seo": {
+      "title": "CAPE Serviços e Consultoria | Climatização, Elétrica e PMOC em Niterói",
+      "description": "Climatização, instalação e manutenção de ar-condicionado, PMOC, contratos, projetos, elétrica e consultoria técnica em Niterói e região.",
+      "ogImage": "/hero-cape.svg",
+      "canonicalBase": ""
+    },
+    "nav": {
+      "servicesLabel": "Serviços",
+      "projectsLabel": "Projetos",
+      "aboutLabel": "Sobre",
+      "blogLabel": "Blog",
+      "contactLabel": "Contato"
+    },
+    "footer": {
+      "tagline": "Climatização, elétrica e consultoria com responsabilidade técnica para residências, comércios e empresas.",
+      "copyright": "© 2026 CAPE Serviços e Consultoria. Todos os direitos reservados."
+    },
+    "social": {
+      "instagram": "https://www.instagram.com/grupocape/",
+      "instagramLabel": "@grupocape",
+      "facebook": "",
+      "linkedin": ""
+    },
+    "cta": {
+      "headerLabel": "Solicitar orçamento",
+      "floatingTitle": "Fale com a CAPE",
+      "floatingText": "Envie sua necessidade e solicite uma avaliação.",
+      "floatingButtonLabel": "Abrir WhatsApp"
+    },
+    "theme": {
+      "colors": {
+        "primary": "#014D81",
+        "secondary": "#062F49",
+        "accent": "#E96711",
+        "background": "#F4F8FB",
+        "foreground": "#0B2130",
+        "surface": "#FFFFFF",
+        "muted": "#5E7382",
+        "border": "#D4E2EA",
+        "soft": "#E8F2F7",
+        "whatsapp": "#25D366"
+      }
+    }
+  },
+  "pages": {
+    "home": {
+      "hero": {
+        "eyebrow": "CLIMATIZAÇÃO • ELÉTRICA • CONSULTORIA",
+        "title": "Soluções técnicas para ambientes que precisam funcionar com segurança.",
+        "titleAccent": "Engenharia responsável. Execução profissional.",
+        "description": "Instalação e manutenção de ar-condicionado, PMOC, contratos, projetos e serviços elétricos para residências, comércios e empresas em Niterói e região.",
+        "primaryCtaLabel": "Pedir orçamento",
+        "secondaryCtaLabel": "Conhecer serviços",
+        "image": "/hero-cape.svg",
+        "imageAlt": "Ilustração técnica de climatização e instalações elétricas da CAPE",
+        "sideLabel": "RESPONSABILIDADE TÉCNICA",
+        "sideTitle": "Engenheiro responsável registrado no CREA/RJ",
+        "sideText": "Atuação técnica com foco em segurança, conformidade e documentação adequada ao escopo do serviço."
+      },
+      "services": {
+        "eyebrow": "SOLUÇÕES CAPE",
+        "title": "Um só parceiro para climatização, elétrica e manutenção técnica.",
+        "description": "Atendimento integrado para instalação, manutenção preventiva e corretiva, projetos, PMOC e consultoria.",
+        "ctaLabel": "Ver todos os serviços"
+      },
+      "credentials": {
+        "eyebrow": "PADRÃO TÉCNICO",
+        "title": "Serviço pensado para reduzir improvisos e aumentar a segurança.",
+        "description": "A CAPE combina execução em campo, planejamento e responsabilidade técnica para atender necessidades residenciais, comerciais e empresariais."
+      },
+      "projects": {
+        "eyebrow": "ÁREAS DE ATUAÇÃO",
+        "title": "Projetos e serviços do diagnóstico à execução.",
+        "description": "Soluções que podem envolver instalação, manutenção, projeto, laudo, plano de manutenção ou acompanhamento técnico.",
+        "ctaLabel": "Conhecer projetos e atuação"
+      },
+      "clients": {
+        "eyebrow": "EXPERIÊNCIA",
+        "title": "Clientes apresentados no portfólio institucional.",
+        "description": "Empresas e instituições que fazem parte do histórico apresentado pela CAPE."
+      },
+      "brands": {
+        "eyebrow": "MARCAS CREDENCIADAS",
+        "title": "Atendimento técnico em marcas reconhecidas.",
+        "description": "Credenciamentos informados pela CAPE para atendimento de climatização."
+      },
+      "areas": {
+        "eyebrow": "ONDE ATENDEMOS",
+        "title": "Atendimento em Niterói e cidades da região.",
+        "description": "Consulte disponibilidade e condições para o seu endereço."
+      },
+      "finalCta": {
+        "eyebrow": "PRECISA DE UMA AVALIAÇÃO?",
+        "title": "Explique o que você precisa e fale com a equipe técnica.",
+        "description": "Envie uma mensagem pelo WhatsApp com o tipo de serviço, cidade e, se possível, fotos do local ou equipamento.",
+        "buttonLabel": "Chamar no WhatsApp",
+        "whatsappMessage": "Olá! Vim pelo site da CAPE e gostaria de solicitar uma avaliação técnica."
+      },
+      "seo": {
+        "title": "CAPE | Ar-condicionado, PMOC e Elétrica em Niterói",
+        "description": "Instalação e manutenção de ar-condicionado, PMOC, projetos, contratos e serviços elétricos em Niterói, São Gonçalo, Itaboraí e Maricá.",
+        "ogImage": "/hero-cape.svg"
+      }
+    },
+    "services": {
+      "hero": {
+        "eyebrow": "SERVIÇOS",
+        "title": "Soluções técnicas para climatização, elétrica e infraestrutura.",
+        "description": "Do atendimento pontual aos contratos de manutenção, a CAPE trabalha com serviços técnicos para residências, comércios e empresas."
+      },
+      "intro": {
+        "title": "Atuação completa, com escopo claro.",
+        "description": "Conheça as principais frentes de atendimento. O escopo final é definido conforme a necessidade do local, equipamento e documentação aplicável."
+      },
+      "detailsTitle": "Serviços e referências técnicas",
+      "process": {
+        "eyebrow": "COMO FUNCIONA",
+        "title": "Um processo simples para organizar cada atendimento."
+      },
+      "faqTitle": "Dúvidas frequentes",
+      "seo": {
+        "title": "Serviços | CAPE Serviços e Consultoria",
+        "description": "Climatização, PMOC, contratos, projetos, elétrica, energia solar, carregadores veiculares e consultoria técnica.",
+        "ogImage": "/project-climatizacao.svg"
+      }
+    },
+    "projects": {
+      "hero": {
+        "eyebrow": "PROJETOS & CONTRATOS",
+        "title": "Planejamento técnico para instalações, manutenção e adequações.",
+        "description": "A CAPE atua em projetos e serviços que exigem organização, documentação e acompanhamento técnico."
+      },
+      "intro": {
+        "title": "Soluções adaptadas ao tipo de operação.",
+        "description": "Cada projeto parte das condições reais do ambiente e do objetivo do cliente, evitando soluções genéricas."
+      },
+      "clientsTitle": "Histórico apresentado pela CAPE",
+      "ctaTitle": "Tem um projeto, contrato ou adequação para avaliar?",
+      "ctaText": "Envie as informações iniciais e converse com a equipe sobre o próximo passo.",
+      "ctaLabel": "Falar sobre meu projeto",
+      "whatsappMessage": "Olá! Gostaria de conversar sobre um projeto, contrato ou adequação técnica com a CAPE.",
+      "seo": {
+        "title": "Projetos e contratos | CAPE Serviços e Consultoria",
+        "description": "Projetos de climatização e elétrica, PMOC, contratos de manutenção, laudos e consultoria técnica em Niterói e região.",
+        "ogImage": "/project-eletrica.svg"
+      }
+    },
+    "about": {
+      "hero": {
+        "eyebrow": "SOBRE A CAPE",
+        "title": "Soluções técnicas com segurança, eficiência e responsabilidade.",
+        "description": "Conheça a proposta, os valores e a forma de atuação da CAPE Serviços e Consultoria."
+      },
+      "story": {
+        "title": "Quem somos",
+        "paragraph1": "A CAPE Serviços e Consultoria é especializada em soluções técnicas nas áreas de climatização, elétrica, energia solar e consultoria, atendendo empresas e residências.",
+        "paragraph2": "A atuação prioriza segurança, eficiência, sustentabilidade e conformidade com as normas técnicas aplicáveis, com profissionais capacitados e responsável técnico registrado no CREA/RJ."
+      },
+      "missionTitle": "Missão",
+      "missionText": "Oferecer soluções técnicas de qualidade em climatização, elétrica e consultoria, garantindo segurança, conforto e eficiência para os clientes.",
+      "visionTitle": "Visão",
+      "visionText": "Ser referência no mercado em serviços técnicos especializados, reconhecida pela competência, confiança e inovação.",
+      "valuesTitle": "Valores que orientam o trabalho",
+      "areasTitle": "Região de atendimento",
+      "ctaLabel": "Solicitar orçamento",
+      "seo": {
+        "title": "Sobre a CAPE | Serviços e Consultoria",
+        "description": "Conheça a CAPE, sua atuação em climatização, elétrica e consultoria e o compromisso com segurança, qualidade e responsabilidade técnica.",
+        "ogImage": "/hero-cape.svg"
+      }
+    },
+    "contact": {
+      "hero": {
+        "eyebrow": "CONTATO",
+        "title": "Fale com a CAPE sobre o seu serviço ou projeto.",
+        "description": "Atendimento para Niterói, São Gonçalo, Itaboraí e Maricá. Envie sua solicitação pelo WhatsApp ou use os canais abaixo."
+      },
+      "info": {
+        "title": "Canais de atendimento",
+        "description": "Para agilizar a avaliação, informe a cidade, o tipo de serviço e os principais detalhes do local ou equipamento."
+      },
+      "form": {
+        "enabled": true,
+        "title": "Solicite uma avaliação",
+        "description": "Preencha os dados e a mensagem será preparada para envio no WhatsApp.",
+        "nameLabel": "Nome",
+        "namePlaceholder": "Seu nome",
+        "phoneLabel": "Telefone",
+        "phonePlaceholder": "(21) 99999-9999",
+        "emailLabel": "E-mail",
+        "emailPlaceholder": "seu@email.com",
+        "serviceLabel": "Serviço",
+        "servicePlaceholder": "Selecione uma opção",
+        "messageLabel": "O que você precisa?",
+        "messagePlaceholder": "Descreva o serviço, equipamento, local ou projeto",
+        "submitText": "Enviar pelo WhatsApp",
+        "whatsappMessage": "Olá! Vim pelo site da CAPE e gostaria de solicitar uma avaliação."
+      },
+      "mapTitle": "Onde estamos",
+      "seo": {
+        "title": "Contato | CAPE Serviços e Consultoria",
+        "description": "Fale com a CAPE pelo WhatsApp e solicite avaliação para climatização, PMOC, elétrica, projetos e consultoria em Niterói e região.",
+        "ogImage": "/hero-cape.svg"
+      }
+    },
+    "blog": {
+      "eyebrow": "CONTEÚDO TÉCNICO",
+      "title": "Informação para cuidar melhor de equipamentos e instalações.",
+      "description": "Conteúdos sobre climatização, PMOC, manutenção, elétrica, eficiência e segurança.",
+      "emptyMessage": "Ainda não há artigos publicados.",
+      "readMoreLabel": "Ler artigo",
+      "backLabel": "Voltar ao Blog",
+      "seo": {
+        "title": "Blog | CAPE Serviços e Consultoria",
+        "description": "Conteúdos sobre ar-condicionado, PMOC, manutenção, elétrica e segurança técnica.",
+        "ogImage": "/hero-cape.svg"
+      }
+    }
+  },
+  "collections": {
+    "stats": [
+      {
+        "id": "crea",
+        "value": "CREA/RJ",
+        "label": "responsável técnico registrado"
+      },
+      {
+        "id": "cidades",
+        "value": "4 cidades",
+        "label": "região principal de atendimento"
+      },
+      {
+        "id": "normas",
+        "value": "NBR / NR",
+        "label": "referências técnicas aplicáveis"
+      }
+    ],
+    "services": [
+      {
+        "id": "climatizacao",
+        "icon": "❄",
+        "title": "Climatização",
+        "description": "Instalação e manutenção de sistemas de ar-condicionado residenciais, comerciais e industriais.",
+        "highlight": "AR-CONDICIONADO",
+        "ctaLabel": "Solicitar avaliação",
+        "whatsappMessage": "Olá! Gostaria de solicitar avaliação para climatização ou ar-condicionado."
+      },
+      {
+        "id": "higienizacao",
+        "icon": "✦",
+        "title": "Higienização técnica",
+        "description": "Limpeza técnica e higienização de equipamentos de climatização, conforme a necessidade do sistema.",
+        "highlight": "HIGIENIZAÇÃO",
+        "ctaLabel": "Pedir orçamento",
+        "whatsappMessage": "Olá! Gostaria de orçamento para higienização de ar-condicionado."
+      },
+      {
+        "id": "pmoc",
+        "icon": "✓",
+        "title": "PMOC e contratos de manutenção",
+        "description": "Plano de Manutenção, Operação e Controle e contratos para organizar rotinas preventivas e corretivas.",
+        "highlight": "PMOC",
+        "ctaLabel": "Falar sobre PMOC",
+        "whatsappMessage": "Olá! Gostaria de informações sobre PMOC ou contrato de manutenção."
+      },
+      {
+        "id": "projetos-clima",
+        "icon": "▱",
+        "title": "Projetos de climatização",
+        "description": "Planejamento técnico de soluções de climatização conforme a necessidade do ambiente e da operação.",
+        "highlight": "PROJETOS",
+        "ctaLabel": "Falar sobre projeto",
+        "whatsappMessage": "Olá! Gostaria de conversar sobre um projeto de climatização."
+      },
+      {
+        "id": "eletrica",
+        "icon": "⚡",
+        "title": "Instalações elétricas",
+        "description": "Projetos, instalação de circuitos, adequações, aterramento e serviços elétricos conforme o escopo técnico.",
+        "highlight": "ELÉTRICA",
+        "ctaLabel": "Solicitar avaliação",
+        "whatsappMessage": "Olá! Gostaria de solicitar avaliação para instalação elétrica."
+      },
+      {
+        "id": "manutencao-eletrica",
+        "icon": "⚙",
+        "title": "Manutenção e inspeções elétricas",
+        "description": "Manutenção preventiva e corretiva, inspeções, relatórios e recomendações para instalações elétricas.",
+        "highlight": "MANUTENÇÃO",
+        "ctaLabel": "Pedir orçamento",
+        "whatsappMessage": "Olá! Preciso de manutenção ou inspeção elétrica."
+      },
+      {
+        "id": "consultoria",
+        "icon": "⌁",
+        "title": "Consultoria técnica",
+        "description": "Laudos, vistorias, POPs, adequações normativas e emissão de ART ou TRT conforme profissional e escopo aplicável.",
+        "highlight": "CONSULTORIA",
+        "ctaLabel": "Falar com a equipe",
+        "whatsappMessage": "Olá! Gostaria de informações sobre consultoria técnica, laudo ou documentação."
+      },
+      {
+        "id": "solar-recarga",
+        "icon": "☀",
+        "title": "Energia solar e recarga veicular",
+        "description": "Projeto e instalação de sistemas fotovoltaicos, monitoramento e soluções de recarga para veículos elétricos.",
+        "highlight": "ENERGIA",
+        "ctaLabel": "Solicitar avaliação",
+        "whatsappMessage": "Olá! Gostaria de conversar sobre energia solar ou carregador veicular."
+      }
+    ],
+    "credentials": [
+      {
+        "id": "crea",
+        "icon": "✓",
+        "title": "Responsabilidade técnica",
+        "description": "Engenheiro responsável registrado no CREA/RJ."
+      },
+      {
+        "id": "pmoc",
+        "icon": "▤",
+        "title": "PMOC e documentação",
+        "description": "Planos, laudos, vistorias e documentação técnica conforme o serviço contratado."
+      },
+      {
+        "id": "normas",
+        "icon": "⚙",
+        "title": "Normas técnicas",
+        "description": "Atuação considerando referências como NR10, NBR 5410 e NBR 5419 quando aplicáveis."
+      },
+      {
+        "id": "contratos",
+        "icon": "↻",
+        "title": "Manutenção contínua",
+        "description": "Contratos e rotinas preventivas e corretivas para reduzir falhas e manter a operação organizada."
+      }
+    ],
+    "projects": [
+      {
+        "id": "clima",
+        "category": "CLIMATIZAÇÃO",
+        "title": "Instalação, manutenção e projetos de climatização",
+        "description": "Soluções para ambientes residenciais, comerciais e industriais, incluindo higienização e manutenção.",
+        "image": "/project-climatizacao.svg",
+        "imageAlt": "Ilustração de sistema de climatização"
+      },
+      {
+        "id": "eletrica",
+        "category": "ELÉTRICA",
+        "title": "Projetos, instalações e adequações elétricas",
+        "description": "Circuitos, inspeções, aterramento, manutenção e recomendações corretivas conforme a necessidade da instalação.",
+        "image": "/project-eletrica.svg",
+        "imageAlt": "Ilustração de projeto e quadro elétrico"
+      },
+      {
+        "id": "consultoria",
+        "category": "PMOC & CONSULTORIA",
+        "title": "Planos, contratos, laudos e acompanhamento técnico",
+        "description": "Organização de manutenção, vistorias e documentação para apoiar a segurança e a operação do cliente.",
+        "image": "/project-consultoria.svg",
+        "imageAlt": "Ilustração de consultoria e verificação técnica"
+      }
+    ],
+    "clients": [
+      { "id": "azevedo", "name": "Azevedo & Travassos" },
+      { "id": "deliciando", "name": "Deliciando" },
+      { "id": "baby-clinica", "name": "Baby Clínica" },
+      { "id": "uff", "name": "Universidade Federal Fluminense (UFF)" },
+      { "id": "fec", "name": "Fundação Euclides da Cunha (FEC)" },
+      { "id": "faria", "name": "Diego Raphael C. de Faria Advogado" },
+      { "id": "mane", "name": "Mané" },
+      { "id": "jp", "name": "JP Refeições" },
+      { "id": "latelier", "name": "L'Atelier" },
+      { "id": "shop-solar", "name": "Shop Solar" }
+    ],
+    "brands": [
+      { "id": "agratto", "name": "Agratto" },
+      { "id": "elgin", "name": "Elgin" },
+      { "id": "hitachi", "name": "Hitachi" },
+      { "id": "midea", "name": "Midea" },
+      { "id": "philco", "name": "Philco" },
+      { "id": "tcl", "name": "TCL" }
+    ],
+    "process": [
+      {
+        "id": "contato",
+        "step": "01",
+        "title": "Entendimento da necessidade",
+        "description": "Você informa o serviço, cidade e detalhes iniciais do ambiente, equipamento ou instalação."
+      },
+      {
+        "id": "avaliacao",
+        "step": "02",
+        "title": "Avaliação técnica",
+        "description": "A equipe identifica o melhor próximo passo e, quando necessário, programa avaliação no local."
+      },
+      {
+        "id": "proposta",
+        "step": "03",
+        "title": "Escopo e proposta",
+        "description": "São definidos serviços, condições e documentação aplicável antes da execução."
+      },
+      {
+        "id": "execucao",
+        "step": "04",
+        "title": "Execução e acompanhamento",
+        "description": "O trabalho é realizado com foco em segurança, organização e funcionamento adequado."
+      }
+    ],
+    "values": [
+      {
+        "id": "cliente",
+        "title": "Comprometimento com o cliente",
+        "description": "Entender a necessidade e propor uma solução tecnicamente adequada."
+      },
+      {
+        "id": "qualidade",
+        "title": "Qualidade e segurança",
+        "description": "Priorizar segurança, desempenho e boa execução nos serviços prestados."
+      },
+      {
+        "id": "etica",
+        "title": "Ética profissional",
+        "description": "Atuar com clareza, responsabilidade e respeito ao escopo contratado."
+      },
+      {
+        "id": "inovacao",
+        "title": "Inovação e sustentabilidade",
+        "description": "Buscar soluções eficientes e compatíveis com a evolução das tecnologias."
+      },
+      {
+        "id": "equipe",
+        "title": "Valorização da equipe técnica",
+        "description": "Reconhecer a capacitação e o trabalho dos profissionais envolvidos."
+      }
+    ],
+    "serviceAreas": [
+      { "id": "niteroi", "text": "Niterói", "city": "Niterói", "state": "RJ" },
+      {
+        "id": "sao-goncalo",
+        "text": "São Gonçalo",
+        "city": "São Gonçalo",
+        "state": "RJ"
+      },
+      { "id": "itaborai", "text": "Itaboraí", "city": "Itaboraí", "state": "RJ" },
+      { "id": "marica", "text": "Maricá", "city": "Maricá", "state": "RJ" }
+    ],
+    "faq": [
+      {
+        "id": "regiao",
+        "question": "Quais cidades a CAPE atende?",
+        "answer": "A região principal informada inclui Niterói, São Gonçalo, Itaboraí e Maricá. Para outros locais, consulte a disponibilidade pelo WhatsApp."
+      },
+      {
+        "id": "pmoc",
+        "question": "A CAPE trabalha com PMOC e contratos de manutenção?",
+        "answer": "Sim. A CAPE oferece PMOC e contratos de manutenção preventiva e corretiva, com escopo definido conforme o ambiente e os equipamentos."
+      },
+      {
+        "id": "eletrica",
+        "question": "A CAPE também executa serviços elétricos?",
+        "answer": "Sim. O portfólio inclui projetos, instalações, manutenção, inspeções, aterramento e adequações elétricas."
+      },
+      {
+        "id": "art",
+        "question": "É possível emitir ART ou TRT?",
+        "answer": "O portfólio prevê emissão de ART e TRT conforme o tipo de serviço, o profissional responsável e a documentação aplicável ao escopo."
+      },
+      {
+        "id": "empresa",
+        "question": "Atendem empresas e residências?",
+        "answer": "Sim. A CAPE informa atendimento para residências, comércios e empresas."
+      }
+    ]
+  },
+  "blog": { "enabled": true }
+}
