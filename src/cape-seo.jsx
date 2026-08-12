@@ -232,6 +232,8 @@ function brandAlt(content) {
 
 export default function CapeSeoEnhancer() {
   useEffect(() => {
+    if (window.parent !== window) return undefined;
+
     let active = true;
     let timer;
 
