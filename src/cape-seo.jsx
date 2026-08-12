@@ -106,8 +106,14 @@ function buildSchema(content, route, page, post, canonical, image, title, descri
   const brand = readObject(global.brand);
   const contact = readObject(global.contact);
   const social = readObject(global.social);
-  const businessId = `${canonical || window.location.origin}/#business`;
-  const websiteId = `${window.location.origin}/#website`;
+  let siteOrigin = window.location.origin;
+  try {
+    siteOrigin = new URL(canonical).origin;
+  } catch {
+    // Mantém a origem atual quando não houver canonical válido.
+  }
+  const businessId = `${siteOrigin}/#business`;
+  const websiteId = `${siteOrigin}/#website`;
   const sameAs = [social.instagram, social.facebook, social.linkedin]
     .filter((value) => typeof value === "string" && value.trim())
     .map((value) => value.trim());
@@ -122,7 +128,7 @@ function buildSchema(content, route, page, post, canonical, image, title, descri
     name: brand.name || "CAPE Serviços e Consultoria",
     legalName: brand.legalName || undefined,
     description: brand.description || undefined,
-    url: canonical ? new URL(canonical).origin : window.location.origin,
+    url: siteOrigin,
     logo: logo || undefined,
     image: image || logo || undefined,
     telephone: telephone || undefined,
@@ -171,10 +177,6 @@ function buildSchema(content, route, page, post, canonical, image, title, descri
   if (type === "WebSite") {
     pageNode["@id"] = websiteId;
     pageNode.inLanguage = "pt-BR";
-  }
-
-  if (type === "Blog") {
-    pageNode.blogPost = undefined;
   }
 
   return {
