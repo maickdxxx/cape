@@ -24,7 +24,7 @@
     "seo": {
       "title": "CAPE Serviços e Consultoria | Climatização, Elétrica e PMOC em Niterói",
       "description": "Climatização, instalação e manutenção de ar-condicionado, PMOC, contratos, projetos, elétrica e consultoria técnica em Niterói e região.",
-      "ogImage": "/hero-cape.svg",
+      "ogImage": "/logo-cape-oficial.png",
       "canonicalBase": ""
     },
     "nav": {
@@ -123,7 +123,7 @@
       "seo": {
         "title": "CAPE | Ar-condicionado, PMOC e Elétrica em Niterói",
         "description": "Instalação e manutenção de ar-condicionado, PMOC, projetos, contratos e serviços elétricos em Niterói, São Gonçalo, Itaboraí e Maricá.",
-        "ogImage": "/hero-cape.svg"
+        "ogImage": "/logo-cape-oficial.png"
       }
     },
     "services": {
@@ -143,9 +143,9 @@
       },
       "faqTitle": "Dúvidas frequentes",
       "seo": {
-        "title": "Serviços | CAPE Serviços e Consultoria",
-        "description": "Climatização, PMOC, contratos, projetos, elétrica, energia solar, carregadores veiculares e consultoria técnica.",
-        "ogImage": "/project-climatizacao.svg"
+        "title": "Climatização, PMOC e Elétrica em Niterói | CAPE",
+        "description": "Serviços de climatização, PMOC, contratos de manutenção, projetos e instalações elétricas em Niterói, São Gonçalo, Itaboraí e Maricá.",
+        "ogImage": "/logo-cape-oficial.png"
       }
     },
     "projects": {
@@ -164,9 +164,9 @@
       "ctaLabel": "Falar sobre meu projeto",
       "whatsappMessage": "Olá! Gostaria de conversar sobre um projeto, contrato ou adequação técnica com a CAPE.",
       "seo": {
-        "title": "Projetos e contratos | CAPE Serviços e Consultoria",
+        "title": "Projetos, PMOC e Contratos em Niterói | CAPE",
         "description": "Projetos de climatização e elétrica, PMOC, contratos de manutenção, laudos e consultoria técnica em Niterói e região.",
-        "ogImage": "/project-eletrica.svg"
+        "ogImage": "/logo-cape-oficial.png"
       }
     },
     "about": {
@@ -188,9 +188,9 @@
       "areasTitle": "Região de atendimento",
       "ctaLabel": "Solicitar orçamento",
       "seo": {
-        "title": "Sobre a CAPE | Serviços e Consultoria",
+        "title": "Sobre a CAPE | Climatização e Elétrica em Niterói",
         "description": "Conheça a CAPE, sua atuação em climatização, elétrica e consultoria e o compromisso com segurança, qualidade e responsabilidade técnica.",
-        "ogImage": "/hero-cape.svg"
+        "ogImage": "/logo-cape-oficial.png"
       }
     },
     "contact": {
@@ -222,9 +222,9 @@
       },
       "mapTitle": "Onde estamos",
       "seo": {
-        "title": "Contato | CAPE Serviços e Consultoria",
+        "title": "Contato CAPE | Climatização, PMOC e Elétrica em Niterói",
         "description": "Fale com a CAPE pelo WhatsApp e solicite avaliação para climatização, PMOC, elétrica, projetos e consultoria em Niterói e região.",
-        "ogImage": "/hero-cape.svg"
+        "ogImage": "/logo-cape-oficial.png"
       }
     },
     "blog": {
@@ -235,9 +235,9 @@
       "readMoreLabel": "Ler artigo",
       "backLabel": "Voltar ao Blog",
       "seo": {
-        "title": "Blog | CAPE Serviços e Consultoria",
+        "title": "Blog CAPE | Ar-condicionado, PMOC e Elétrica",
         "description": "Conteúdos sobre ar-condicionado, PMOC, manutenção, elétrica e segurança técnica.",
-        "ogImage": "/hero-cape.svg"
+        "ogImage": "/logo-cape-oficial.png"
       }
     }
   },
