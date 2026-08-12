@@ -175,9 +175,10 @@ function SeoManager({ post }) {
 function Brand() {
   const name = useContent("global.brand.name", "");
   const logo = useContent("global.brand.logoUrl", "");
+  const logoSrc = logo === "/logo-cape.svg" ? "/logo-cape-oficial.png" : logo;
   return (
     <a className="brand" href={siteHref("/")} aria-label={name} {...editable("global.brand.name")}>
-      {logo ? <img src={logo} alt={name} {...editableImage("global.brand.logoUrl", "global.brand.name", "Logo da empresa")} /> : <><span className="brand-fallback">C</span><span>{name}</span></>}
+      {logo ? <img src={logoSrc} alt={name} {...editableImage("global.brand.logoUrl", "global.brand.name", "Logo da empresa")} /> : <><span className="brand-fallback">C</span><span>{name}</span></>}
     </a>
   );
 }
@@ -192,7 +193,9 @@ function Header() {
   const blog = useContent("global.nav.blogLabel", "Blog");
   const contact = useContent("global.nav.contactLabel", "Contato");
   const cta = useContent("global.cta.headerLabel", "Solicitar orçamento");
+  const home = useContent("global.nav.homeLabel", "Início");
   const links = [
+    ["/", home, "global.nav.homeLabel"],
     ["/servicos", services, "global.nav.servicesLabel"],
     ["/projetos", projects, "global.nav.projectsLabel"],
     ["/sobre", about, "global.nav.aboutLabel"],
@@ -264,6 +267,7 @@ function Footer() {
         </div>
         <div>
           <h3>Navegação</h3>
+          <a href={siteHref("/")}>Início</a>
           <a href={siteHref("/servicos")}>Serviços</a>
           <a href={siteHref("/projetos")}>Projetos</a>
           <a href={siteHref("/sobre")}>Sobre</a>
@@ -284,7 +288,10 @@ function FloatingWhatsapp() {
   return (
     <div className="floating-wa">
       <div><strong {...editable("global.cta.floatingTitle")}>{title}</strong><span {...editable("global.cta.floatingText")}>{text}</span></div>
-      <a href={wa} target="_blank" rel="noopener noreferrer" aria-label={label} data-coruja-value={label} data-coruja-event="whatsapp_click" data-coruja-event-label="floating_whatsapp" {...editable("global.cta.floatingButtonLabel")}>↗</a>
+      <a href={wa} target="_blank" rel="noopener noreferrer" aria-label={label} title={label} data-coruja-value={label} data-coruja-event="whatsapp_click" data-coruja-event-label="floating_whatsapp" {...editable("global.cta.floatingButtonLabel")}>
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3.2A12.7 12.7 0 0 0 5.1 22.34L3.4 28.6l6.41-1.68a12.74 12.74 0 1 0 6.23-23.72Zm0 22.98c-2.04 0-4.03-.55-5.76-1.58l-.41-.24-3.8 1 1.01-3.71-.27-.42a10.24 10.24 0 1 1 9.23 4.95Zm5.62-7.67c-.31-.15-1.82-.9-2.1-1-.28-.1-.49-.16-.69.15-.2.31-.8 1-.98 1.21-.18.2-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53a9.32 9.32 0 0 1-1.72-2.14c-.18-.31-.02-.48.14-.63.14-.14.3-.36.46-.54.15-.18.2-.31.3-.51.11-.21.06-.39-.02-.54-.08-.16-.7-1.68-.95-2.3-.25-.6-.5-.52-.69-.53h-.59c-.2 0-.54.08-.82.39-.28.3-1.08 1.05-1.08 2.57 0 1.51 1.11 2.98 1.26 3.18.15.2 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.24 1.41.2 1.94.13.59-.09 1.82-.75 2.08-1.47.25-.72.25-1.34.18-1.47-.08-.13-.28-.2-.59-.36Z" /></svg>
+        <span className="sr-only">{label}</span>
+      </a>
     </div>
   );
 }

@@ -88,6 +88,11 @@
       "type": "url"
     },
     {
+      "path": "global.nav.homeLabel",
+      "label": "Menu: Início",
+      "type": "text"
+    },
+    {
       "path": "global.nav.servicesLabel",
       "label": "Menu: Serviços",
       "type": "text"

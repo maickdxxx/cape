@@ -4,7 +4,7 @@
       "name": "CAPE Serviços e Consultoria",
       "legalName": "CAPE SERVIÇOS E CONSULTORIA LTDA",
       "description": "Soluções técnicas integradas em climatização, elétrica, PMOC, projetos e consultoria, com responsável técnico registrado no CREA/RJ.",
-      "logoUrl": "/logo-cape.svg",
+      "logoUrl": "/logo-cape-oficial.png",
       "logoIconUrl": "/favicon.svg",
       "faviconUrl": "/favicon.svg"
     },
@@ -28,6 +28,7 @@
       "canonicalBase": ""
     },
     "nav": {
+      "homeLabel": "Início",
       "servicesLabel": "Serviços",
       "projectsLabel": "Projetos",
       "aboutLabel": "Sobre",
