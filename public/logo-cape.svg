@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" role="img" aria-labelledby="title">
+<title id="title">CAPE Serviços e Consultoria</title>
+<g transform="translate(32 30)">
+  <g transform="translate(0 4)" stroke="#214861" fill="none">
+    <circle cx="92" cy="82" r="60" stroke-width="15"/>
+    <path d="M92 12v-12M92 164v12M22 82H8M176 82h14M43 33L31 21M141 131l12 12M43 131l-12 12M141 33l12-12" stroke-width="15" stroke-linecap="square"/>
+    <path d="M129 43c-12-11-27-16-43-16-34 0-61 25-61 56s27 56 61 56c16 0 31-5 43-16" stroke="#fff" stroke-width="25"/>
+    <path d="M130 43c-12-10-27-16-43-16-33 0-59 25-59 56s26 56 59 56c16 0 31-6 43-16" stroke="#214861" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <text x="168" y="135" font-family="Arial,Helvetica,sans-serif" font-size="126" font-weight="700" letter-spacing="7" fill="#214861">APE</text>
+  <g transform="translate(598 19)">
+    <circle cx="34" cy="34" r="29" fill="#214861"/>
+    <path d="M17 43h34M22 43V28l12-8 12 8v15M29 34h10" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="34" cy="101" r="29" fill="#E96711"/>
+    <path d="M40 72l-20 33h15l-7 25 23-38H36z" fill="#fff"/>
+    <circle cx="34" cy="168" r="29" fill="#214861"/>
+    <g stroke="#fff" stroke-width="4" stroke-linecap="round">
+      <path d="M34 145v46M11 168h46M18 152l32 32M50 152l-32 32"/>
+    </g>
+  </g>
+  <text x="40" y="216" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-size="35" letter-spacing="5" fill="#214861">SERVIÇOS E CONSULTORIA</text>
+</g>
+</svg>
