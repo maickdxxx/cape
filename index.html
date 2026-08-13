@@ -25,6 +25,16 @@
     <meta name="twitter:image" content="/logo-cape-oficial.png" />
     <link rel="icon" href="/favicon.svg" />
     <title>CAPE | Ar-condicionado, PMOC e Elétrica em Niterói</title>
+    <style>
+      .hero-visual { display:grid; align-content:center; gap:14px; padding:0 !important; isolation:isolate; }
+      .hero-visual > img { justify-self:end; width:100%; max-width:620px; border:0 !important; border-radius:24px; box-shadow:none !important; }
+      .hero-visual:hover > img { transform:translateY(-3px); box-shadow:none !important; }
+      .hero-credential { position:relative !important; z-index:2; left:auto !important; right:auto !important; bottom:auto !important; justify-self:end; width:100% !important; max-width:620px; padding:8px 0 8px 18px; border:0; border-left:3px solid #ff9d5b; border-radius:0; background:transparent; color:#fff; box-shadow:none; backdrop-filter:none; }
+      .hero-credential > span { color:#ff9d5b; }
+      .hero-credential strong { color:#fff; }
+      .hero-credential p { max-width:560px; color:#d3e5ee; }
+      @media (max-width:780px) { .hero-visual { gap:12px; } .hero-visual > img, .hero-credential { width:100% !important; max-width:none; } .hero-credential { padding-left:16px; } }
+    </style>
   </head>
   <body>
     <div id="root"></div>
