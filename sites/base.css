@@ -327,16 +327,3 @@ main { overflow: hidden; }
 --soft: #E8F2F7;
 --whatsapp: #25D366;
 }
-
-:root {
---primary: #014D81;
---secondary: #062F49;
---accent: #E96711;
---background: #F4F8FB;
---foreground: #0B2130;
---surface: #FFFFFF;
---muted: #5E7382;
---border: #D4E2EA;
---soft: #E8F2F7;
---whatsapp: #25D366;
-}

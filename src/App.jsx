@@ -1,268 +1,205 @@
-import { useEffect, useState } from "react";
-import {
-  CorujaContentGate,
-  CorujaProvider,
-  buildWhatsAppHref,
-  useCollection,
-  useContent,
-  useTelHref,
-  useWhatsAppUrl,
-} from "./coruja-template/content.jsx";
-import { fetchCorujaBlogPost, fetchCorujaBlogPosts } from "./coruja-template/api.js";
-
-function editable(path, type = "text", extra = {}) {
-  return { "data-coruja-path": path, "data-coruja-type": type, ...extra };
-}
-
-function editableButton(path, label, extra = {}) {
-  return editable(path, "button", {
-    "data-coruja-text-path": path,
-    "data-coruja-label": label,
-    ...extra,
-  });
-}
-
-function editableImage(path, altPath, label) {
-  return editable(path, "image", {
-    "data-coruja-src-path": path,
-    "data-coruja-alt-path": altPath,
-    "data-coruja-label": label,
-  });
-}
-
+import { createContext, useContext, useEffect, useState } from "react";
+import { buildWhatsAppHref, getCollection, getValue, useTelHref, useWhatsAppUrl } from "./lib/site-content.js";
+import savedPosts from "./data/blog.json";
 function collectionPath(collection, index, field) {
-  return `collections.${collection}.${index}.${field}`;
+    return `collections.${collection}.${index}.${field}`;
 }
-
-function HiddenBinding({ path, value, type = "text" }) {
-  return <span hidden data-coruja-path={path} data-coruja-type={type} data-coruja-value={String(value ?? "")} />;
-}
-
-function previewBase() {
-  if (typeof window === "undefined") return "";
-  const raw = String(window.__CORUJA_PREVIEW_BASE_PATH__ || "").trim();
-  if (!raw || raw === "/") return "";
-  return `/${raw.replace(/^\/+|\/+$/g, "")}`;
-}
-function siteHref(path = "/") {
-  const base = previewBase();
-  if (!base) return path;
-  return `${base}${path.startsWith("/") ? path : `/${path}`}`;
-}
-function currentRoute() {
-  if (typeof window === "undefined") return "/";
-  let pathname = window.location.pathname || "/";
-  const base = previewBase();
-  if (base && pathname.startsWith(base)) pathname = pathname.slice(base.length) || "/";
-  return pathname !== "/" ? pathname.replace(/\/+$/, "") : "/";
-}
+const RouteContext = createContext('/');
+function siteHref(path = '/') { return path; }
+function currentRoute() { return useContext(RouteContext); }
 function currentSlug() {
-  const match = currentRoute().match(/^\/blog\/([^/]+)$/);
-  return match ? decodeURIComponent(match[1]) : "";
+    const match = currentRoute().match(/^\/blog\/([^/]+)$/);
+    return match ? decodeURIComponent(match[1]) : "";
 }
 function setMeta(name, content, attr = "name") {
-  if (!content) return;
-  let tag = document.head.querySelector(`meta[${attr}="${name}"]`);
-  if (!tag) {
-    tag = document.createElement("meta");
-    tag.setAttribute(attr, name);
-    document.head.appendChild(tag);
-  }
-  tag.setAttribute("content", content);
+    if (!content)
+        return;
+    let tag = document.head.querySelector(`meta[${attr}="${name}"]`);
+    if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute(attr, name);
+        document.head.appendChild(tag);
+    }
+    tag.setAttribute("content", content);
 }
 function setLink(rel, href) {
-  if (!href) return;
-  let tag = document.head.querySelector(`link[rel="${rel}"]`);
-  if (!tag) {
-    tag = document.createElement("link");
-    tag.rel = rel;
-    document.head.appendChild(tag);
-  }
-  tag.href = href;
-}
-
-function SeoManager({ post }) {
-  const route = currentRoute();
-  const pageId =
-    route === "/servicos"
-      ? "services"
-      : route === "/projetos"
-        ? "projects"
-        : route === "/sobre"
-          ? "about"
-          : route === "/contato"
-            ? "contact"
-            : route.startsWith("/blog")
-              ? "blog"
-              : "home";
-
-  const globalTitle = useContent("global.seo.title", "");
-  const globalDescription = useContent("global.seo.description", "");
-  const globalImage = useContent("global.seo.ogImage", "");
-  const pageTitle = useContent(`pages.${pageId}.seo.title`, globalTitle);
-  const pageDescription = useContent(`pages.${pageId}.seo.description`, globalDescription);
-  const pageImage = useContent(`pages.${pageId}.seo.ogImage`, globalImage);
-  const canonicalBase = useContent("global.seo.canonicalBase", "");
-  const favicon = useContent("global.brand.faviconUrl", "/favicon.svg");
-  const brand = useContent("global.brand.name", "");
-  const legalName = useContent("global.brand.legalName", "");
-  const phone = useContent("global.contact.phoneRaw", "");
-  const email = useContent("global.contact.email", "");
-  const address = useContent("global.contact.address", "");
-  const serviceArea = useContent("global.contact.serviceArea", "");
-  const instagram = useContent("global.social.instagram", "");
-
-  useEffect(() => {
-    const title = post?.seoTitle || post?.title || pageTitle || globalTitle;
-    const description = post?.seoDescription || post?.excerpt || pageDescription || globalDescription;
-    const image = post?.coverImage || pageImage;
-
-    document.title = title;
-    setMeta("description", description);
-    setMeta("og:title", title, "property");
-    setMeta("og:description", description, "property");
-    setMeta("og:type", post ? "article" : "website", "property");
-    if (image) setMeta("og:image", image, "property");
-    setLink("icon", favicon);
-
-    const suffix = post ? `/blog/${post.slug}` : route;
-    if (canonicalBase) {
-      const canonical = `${canonicalBase.replace(/\/+$/, "")}${suffix === "/" ? "" : suffix}`;
-      setLink("canonical", canonical);
-      setMeta("og:url", canonical, "property");
+    if (!href)
+        return;
+    let tag = document.head.querySelector(`link[rel="${rel}"]`);
+    if (!tag) {
+        tag = document.createElement("link");
+        tag.rel = rel;
+        document.head.appendChild(tag);
     }
-
-    const id = "coruja-cape-schema";
-    document.getElementById(id)?.remove();
-    const script = document.createElement("script");
-    script.id = id;
-    script.type = "application/ld+json";
-    script.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": ["HVACBusiness", "Electrician"],
-      name: brand,
-      legalName,
-      telephone: phone,
-      email,
-      address,
-      areaServed: serviceArea,
-      sameAs: instagram ? [instagram] : undefined,
-      url: canonicalBase || undefined,
-    });
-    document.head.appendChild(script);
-    return () => script.remove();
-  }, [
-    post,
-    pageTitle,
-    pageDescription,
-    pageImage,
-    globalTitle,
-    globalDescription,
-    canonicalBase,
-    favicon,
-    brand,
-    legalName,
-    phone,
-    email,
-    address,
-    serviceArea,
-    instagram,
-    route,
-  ]);
-  return null;
+    tag.href = href;
 }
-
+function SeoManager({ post }) {
+    const route = currentRoute();
+    const pageId = route === "/servicos"
+        ? "services"
+        : route === "/projetos"
+            ? "projects"
+            : route === "/sobre"
+                ? "about"
+                : route === "/contato"
+                    ? "contact"
+                    : route.startsWith("/blog")
+                        ? "blog"
+                        : "home";
+    const globalTitle = getValue("global.seo.title", "");
+    const globalDescription = getValue("global.seo.description", "");
+    const globalImage = getValue("global.seo.ogImage", "");
+    const pageTitle = getValue(`pages.${pageId}.seo.title`, globalTitle);
+    const pageDescription = getValue(`pages.${pageId}.seo.description`, globalDescription);
+    const pageImage = getValue(`pages.${pageId}.seo.ogImage`, globalImage);
+    const canonicalBase = getValue("global.seo.canonicalBase", "");
+    const favicon = getValue("global.brand.faviconUrl", "/favicon.svg");
+    const brand = getValue("global.brand.name", "");
+    const legalName = getValue("global.brand.legalName", "");
+    const phone = getValue("global.contact.phoneRaw", "");
+    const email = getValue("global.contact.email", "");
+    const address = getValue("global.contact.address", "");
+    const serviceArea = getValue("global.contact.serviceArea", "");
+    const instagram = getValue("global.social.instagram", "");
+    useEffect(() => {
+        const title = post?.seoTitle || post?.title || pageTitle || globalTitle;
+        const description = post?.seoDescription || post?.excerpt || pageDescription || globalDescription;
+        const image = post?.coverImage || pageImage;
+        document.title = title;
+        setMeta("description", description);
+        setMeta("og:title", title, "property");
+        setMeta("og:description", description, "property");
+        setMeta("og:type", post ? "article" : "website", "property");
+        if (image)
+            setMeta("og:image", image, "property");
+        setLink("icon", favicon);
+        const suffix = post ? `/blog/${post.slug}` : route;
+        if (canonicalBase) {
+            const canonical = `${canonicalBase.replace(/\/+$/, "")}${suffix === "/" ? "" : suffix}`;
+            setLink("canonical", canonical);
+            setMeta("og:url", canonical, "property");
+        }
+        const id = "coruja-cape-schema";
+        document.getElementById(id)?.remove();
+        const script = document.createElement("script");
+        script.id = id;
+        script.type = "application/ld+json";
+        script.textContent = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": ["HVACBusiness", "Electrician"],
+            name: brand,
+            legalName,
+            telephone: phone,
+            email,
+            address,
+            areaServed: serviceArea,
+            sameAs: instagram ? [instagram] : undefined,
+            url: canonicalBase || undefined,
+        });
+        document.head.appendChild(script);
+        return () => script.remove();
+    }, [
+        post,
+        pageTitle,
+        pageDescription,
+        pageImage,
+        globalTitle,
+        globalDescription,
+        canonicalBase,
+        favicon,
+        brand,
+        legalName,
+        phone,
+        email,
+        address,
+        serviceArea,
+        instagram,
+        route,
+    ]);
+    return null;
+}
 function Brand() {
-  const name = useContent("global.brand.name", "");
-  const logo = useContent("global.brand.logoUrl", "");
-  const logoSrc = logo === "/logo-cape.svg" ? "/logo-cape-oficial.png" : logo;
-  return (
-    <a className="brand" href={siteHref("/")} aria-label={name} {...editable("global.brand.name")}>
-      {logo ? <img src={logoSrc} alt={name} {...editableImage("global.brand.logoUrl", "global.brand.name", "Logo da empresa")} /> : <><span className="brand-fallback">C</span><span>{name}</span></>}
-    </a>
-  );
+    const name = getValue("global.brand.name", "");
+    const logo = getValue("global.brand.logoUrl", "");
+    const logoSrc = logo === "/logo-cape.svg" ? "/logo-cape-oficial.png" : logo;
+    return (<a className="brand" href={siteHref("/")} aria-label={name}>
+      {logo ? <img src={logoSrc} alt={name}/> : <><span className="brand-fallback">C</span><span>{name}</span></>}
+    </a>);
 }
-
 function Header() {
-  const phone = useContent("global.contact.phone", "");
-  const tel = useTelHref();
-  const wa = useWhatsAppUrl();
-  const services = useContent("global.nav.servicesLabel", "Serviços");
-  const projects = useContent("global.nav.projectsLabel", "Projetos");
-  const about = useContent("global.nav.aboutLabel", "Sobre");
-  const blog = useContent("global.nav.blogLabel", "Blog");
-  const contact = useContent("global.nav.contactLabel", "Contato");
-  const cta = useContent("global.cta.headerLabel", "Solicitar orçamento");
-  const home = useContent("global.nav.homeLabel", "Início");
-  const links = [
-    ["/", home, "global.nav.homeLabel"],
-    ["/servicos", services, "global.nav.servicesLabel"],
-    ["/projetos", projects, "global.nav.projectsLabel"],
-    ["/sobre", about, "global.nav.aboutLabel"],
-    ["/blog", blog, "global.nav.blogLabel"],
-    ["/contato", contact, "global.nav.contactLabel"],
-  ];
-
-  return (
-    <header className="site-header">
-      <div className="header-accent" />
+    const phone = getValue("global.contact.phone", "");
+    const tel = useTelHref();
+    const wa = useWhatsAppUrl();
+    const services = getValue("global.nav.servicesLabel", "Serviços");
+    const projects = getValue("global.nav.projectsLabel", "Projetos");
+    const about = getValue("global.nav.aboutLabel", "Sobre");
+    const blog = getValue("global.nav.blogLabel", "Blog");
+    const contact = getValue("global.nav.contactLabel", "Contato");
+    const cta = getValue("global.cta.headerLabel", "Solicitar orçamento");
+    const home = getValue("global.nav.homeLabel", "Início");
+    const links = [
+        ["/", home, "global.nav.homeLabel"],
+        ["/servicos", services, "global.nav.servicesLabel"],
+        ["/projetos", projects, "global.nav.projectsLabel"],
+        ["/sobre", about, "global.nav.aboutLabel"],
+        ["/blog", blog, "global.nav.blogLabel"],
+        ["/contato", contact, "global.nav.contactLabel"],
+    ];
+    return (<header className="site-header">
+      <div className="header-accent"/>
       <div className="container header-inner">
         <Brand />
         <nav className="desktop-nav" aria-label="Navegação principal">
-          {links.map(([href, label, path]) => <a key={href} href={siteHref(href)} {...editable(path)}>{label}</a>)}
+          {links.map(([href, label, path]) => <a key={href} href={siteHref(href)}>{label}</a>)}
         </nav>
         <div className="header-actions">
-          <a className="phone-link" href={tel} data-coruja-event="tel_click" data-coruja-event-label="header_phone" {...editable("global.contact.phone")}>{phone}</a>
-          <a className="btn btn-accent btn-small" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="header_whatsapp" {...editableButton("global.cta.headerLabel", "Botão do cabeçalho")}>{cta}</a>
+          <a className="phone-link" href={tel} data-coruja-event="tel_click" data-coruja-event-label="header_phone">{phone}</a>
+          <a className="btn btn-accent btn-small" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="header_whatsapp">{cta}</a>
         </div>
         <details className="mobile-menu">
           <summary aria-label="Abrir menu"><span /><span /><span /></summary>
           <div className="mobile-panel">
-            {links.map(([href, label, path]) => <a key={href} href={siteHref(href)} {...editable(path)}>{label}</a>)}
-            <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="mobile_menu_whatsapp" {...editableButton("global.cta.headerLabel", "Botão do menu móvel")}>{cta}</a>
+            {links.map(([href, label, path]) => <a key={href} href={siteHref(href)}>{label}</a>)}
+            <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="mobile_menu_whatsapp">{cta}</a>
           </div>
         </details>
       </div>
-    </header>
-  );
+    </header>);
 }
-
 function Footer() {
-  const legalName = useContent("global.brand.legalName", "");
-  const brandDescription = useContent("global.brand.description", "");
-  const tagline = useContent("global.footer.tagline", "");
-  const copyright = useContent("global.footer.copyright", "");
-  const email = useContent("global.contact.email", "");
-  const phone = useContent("global.contact.phone", "");
-  const address = useContent("global.contact.address", "");
-  const cnpj = useContent("global.contact.cnpj", "");
-  const instagram = useContent("global.social.instagram", "");
-  const instagramLabel = useContent("global.social.instagramLabel", "Instagram");
-  const facebook = useContent("global.social.facebook", "");
-  const linkedin = useContent("global.social.linkedin", "");
-  const tel = useTelHref();
-
-  return (
-    <footer className="footer">
-      <div className="footer-top-line" />
+    const legalName = getValue("global.brand.legalName", "");
+    const brandDescription = getValue("global.brand.description", "");
+    const tagline = getValue("global.footer.tagline", "");
+    const copyright = getValue("global.footer.copyright", "");
+    const email = getValue("global.contact.email", "");
+    const phone = getValue("global.contact.phone", "");
+    const address = getValue("global.contact.address", "");
+    const cnpj = getValue("global.contact.cnpj", "");
+    const instagram = getValue("global.social.instagram", "");
+    const instagramLabel = getValue("global.social.instagramLabel", "Instagram");
+    const facebook = getValue("global.social.facebook", "");
+    const linkedin = getValue("global.social.linkedin", "");
+    const tel = useTelHref();
+    return (<footer className="footer">
+      <div className="footer-top-line"/>
       <div className="container footer-grid">
         <div className="footer-brand">
           <Brand />
-          <small {...editable("global.brand.legalName")}>{legalName}</small>
-          <p {...editable("global.brand.description")}>{brandDescription}</p>
-          <p {...editable("global.footer.tagline")}>{tagline}</p>
+          <small>{legalName}</small>
+          <p>{brandDescription}</p>
+          <p>{tagline}</p>
         </div>
         <div>
           <h3>Contato</h3>
-          <a href={tel} data-coruja-event="tel_click" data-coruja-event-label="footer_phone" {...editable("global.contact.phone")}>{phone}</a>
-          <a href={`mailto:${email}`} {...editable("global.contact.email")}>{email}</a>
-          {instagram && <a href={instagram} target="_blank" rel="noopener noreferrer" {...editable("global.social.instagramLabel", "url", { "data-coruja-url-path": "global.social.instagram" })}>{instagramLabel}</a>}
-          {facebook && <a href={facebook} target="_blank" rel="noopener noreferrer" {...editable("global.social.facebook", "url", { "data-coruja-url-path": "global.social.facebook" })}>Facebook</a>}
-          {linkedin && <a href={linkedin} target="_blank" rel="noopener noreferrer" {...editable("global.social.linkedin", "url", { "data-coruja-url-path": "global.social.linkedin" })}>LinkedIn</a>}
+          <a href={tel} data-coruja-event="tel_click" data-coruja-event-label="footer_phone">{phone}</a>
+          <a href={`mailto:${email}`}>{email}</a>
+          {instagram && <a href={instagram} target="_blank" rel="noopener noreferrer" {...{ "data-coruja-url-path": "global.social.instagram" }}>{instagramLabel}</a>}
+          {facebook && <a href={facebook} target="_blank" rel="noopener noreferrer" {...{ "data-coruja-url-path": "global.social.facebook" }}>Facebook</a>}
+          {linkedin && <a href={linkedin} target="_blank" rel="noopener noreferrer" {...{ "data-coruja-url-path": "global.social.linkedin" }}>LinkedIn</a>}
         </div>
         <div>
           <h3>Endereço</h3>
-          <p {...editable("global.contact.address")}>{address}</p>
+          <p>{address}</p>
           {cnpj && <small>CNPJ: {cnpj}</small>}
         </div>
         <div>
@@ -275,177 +212,141 @@ function Footer() {
           <a href={siteHref("/contato")}>Contato</a>
         </div>
       </div>
-      <div className="container footer-bottom" {...editable("global.footer.copyright")}>{copyright}</div>
-    </footer>
-  );
+      <div className="container footer-bottom">{copyright}</div>
+    </footer>);
 }
-
 function FloatingWhatsapp() {
-  const wa = useWhatsAppUrl();
-  const title = useContent("global.cta.floatingTitle", "");
-  const text = useContent("global.cta.floatingText", "");
-  const label = useContent("global.cta.floatingButtonLabel", "Abrir WhatsApp");
-  return (
-    <div className="floating-wa">
-      <div><strong {...editable("global.cta.floatingTitle")}>{title}</strong><span {...editable("global.cta.floatingText")}>{text}</span></div>
-      <a href={wa} target="_blank" rel="noopener noreferrer" aria-label={label} title={label} data-coruja-value={label} data-coruja-event="whatsapp_click" data-coruja-event-label="floating_whatsapp" {...editable("global.cta.floatingButtonLabel")}>
-        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3.2A12.7 12.7 0 0 0 5.1 22.34L3.4 28.6l6.41-1.68a12.74 12.74 0 1 0 6.23-23.72Zm0 22.98c-2.04 0-4.03-.55-5.76-1.58l-.41-.24-3.8 1 1.01-3.71-.27-.42a10.24 10.24 0 1 1 9.23 4.95Zm5.62-7.67c-.31-.15-1.82-.9-2.1-1-.28-.1-.49-.16-.69.15-.2.31-.8 1-.98 1.21-.18.2-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53a9.32 9.32 0 0 1-1.72-2.14c-.18-.31-.02-.48.14-.63.14-.14.3-.36.46-.54.15-.18.2-.31.3-.51.11-.21.06-.39-.02-.54-.08-.16-.7-1.68-.95-2.3-.25-.6-.5-.52-.69-.53h-.59c-.2 0-.54.08-.82.39-.28.3-1.08 1.05-1.08 2.57 0 1.51 1.11 2.98 1.26 3.18.15.2 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.24 1.41.2 1.94.13.59-.09 1.82-.75 2.08-1.47.25-.72.25-1.34.18-1.47-.08-.13-.28-.2-.59-.36Z" /></svg>
+    const wa = useWhatsAppUrl();
+    const title = getValue("global.cta.floatingTitle", "");
+    const text = getValue("global.cta.floatingText", "");
+    const label = getValue("global.cta.floatingButtonLabel", "Abrir WhatsApp");
+    return (<div className="floating-wa">
+      <div><strong>{title}</strong><span>{text}</span></div>
+      <a href={wa} target="_blank" rel="noopener noreferrer" aria-label={label} title={label} data-coruja-event="whatsapp_click" data-coruja-event-label="floating_whatsapp">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3.2A12.7 12.7 0 0 0 5.1 22.34L3.4 28.6l6.41-1.68a12.74 12.74 0 1 0 6.23-23.72Zm0 22.98c-2.04 0-4.03-.55-5.76-1.58l-.41-.24-3.8 1 1.01-3.71-.27-.42a10.24 10.24 0 1 1 9.23 4.95Zm5.62-7.67c-.31-.15-1.82-.9-2.1-1-.28-.1-.49-.16-.69.15-.2.31-.8 1-.98 1.21-.18.2-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53a9.32 9.32 0 0 1-1.72-2.14c-.18-.31-.02-.48.14-.63.14-.14.3-.36.46-.54.15-.18.2-.31.3-.51.11-.21.06-.39-.02-.54-.08-.16-.7-1.68-.95-2.3-.25-.6-.5-.52-.69-.53h-.59c-.2 0-.54.08-.82.39-.28.3-1.08 1.05-1.08 2.57 0 1.51 1.11 2.98 1.26 3.18.15.2 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.24 1.41.2 1.94.13.59-.09 1.82-.75 2.08-1.47.25-.72.25-1.34.18-1.47-.08-.13-.28-.2-.59-.36Z"/></svg>
         <span className="sr-only">{label}</span>
       </a>
-    </div>
-  );
+    </div>);
 }
-
 function Layout({ children, post }) {
-  return <><SeoManager post={post} /><Header /><main>{children}</main><Footer /><FloatingWhatsapp /></>;
+    return <><SeoManager post={post}/><Header /><main>{children}</main><Footer /><FloatingWhatsapp /></>;
 }
-
 function Eyebrow({ children, light = false }) {
-  return <span className={`eyebrow ${light ? "eyebrow-light" : ""}`}><i />{children}</span>;
+    return <span className={`eyebrow ${light ? "eyebrow-light" : ""}`}><i />{children}</span>;
 }
 function SectionTitle({ eyebrow, title, description, eyebrowPath, titlePath, descriptionPath, light = false, compact = false }) {
-  return (
-    <div className={`section-title ${light ? "light" : ""} ${compact ? "compact" : ""}`}>
-      <Eyebrow light={light}><span {...(eyebrowPath ? editable(eyebrowPath) : {})}>{eyebrow}</span></Eyebrow>
-      <h2 {...(titlePath ? editable(titlePath) : {})}>{title}</h2>
-      {description && <p {...(descriptionPath ? editable(descriptionPath) : {})}>{description}</p>}
-    </div>
-  );
+    return (<div className={`section-title ${light ? "light" : ""} ${compact ? "compact" : ""}`}>
+      <Eyebrow light={light}><span {...(eyebrowPath ? {} : {})}>{eyebrow}</span></Eyebrow>
+      <h2 {...(titlePath ? {} : {})}>{title}</h2>
+      {description && <p {...(descriptionPath ? {} : {})}>{description}</p>}
+    </div>);
 }
 function Stats() {
-  const items = useCollection("collections.stats");
-  return (
-    <div className="stats">
-      {items.map((item, index) => <div key={item.id}><strong {...editable(collectionPath("stats", index, "value"))}>{item.value}</strong><span {...editable(collectionPath("stats", index, "label"))}>{item.label}</span></div>)}
-    </div>
-  );
+    const items = getCollection("collections.stats");
+    return (<div className="stats">
+      {items.map((item, index) => <div key={item.id}><strong>{item.value}</strong><span>{item.label}</span></div>)}
+    </div>);
 }
 function ServiceCard({ service, index }) {
-  const number = useContent("global.contact.whatsappRaw", "");
-  const fallback = useContent("global.contact.whatsappMessage", "");
-  const wa = buildWhatsAppHref(number, service.whatsappMessage || fallback);
-  return (
-    <article className="service-card">
+    const number = getValue("global.contact.whatsappRaw", "");
+    const fallback = getValue("global.contact.whatsappMessage", "");
+    const wa = buildWhatsAppHref(number, service.whatsappMessage || fallback);
+    return (<article className="service-card">
       <div className="service-top">
-        <span className="service-icon" {...editable(collectionPath("services", index, "icon"))}>{service.icon}</span>
+        <span className="service-icon">{service.icon}</span>
         <span className="service-index">{String(index + 1).padStart(2, "0")}</span>
       </div>
-      <span className="pill" {...editable(collectionPath("services", index, "highlight"))}>{service.highlight}</span>
-      <h3 {...editable(collectionPath("services", index, "title"))}>{service.title}</h3>
-      <p {...editable(collectionPath("services", index, "description"))}>{service.description}</p>
-      <a href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label={`service_${service.id}_whatsapp`} {...editableButton(collectionPath("services", index, "ctaLabel"), "Botão do serviço")}>{service.ctaLabel}<span>↗</span></a>
-      <HiddenBinding path={collectionPath("services", index, "whatsappMessage")} value={service.whatsappMessage} />
-    </article>
-  );
+      <span className="pill">{service.highlight}</span>
+      <h3>{service.title}</h3>
+      <p>{service.description}</p>
+      <a href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label={`service_${service.id}_whatsapp`}>{service.ctaLabel}<span>↗</span></a>
+
+    </article>);
 }
 function ProjectCard({ item, index }) {
-  return (
-    <article className="project-card">
-      <div className="project-image"><img src={item.image} alt={item.imageAlt || item.title} {...editableImage(collectionPath("projects", index, "image"), collectionPath("projects", index, "imageAlt"), "Imagem do projeto")} /></div>
+    return (<article className="project-card">
+      <div className="project-image"><img src={item.image} alt={item.imageAlt || item.title}/></div>
       <div className="project-copy">
-        <span className="pill" {...editable(collectionPath("projects", index, "category"))}>{item.category}</span>
-        <h3 {...editable(collectionPath("projects", index, "title"))}>{item.title}</h3>
-        <p {...editable(collectionPath("projects", index, "description"))}>{item.description}</p>
+        <span className="pill">{item.category}</span>
+        <h3>{item.title}</h3>
+        <p>{item.description}</p>
       </div>
-    </article>
-  );
+    </article>);
 }
 function PageHero({ page, mark = "C" }) {
-  const eyebrow = useContent(`pages.${page}.hero.eyebrow`, "");
-  const title = useContent(`pages.${page}.hero.title`, "");
-  const description = useContent(`pages.${page}.hero.description`, "");
-  return (
-    <section className="page-hero">
+    const eyebrow = getValue(`pages.${page}.hero.eyebrow`, "");
+    const title = getValue(`pages.${page}.hero.title`, "");
+    const description = getValue(`pages.${page}.hero.description`, "");
+    return (<section className="page-hero">
       <div className="page-grid container">
-        <div><Eyebrow light><span {...editable(`pages.${page}.hero.eyebrow`)}>{eyebrow}</span></Eyebrow><h1 {...editable(`pages.${page}.hero.title`)}>{title}</h1><p {...editable(`pages.${page}.hero.description`)}>{description}</p></div>
+        <div><Eyebrow light><span>{eyebrow}</span></Eyebrow><h1>{title}</h1><p>{description}</p></div>
         <div className="page-mark" aria-hidden="true">{mark}</div>
       </div>
-    </section>
-  );
+    </section>);
 }
-
 function HomePage() {
-  const wa = useWhatsAppUrl();
-  const services = useCollection("collections.services");
-  const credentials = useCollection("collections.credentials");
-  const projects = useCollection("collections.projects");
-  const clients = useCollection("collections.clients");
-  const brands = useCollection("collections.brands");
-  const areas = useCollection("collections.serviceAreas");
-  const process = useCollection("collections.process");
-  const values = useCollection("collections.values");
-  const faq = useCollection("collections.faq");
-  const finalMessage = useContent("pages.home.finalCta.whatsappMessage", "");
-  const finalWa = useWhatsAppUrl(finalMessage);
+    const wa = useWhatsAppUrl();
+    const services = getCollection("collections.services");
+    const credentials = getCollection("collections.credentials");
+    const projects = getCollection("collections.projects");
+    const clients = getCollection("collections.clients");
+    const brands = getCollection("collections.brands");
+    const areas = getCollection("collections.serviceAreas");
+    const process = getCollection("collections.process");
+    const values = getCollection("collections.values");
+    const faq = getCollection("collections.faq");
+    const finalMessage = getValue("pages.home.finalCta.whatsappMessage", "");
+    const finalWa = useWhatsAppUrl(finalMessage);
+    return (<Layout>
 
-  return (
-    <Layout>
-      <HiddenBinding path="global.brand.logoIconUrl" value={useContent("global.brand.logoIconUrl", "")} type="image" />
-      <HiddenBinding path="pages.home.finalCta.whatsappMessage" value={finalMessage} />
-      {process.slice(0, 1).map((item, index) => <span hidden key={`process-${item.id}`}><HiddenBinding path={collectionPath("process", index, "step")} value={item.step} /><HiddenBinding path={collectionPath("process", index, "title")} value={item.title} /><HiddenBinding path={collectionPath("process", index, "description")} value={item.description} /></span>)}
-      {values.slice(0, 1).map((item, index) => <span hidden key={`value-${item.id}`}><HiddenBinding path={collectionPath("values", index, "title")} value={item.title} /><HiddenBinding path={collectionPath("values", index, "description")} value={item.description} /></span>)}
-      {faq.slice(0, 1).map((item, index) => <span hidden key={`faq-${item.id}`}><HiddenBinding path={collectionPath("faq", index, "question")} value={item.question} /><HiddenBinding path={collectionPath("faq", index, "answer")} value={item.answer} /></span>)}
+
+      {process.slice(0, 1).map((item, index) => <span hidden key={`process-${item.id}`}></span>)}
+      {values.slice(0, 1).map((item, index) => <span hidden key={`value-${item.id}`}></span>)}
+      {faq.slice(0, 1).map((item, index) => <span hidden key={`faq-${item.id}`}></span>)}
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <Eyebrow light><span {...editable("pages.home.hero.eyebrow")}>{useContent("pages.home.hero.eyebrow", "")}</span></Eyebrow>
-            <h1 {...editable("pages.home.hero.title")}>{useContent("pages.home.hero.title", "")}</h1>
-            <strong className="hero-accent" {...editable("pages.home.hero.titleAccent")}>{useContent("pages.home.hero.titleAccent", "")}</strong>
-            <p {...editable("pages.home.hero.description")}>{useContent("pages.home.hero.description", "")}</p>
+            <Eyebrow light><span>{getValue("pages.home.hero.eyebrow", "")}</span></Eyebrow>
+            <h1>{getValue("pages.home.hero.title", "")}</h1>
+            <strong className="hero-accent">{getValue("pages.home.hero.titleAccent", "")}</strong>
+            <p>{getValue("pages.home.hero.description", "")}</p>
             <div className="hero-actions">
-              <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="hero_whatsapp" {...editableButton("pages.home.hero.primaryCtaLabel", "Botão principal")}>
-                {useContent("pages.home.hero.primaryCtaLabel", "")}<span>↗</span>
+              <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="hero_whatsapp">
+                {getValue("pages.home.hero.primaryCtaLabel", "")}<span>↗</span>
               </a>
-              <a className="btn btn-ghost-light" href={siteHref("/servicos")} {...editableButton("pages.home.hero.secondaryCtaLabel", "Botão secundário")}>{useContent("pages.home.hero.secondaryCtaLabel", "")}</a>
+              <a className="btn btn-ghost-light" href={siteHref("/servicos")}>{getValue("pages.home.hero.secondaryCtaLabel", "")}</a>
             </div>
             <Stats />
           </div>
           <div className="hero-visual">
-            <img src={useContent("pages.home.hero.image", "")} alt={useContent("pages.home.hero.imageAlt", "")} {...editableImage("pages.home.hero.image", "pages.home.hero.imageAlt", "Imagem principal")} />
+            <img src={getValue("pages.home.hero.image", "")} alt={getValue("pages.home.hero.imageAlt", "")}/>
             <div className="hero-credential">
-              <span {...editable("pages.home.hero.sideLabel")}>{useContent("pages.home.hero.sideLabel", "")}</span>
-              <strong {...editable("pages.home.hero.sideTitle")}>{useContent("pages.home.hero.sideTitle", "")}</strong>
-              <p {...editable("pages.home.hero.sideText")}>{useContent("pages.home.hero.sideText", "")}</p>
+              <span>{getValue("pages.home.hero.sideLabel", "")}</span>
+              <strong>{getValue("pages.home.hero.sideTitle", "")}</strong>
+              <p>{getValue("pages.home.hero.sideText", "")}</p>
             </div>
           </div>
         </div>
-        <div className="hero-angle" />
+        <div className="hero-angle"/>
       </section>
 
       <section className="section service-section">
         <div className="container">
           <div className="split-heading">
-            <SectionTitle
-              eyebrow={useContent("pages.home.services.eyebrow", "")}
-              title={useContent("pages.home.services.title", "")}
-              description={useContent("pages.home.services.description", "")}
-              eyebrowPath="pages.home.services.eyebrow"
-              titlePath="pages.home.services.title"
-              descriptionPath="pages.home.services.description"
-            />
-            <a className="text-link" href={siteHref("/servicos")} {...editableButton("pages.home.services.ctaLabel", "Ver serviços")}>{useContent("pages.home.services.ctaLabel", "")} ↗</a>
+            <SectionTitle eyebrow={getValue("pages.home.services.eyebrow", "")} title={getValue("pages.home.services.title", "")} description={getValue("pages.home.services.description", "")} eyebrowPath="pages.home.services.eyebrow" titlePath="pages.home.services.title" descriptionPath="pages.home.services.description"/>
+            <a className="text-link" href={siteHref("/servicos")}>{getValue("pages.home.services.ctaLabel", "")} ↗</a>
           </div>
-          <div className="services-grid">{services.slice(0, 6).map((service, index) => <ServiceCard key={service.id} service={service} index={index} />)}</div>
+          <div className="services-grid">{services.slice(0, 6).map((service, index) => <ServiceCard key={service.id} service={service} index={index}/>)}</div>
         </div>
       </section>
 
       <section className="section technical-section">
         <div className="container">
-          <SectionTitle
-            light
-            eyebrow={useContent("pages.home.credentials.eyebrow", "")}
-            title={useContent("pages.home.credentials.title", "")}
-            description={useContent("pages.home.credentials.description", "")}
-            eyebrowPath="pages.home.credentials.eyebrow"
-            titlePath="pages.home.credentials.title"
-            descriptionPath="pages.home.credentials.description"
-          />
+          <SectionTitle light eyebrow={getValue("pages.home.credentials.eyebrow", "")} title={getValue("pages.home.credentials.title", "")} description={getValue("pages.home.credentials.description", "")} eyebrowPath="pages.home.credentials.eyebrow" titlePath="pages.home.credentials.title" descriptionPath="pages.home.credentials.description"/>
           <div className="credential-grid">
-            {credentials.map((item, index) => (
-              <article key={item.id}>
-                <span {...editable(collectionPath("credentials", index, "icon"))}>{item.icon}</span><h3 {...editable(collectionPath("credentials", index, "title"))}>{item.title}</h3><p {...editable(collectionPath("credentials", index, "description"))}>{item.description}</p>
-              </article>
-            ))}
+            {credentials.map((item, index) => (<article key={item.id}>
+                <span>{item.icon}</span><h3>{item.title}</h3><p>{item.description}</p>
+              </article>))}
           </div>
         </div>
       </section>
@@ -453,399 +354,339 @@ function HomePage() {
       <section className="section projects-home">
         <div className="container">
           <div className="split-heading">
-            <SectionTitle
-              eyebrow={useContent("pages.home.projects.eyebrow", "")}
-              title={useContent("pages.home.projects.title", "")}
-              description={useContent("pages.home.projects.description", "")}
-              eyebrowPath="pages.home.projects.eyebrow"
-              titlePath="pages.home.projects.title"
-              descriptionPath="pages.home.projects.description"
-            />
-            <a className="text-link" href={siteHref("/projetos")} {...editableButton("pages.home.projects.ctaLabel", "Ver projetos")}>{useContent("pages.home.projects.ctaLabel", "")} ↗</a>
+            <SectionTitle eyebrow={getValue("pages.home.projects.eyebrow", "")} title={getValue("pages.home.projects.title", "")} description={getValue("pages.home.projects.description", "")} eyebrowPath="pages.home.projects.eyebrow" titlePath="pages.home.projects.title" descriptionPath="pages.home.projects.description"/>
+            <a className="text-link" href={siteHref("/projetos")}>{getValue("pages.home.projects.ctaLabel", "")} ↗</a>
           </div>
-          <div className="projects-grid">{projects.map((item, index) => <ProjectCard key={item.id} item={item} index={index} />)}</div>
+          <div className="projects-grid">{projects.map((item, index) => <ProjectCard key={item.id} item={item} index={index}/>)}</div>
         </div>
       </section>
 
       <section className="section clients-section">
         <div className="container">
-          <SectionTitle
-            compact
-            eyebrow={useContent("pages.home.clients.eyebrow", "")}
-            title={useContent("pages.home.clients.title", "")}
-            description={useContent("pages.home.clients.description", "")}
-            eyebrowPath="pages.home.clients.eyebrow"
-            titlePath="pages.home.clients.title"
-            descriptionPath="pages.home.clients.description"
-          />
-          <div className="name-grid client-grid">{clients.map((item, index) => <span key={item.id} {...editable(collectionPath("clients", index, "name"))}>{item.name}</span>)}</div>
+          <SectionTitle compact eyebrow={getValue("pages.home.clients.eyebrow", "")} title={getValue("pages.home.clients.title", "")} description={getValue("pages.home.clients.description", "")} eyebrowPath="pages.home.clients.eyebrow" titlePath="pages.home.clients.title" descriptionPath="pages.home.clients.description"/>
+          <div className="name-grid client-grid">{clients.map((item, index) => <span key={item.id}>{item.name}</span>)}</div>
         </div>
       </section>
 
       <section className="section brands-section">
         <div className="container brand-band">
           <div>
-            <Eyebrow><span {...editable("pages.home.brands.eyebrow")}>{useContent("pages.home.brands.eyebrow", "")}</span></Eyebrow>
-            <h2 {...editable("pages.home.brands.title")}>{useContent("pages.home.brands.title", "")}</h2>
-            <p {...editable("pages.home.brands.description")}>{useContent("pages.home.brands.description", "")}</p>
+            <Eyebrow><span>{getValue("pages.home.brands.eyebrow", "")}</span></Eyebrow>
+            <h2>{getValue("pages.home.brands.title", "")}</h2>
+            <p>{getValue("pages.home.brands.description", "")}</p>
           </div>
-          <div className="brand-list">{brands.map((item, index) => <span key={item.id} {...editable(collectionPath("brands", index, "name"))}>{item.name}</span>)}</div>
+          <div className="brand-list">{brands.map((item, index) => <span key={item.id}>{item.name}</span>)}</div>
         </div>
       </section>
 
       <section className="section areas-home">
         <div className="container areas-grid">
-          <SectionTitle
-            eyebrow={useContent("pages.home.areas.eyebrow", "")}
-            title={useContent("pages.home.areas.title", "")}
-            description={useContent("pages.home.areas.description", "")}
-            eyebrowPath="pages.home.areas.eyebrow"
-            titlePath="pages.home.areas.title"
-            descriptionPath="pages.home.areas.description"
-          />
-          <div className="area-list">{areas.map((item, index) => <span key={item.id} {...editable(collectionPath("serviceAreas", index, "text"))}>{item.text}<HiddenBinding path={collectionPath("serviceAreas", index, "city")} value={item.city} /><HiddenBinding path={collectionPath("serviceAreas", index, "state")} value={item.state} /></span>)}</div>
+          <SectionTitle eyebrow={getValue("pages.home.areas.eyebrow", "")} title={getValue("pages.home.areas.title", "")} description={getValue("pages.home.areas.description", "")} eyebrowPath="pages.home.areas.eyebrow" titlePath="pages.home.areas.title" descriptionPath="pages.home.areas.description"/>
+          <div className="area-list">{areas.map((item, index) => <span key={item.id}>{item.text}</span>)}</div>
         </div>
       </section>
 
       <section className="cta-band">
         <div className="container cta-grid">
           <div>
-            <Eyebrow light><span {...editable("pages.home.finalCta.eyebrow")}>{useContent("pages.home.finalCta.eyebrow", "")}</span></Eyebrow>
-            <h2 {...editable("pages.home.finalCta.title")}>{useContent("pages.home.finalCta.title", "")}</h2>
-            <p {...editable("pages.home.finalCta.description")}>{useContent("pages.home.finalCta.description", "")}</p>
+            <Eyebrow light><span>{getValue("pages.home.finalCta.eyebrow", "")}</span></Eyebrow>
+            <h2>{getValue("pages.home.finalCta.title", "")}</h2>
+            <p>{getValue("pages.home.finalCta.description", "")}</p>
           </div>
-          <a className="btn btn-accent" href={finalWa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="home_final_whatsapp" {...editableButton("pages.home.finalCta.buttonLabel", "Botão final")}>
-            {useContent("pages.home.finalCta.buttonLabel", "")}<span>↗</span>
+          <a className="btn btn-accent" href={finalWa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="home_final_whatsapp">
+            {getValue("pages.home.finalCta.buttonLabel", "")}<span>↗</span>
           </a>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>);
 }
-
 function ServicesPage() {
-  const services = useCollection("collections.services");
-  const credentials = useCollection("collections.credentials");
-  const process = useCollection("collections.process");
-  const faq = useCollection("collections.faq");
-  return (
-    <Layout>
-      <PageHero page="services" mark="S" />
+    const services = getCollection("collections.services");
+    const credentials = getCollection("collections.credentials");
+    const process = getCollection("collections.process");
+    const faq = getCollection("collections.faq");
+    return (<Layout>
+      <PageHero page="services" mark="S"/>
       <section className="section">
         <div className="container">
-          <SectionTitle
-            eyebrow={useContent("pages.services.hero.eyebrow", "")}
-            title={useContent("pages.services.intro.title", "")}
-            description={useContent("pages.services.intro.description", "")}
-            eyebrowPath="pages.services.hero.eyebrow"
-            titlePath="pages.services.intro.title"
-            descriptionPath="pages.services.intro.description"
-          />
-          <div className="services-grid">{services.map((service, index) => <ServiceCard key={service.id} service={service} index={index} />)}</div>
+          <SectionTitle eyebrow={getValue("pages.services.hero.eyebrow", "")} title={getValue("pages.services.intro.title", "")} description={getValue("pages.services.intro.description", "")} eyebrowPath="pages.services.hero.eyebrow" titlePath="pages.services.intro.title" descriptionPath="pages.services.intro.description"/>
+          <div className="services-grid">{services.map((service, index) => <ServiceCard key={service.id} service={service} index={index}/>)}</div>
         </div>
       </section>
       <section className="section technical-details">
         <div className="container">
-          <h2 {...editable("pages.services.detailsTitle")}>{useContent("pages.services.detailsTitle", "")}</h2>
+          <h2>{getValue("pages.services.detailsTitle", "")}</h2>
           <div className="credential-grid compact-cards">
-            {credentials.map((item, index) => <article key={item.id}><span {...editable(collectionPath("credentials", index, "icon"))}>{item.icon}</span><h3 {...editable(collectionPath("credentials", index, "title"))}>{item.title}</h3><p {...editable(collectionPath("credentials", index, "description"))}>{item.description}</p></article>)}
+            {credentials.map((item, index) => <article key={item.id}><span>{item.icon}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}
           </div>
         </div>
       </section>
       <section className="section process-section">
         <div className="container">
-          <SectionTitle light eyebrow={useContent("pages.services.process.eyebrow", "")} title={useContent("pages.services.process.title", "")} eyebrowPath="pages.services.process.eyebrow" titlePath="pages.services.process.title" />
+          <SectionTitle light eyebrow={getValue("pages.services.process.eyebrow", "")} title={getValue("pages.services.process.title", "")} eyebrowPath="pages.services.process.eyebrow" titlePath="pages.services.process.title"/>
           <div className="process-grid">
-            {process.map((item, index) => <article key={item.id}><span {...editable(collectionPath("process", index, "step"))}>{item.step}</span><h3 {...editable(collectionPath("process", index, "title"))}>{item.title}</h3><p {...editable(collectionPath("process", index, "description"))}>{item.description}</p></article>)}
+            {process.map((item, index) => <article key={item.id}><span>{item.step}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}
           </div>
         </div>
       </section>
       <section className="section">
         <div className="container narrow">
-          <h2 className="faq-title" {...editable("pages.services.faqTitle")}>{useContent("pages.services.faqTitle", "")}</h2>
+          <h2 className="faq-title">{getValue("pages.services.faqTitle", "")}</h2>
           <div className="faq-list">
-            {faq.map((item, index) => <details key={item.id}><summary {...editable(collectionPath("faq", index, "question"))}>{item.question}<span>+</span></summary><p {...editable(collectionPath("faq", index, "answer"))}>{item.answer}</p></details>)}
+            {faq.map((item, index) => <details key={item.id}><summary>{item.question}<span>+</span></summary><p>{item.answer}</p></details>)}
           </div>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>);
 }
-
 function ProjectsPage() {
-  const projects = useCollection("collections.projects");
-  const clients = useCollection("collections.clients");
-  const projectMessage = useContent("pages.projects.whatsappMessage", "");
-  const wa = useWhatsAppUrl(projectMessage);
-  return (
-    <Layout>
-      <HiddenBinding path="pages.projects.whatsappMessage" value={projectMessage} />
-      <PageHero page="projects" mark="P" />
+    const projects = getCollection("collections.projects");
+    const clients = getCollection("collections.clients");
+    const projectMessage = getValue("pages.projects.whatsappMessage", "");
+    const wa = useWhatsAppUrl(projectMessage);
+    return (<Layout>
+
+      <PageHero page="projects" mark="P"/>
       <section className="section">
         <div className="container">
-          <SectionTitle
-            eyebrow={useContent("pages.projects.hero.eyebrow", "")}
-            title={useContent("pages.projects.intro.title", "")}
-            description={useContent("pages.projects.intro.description", "")}
-            eyebrowPath="pages.projects.hero.eyebrow"
-            titlePath="pages.projects.intro.title"
-            descriptionPath="pages.projects.intro.description"
-          />
-          <div className="projects-grid projects-page">{projects.map((item, index) => <ProjectCard key={item.id} item={item} index={index} />)}</div>
+          <SectionTitle eyebrow={getValue("pages.projects.hero.eyebrow", "")} title={getValue("pages.projects.intro.title", "")} description={getValue("pages.projects.intro.description", "")} eyebrowPath="pages.projects.hero.eyebrow" titlePath="pages.projects.intro.title" descriptionPath="pages.projects.intro.description"/>
+          <div className="projects-grid projects-page">{projects.map((item, index) => <ProjectCard key={item.id} item={item} index={index}/>)}</div>
         </div>
       </section>
       <section className="section clients-section">
         <div className="container">
-          <h2 className="subsection-title" {...editable("pages.projects.clientsTitle")}>{useContent("pages.projects.clientsTitle", "")}</h2>
-          <div className="name-grid client-grid">{clients.map((item, index) => <span key={item.id} {...editable(collectionPath("clients", index, "name"))}>{item.name}</span>)}</div>
+          <h2 className="subsection-title">{getValue("pages.projects.clientsTitle", "")}</h2>
+          <div className="name-grid client-grid">{clients.map((item, index) => <span key={item.id}>{item.name}</span>)}</div>
         </div>
       </section>
       <section className="cta-band">
         <div className="container cta-grid">
-          <div><h2 {...editable("pages.projects.ctaTitle")}>{useContent("pages.projects.ctaTitle", "")}</h2><p {...editable("pages.projects.ctaText")}>{useContent("pages.projects.ctaText", "")}</p></div>
-          <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="projects_whatsapp" {...editableButton("pages.projects.ctaLabel", "Botão de projetos")}>{useContent("pages.projects.ctaLabel", "")}<span>↗</span></a>
+          <div><h2>{getValue("pages.projects.ctaTitle", "")}</h2><p>{getValue("pages.projects.ctaText", "")}</p></div>
+          <a className="btn btn-accent" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="projects_whatsapp">{getValue("pages.projects.ctaLabel", "")}<span>↗</span></a>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>);
 }
-
 function AboutPage() {
-  const values = useCollection("collections.values");
-  const areas = useCollection("collections.serviceAreas");
-  const credentials = useCollection("collections.credentials");
-  const wa = useWhatsAppUrl();
-  return (
-    <Layout>
-      <PageHero page="about" mark="A" />
+    const values = getCollection("collections.values");
+    const areas = getCollection("collections.serviceAreas");
+    const credentials = getCollection("collections.credentials");
+    const wa = useWhatsAppUrl();
+    return (<Layout>
+      <PageHero page="about" mark="A"/>
       <section className="section">
         <div className="container about-grid">
           <div>
-            <SectionTitle eyebrow={useContent("pages.about.hero.eyebrow", "")} title={useContent("pages.about.story.title", "")} eyebrowPath="pages.about.hero.eyebrow" titlePath="pages.about.story.title" />
-            <p className="lead-copy" {...editable("pages.about.story.paragraph1")}>{useContent("pages.about.story.paragraph1", "")}</p>
-            <p className="lead-copy" {...editable("pages.about.story.paragraph2")}>{useContent("pages.about.story.paragraph2", "")}</p>
-            <a className="btn btn-primary" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="about_whatsapp" {...editableButton("pages.about.ctaLabel", "Botão sobre")}>{useContent("pages.about.ctaLabel", "")}</a>
+            <SectionTitle eyebrow={getValue("pages.about.hero.eyebrow", "")} title={getValue("pages.about.story.title", "")} eyebrowPath="pages.about.hero.eyebrow" titlePath="pages.about.story.title"/>
+            <p className="lead-copy">{getValue("pages.about.story.paragraph1", "")}</p>
+            <p className="lead-copy">{getValue("pages.about.story.paragraph2", "")}</p>
+            <a className="btn btn-primary" href={wa} target="_blank" rel="noopener noreferrer" data-coruja-event="whatsapp_click" data-coruja-event-label="about_whatsapp">{getValue("pages.about.ctaLabel", "")}</a>
           </div>
           <div className="mission-panel">
-            <article><span>01</span><h3 {...editable("pages.about.missionTitle")}>{useContent("pages.about.missionTitle", "")}</h3><p {...editable("pages.about.missionText")}>{useContent("pages.about.missionText", "")}</p></article>
-            <article><span>02</span><h3 {...editable("pages.about.visionTitle")}>{useContent("pages.about.visionTitle", "")}</h3><p {...editable("pages.about.visionText")}>{useContent("pages.about.visionText", "")}</p></article>
+            <article><span>01</span><h3>{getValue("pages.about.missionTitle", "")}</h3><p>{getValue("pages.about.missionText", "")}</p></article>
+            <article><span>02</span><h3>{getValue("pages.about.visionTitle", "")}</h3><p>{getValue("pages.about.visionText", "")}</p></article>
           </div>
         </div>
       </section>
       <section className="section values-section">
         <div className="container">
-          <h2 className="subsection-title" {...editable("pages.about.valuesTitle")}>{useContent("pages.about.valuesTitle", "")}</h2>
-          <div className="values-grid">{values.map((item, index) => <article key={item.id}><span>{String(index + 1).padStart(2, "0")}</span><h3 {...editable(collectionPath("values", index, "title"))}>{item.title}</h3><p {...editable(collectionPath("values", index, "description"))}>{item.description}</p></article>)}</div>
+          <h2 className="subsection-title">{getValue("pages.about.valuesTitle", "")}</h2>
+          <div className="values-grid">{values.map((item, index) => <article key={item.id}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}</div>
         </div>
       </section>
       <section className="section technical-details">
         <div className="container">
           <div className="credential-grid compact-cards">
-            {credentials.map((item, index) => <article key={item.id}><span {...editable(collectionPath("credentials", index, "icon"))}>{item.icon}</span><h3 {...editable(collectionPath("credentials", index, "title"))}>{item.title}</h3><p {...editable(collectionPath("credentials", index, "description"))}>{item.description}</p></article>)}
+            {credentials.map((item, index) => <article key={item.id}><span>{item.icon}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}
           </div>
         </div>
       </section>
       <section className="section areas-section">
         <div className="container">
-          <h2 {...editable("pages.about.areasTitle")}>{useContent("pages.about.areasTitle", "")}</h2>
-          <div className="area-list">{areas.map((item, index) => <span key={item.id} {...editable(collectionPath("serviceAreas", index, "text"))}>{item.text}</span>)}</div>
+          <h2>{getValue("pages.about.areasTitle", "")}</h2>
+          <div className="area-list">{areas.map((item, index) => <span key={item.id}>{item.text}</span>)}</div>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>);
 }
-
 function ContactPage() {
-  const formEnabled = Boolean(useContent("pages.contact.form.enabled", true));
-  const number = useContent("global.contact.whatsappRaw", "");
-  const phone = useContent("global.contact.phone", "");
-  const email = useContent("global.contact.email", "");
-  const address = useContent("global.contact.address", "");
-  const area = useContent("global.contact.serviceArea", "");
-  const hours = useContent("global.contact.businessHoursWeek", "");
-  const cnpj = useContent("global.contact.cnpj", "");
-  const instagram = useContent("global.social.instagram", "");
-  const instagramLabel = useContent("global.social.instagramLabel", "");
-  const tel = useTelHref();
-  const services = useCollection("collections.services");
-  const [form, setForm] = useState({ name: "", phone: "", email: "", service: "", message: "" });
+    const formEnabled = Boolean(getValue("pages.contact.form.enabled", true));
+    const number = getValue("global.contact.whatsappRaw", "");
+    const phone = getValue("global.contact.phone", "");
+    const email = getValue("global.contact.email", "");
+    const address = getValue("global.contact.address", "");
+    const area = getValue("global.contact.serviceArea", "");
+    const hours = getValue("global.contact.businessHoursWeek", "");
+    const cnpj = getValue("global.contact.cnpj", "");
+    const instagram = getValue("global.social.instagram", "");
+    const instagramLabel = getValue("global.social.instagramLabel", "");
+    const tel = useTelHref();
+    const services = getCollection("collections.services");
+    const [form, setForm] = useState({ name: "", phone: "", email: "", service: "", message: "" });
+    const formTitle = getValue("pages.contact.form.title", "");
+    const formDescription = getValue("pages.contact.form.description", "");
+    const nameLabel = getValue("pages.contact.form.nameLabel", "");
+    const namePlaceholder = getValue("pages.contact.form.namePlaceholder", "");
+    const phoneLabel = getValue("pages.contact.form.phoneLabel", "");
+    const phonePlaceholder = getValue("pages.contact.form.phonePlaceholder", "");
+    const emailLabel = getValue("pages.contact.form.emailLabel", "");
+    const emailPlaceholder = getValue("pages.contact.form.emailPlaceholder", "");
+    const serviceLabel = getValue("pages.contact.form.serviceLabel", "");
+    const servicePlaceholder = getValue("pages.contact.form.servicePlaceholder", "");
+    const messageLabel = getValue("pages.contact.form.messageLabel", "");
+    const messagePlaceholder = getValue("pages.contact.form.messagePlaceholder", "");
+    const submitText = getValue("pages.contact.form.submitText", "");
+    const introMessage = getValue("pages.contact.form.whatsappMessage", "");
+    const mapTitle = getValue("pages.contact.mapTitle", "");
+    const infoTitle = getValue("pages.contact.info.title", "");
+    const infoDescription = getValue("pages.contact.info.description", "");
+    function submit(e) {
+        e.preventDefault();
+        const body = [
+            introMessage,
+            `Nome: ${form.name}`,
+            `Telefone: ${form.phone}`,
+            form.email ? `E-mail: ${form.email}` : "",
+            form.service ? `Serviço: ${form.service}` : "",
+            `Mensagem: ${form.message}`,
+        ].filter(Boolean).join("\n");
+        window.open(buildWhatsAppHref(number, body), "_blank", "noopener,noreferrer");
+    }
+    const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
+    return (<Layout>
 
-  const formTitle = useContent("pages.contact.form.title", "");
-  const formDescription = useContent("pages.contact.form.description", "");
-  const nameLabel = useContent("pages.contact.form.nameLabel", "");
-  const namePlaceholder = useContent("pages.contact.form.namePlaceholder", "");
-  const phoneLabel = useContent("pages.contact.form.phoneLabel", "");
-  const phonePlaceholder = useContent("pages.contact.form.phonePlaceholder", "");
-  const emailLabel = useContent("pages.contact.form.emailLabel", "");
-  const emailPlaceholder = useContent("pages.contact.form.emailPlaceholder", "");
-  const serviceLabel = useContent("pages.contact.form.serviceLabel", "");
-  const servicePlaceholder = useContent("pages.contact.form.servicePlaceholder", "");
-  const messageLabel = useContent("pages.contact.form.messageLabel", "");
-  const messagePlaceholder = useContent("pages.contact.form.messagePlaceholder", "");
-  const submitText = useContent("pages.contact.form.submitText", "");
-  const introMessage = useContent("pages.contact.form.whatsappMessage", "");
-  const mapTitle = useContent("pages.contact.mapTitle", "");
-  const infoTitle = useContent("pages.contact.info.title", "");
-  const infoDescription = useContent("pages.contact.info.description", "");
 
-  function submit(e) {
-    e.preventDefault();
-    const body = [
-      introMessage,
-      `Nome: ${form.name}`,
-      `Telefone: ${form.phone}`,
-      form.email ? `E-mail: ${form.email}` : "",
-      form.service ? `Serviço: ${form.service}` : "",
-      `Mensagem: ${form.message}`,
-    ].filter(Boolean).join("\n");
-    window.open(buildWhatsAppHref(number, body), "_blank", "noopener,noreferrer");
-  }
 
-  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
 
-  return (
-    <Layout>
-      <HiddenBinding path="pages.contact.info.title" value={infoTitle} />
-      <HiddenBinding path="pages.contact.info.description" value={infoDescription} />
-      <HiddenBinding path="pages.contact.form.nameLabel" value={nameLabel} />
-      <HiddenBinding path="pages.contact.form.phoneLabel" value={phoneLabel} />
-      <HiddenBinding path="pages.contact.form.emailLabel" value={emailLabel} />
-      <HiddenBinding path="pages.contact.form.serviceLabel" value={serviceLabel} />
-      <HiddenBinding path="pages.contact.form.messageLabel" value={messageLabel} />
-      <HiddenBinding path="pages.contact.form.whatsappMessage" value={introMessage} />
-      <PageHero page="contact" mark="@" />
+
+
+
+
+      <PageHero page="contact" mark="@"/>
       <section className="section">
         <div className="container contact-grid">
           <aside className="contact-info">
-            <SectionTitle eyebrow={useContent("pages.contact.hero.eyebrow", "")} title={infoTitle} description={infoDescription} />
+            <SectionTitle eyebrow={getValue("pages.contact.hero.eyebrow", "")} title={infoTitle} description={infoDescription}/>
             <div className="contact-items">
               <a href={tel} data-coruja-event="tel_click" data-coruja-event-label="contact_phone"><span>TELEFONE</span><strong>{phone}</strong></a>
               <a href={`mailto:${email}`}><span>E-MAIL</span><strong>{email}</strong></a>
-              {instagram && <a href={instagram} target="_blank" rel="noopener noreferrer" data-coruja-url-path="global.social.instagram"><span>INSTAGRAM</span><strong {...editable("global.social.instagramLabel")}>{instagramLabel}</strong></a>}
-              <div><span>REGIÃO</span><strong {...editable("global.contact.serviceArea")}>{area}</strong></div>
-              <div><span>ATENDIMENTO</span><strong {...editable("global.contact.businessHoursWeek")}>{hours}</strong></div>
+              {instagram && <a href={instagram} target="_blank" rel="noopener noreferrer"><span>INSTAGRAM</span><strong>{instagramLabel}</strong></a>}
+              <div><span>REGIÃO</span><strong>{area}</strong></div>
+              <div><span>ATENDIMENTO</span><strong>{hours}</strong></div>
               <div><span>CNPJ</span><strong>{cnpj}</strong></div>
             </div>
           </aside>
-          {formEnabled && (
-            <form className="quote-form" onSubmit={submit} data-coruja-form="quote-request" data-coruja-event="form_submit" data-coruja-event-label="contact_quote_form">
-              <h2 {...editable("pages.contact.form.title")}>{formTitle}</h2><p {...editable("pages.contact.form.description")}>{formDescription}</p>
+          {formEnabled && (<form className="quote-form" onSubmit={submit} data-coruja-form="quote-request" data-coruja-event="form_submit" data-coruja-event-label="contact_quote_form">
+              <h2>{formTitle}</h2><p>{formDescription}</p>
               <div className="form-row">
-                <label>{nameLabel}<input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder={namePlaceholder} /></label>
-                <label>{phoneLabel}<input required value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder={phonePlaceholder} /></label>
+                <label>{nameLabel}<input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder={namePlaceholder}/></label>
+                <label>{phoneLabel}<input required value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder={phonePlaceholder}/></label>
               </div>
-              <label>{emailLabel}<input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder={emailPlaceholder} /></label>
+              <label>{emailLabel}<input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder={emailPlaceholder}/></label>
               <label>{serviceLabel}<select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })}><option value="">{servicePlaceholder}</option>{services.map(s => <option key={s.id} value={s.title}>{s.title}</option>)}</select></label>
-              <label>{messageLabel}<textarea required value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder={messagePlaceholder} /></label>
-              <button className="btn btn-accent" type="submit" {...editableButton("pages.contact.form.submitText", "Enviar formulário")}>{submitText}<span>↗</span></button>
-            </form>
-          )}
+              <label>{messageLabel}<textarea required value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder={messagePlaceholder}/></label>
+              <button className="btn btn-accent" type="submit">{submitText}<span>↗</span></button>
+            </form>)}
         </div>
       </section>
       <section className="map-section">
         <div className="container">
-          <div className="map-heading"><h2 {...editable("pages.contact.mapTitle")}>{mapTitle}</h2><p {...editable("global.contact.address")}>{address}</p></div>
-          <div className="map-shell"><iframe title={mapTitle} src={mapSrc} loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div>
+          <div className="map-heading"><h2>{mapTitle}</h2><p>{address}</p></div>
+          <div className="map-shell"><iframe title={mapTitle} src={mapSrc} loading="lazy" referrerPolicy="no-referrer-when-downgrade"/></div>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>);
 }
-
 function BlogPage() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const title = useContent("pages.blog.title", "");
-  const eyebrow = useContent("pages.blog.eyebrow", "");
-  const description = useContent("pages.blog.description", "");
-  const empty = useContent("pages.blog.emptyMessage", "");
-  const readMore = useContent("pages.blog.readMoreLabel", "");
+    const posts = savedPosts;
+    const loading = false;
+    const title = getValue("pages.blog.title", "");
+    const eyebrow = getValue("pages.blog.eyebrow", "");
+    const description = getValue("pages.blog.description", "");
+    const empty = getValue("pages.blog.emptyMessage", "");
+    const readMore = getValue("pages.blog.readMoreLabel", "");
+    useEffect(() => {
+        let active = true;
+        fetchCorujaBlogPosts().then(data => { if (active) {
+            setPosts(data);
+            setLoading(false);
+        } });
+        return () => { active = false; };
+    }, []);
+    return (<Layout>
 
-  useEffect(() => {
-    let active = true;
-    fetchCorujaBlogPosts().then(data => { if (active) { setPosts(data); setLoading(false); } });
-    return () => { active = false; };
-  }, []);
 
-  return (
-    <Layout>
-      <HiddenBinding path="pages.blog.emptyMessage" value={empty} />
-      <HiddenBinding path="pages.blog.readMoreLabel" value={readMore} />
-      <HiddenBinding path="pages.blog.backLabel" value={useContent("pages.blog.backLabel", "")} />
+
       <section className="page-hero">
-        <div className="page-grid container"><div><Eyebrow light><span {...editable("pages.blog.eyebrow")}>{eyebrow}</span></Eyebrow><h1 {...editable("pages.blog.title")}>{title}</h1><p {...editable("pages.blog.description")}>{description}</p></div><div className="page-mark">B</div></div>
+        <div className="page-grid container"><div><Eyebrow light><span>{eyebrow}</span></Eyebrow><h1>{title}</h1><p>{description}</p></div><div className="page-mark">B</div></div>
       </section>
       <section className="section">
         <div className="container">
-          {loading ? <div className="blog-state">Carregando…</div> : posts.length === 0 ? <div className="blog-state">{empty}</div> : (
-            <div className="blog-grid">
-              {posts.map(post => (
-                <article key={post.id || post.slug} className="blog-card">
-                  {post.coverImage && <img src={post.coverImage} alt={post.coverImageAlt || post.title} />}
+          {loading ? <div className="blog-state">Carregando…</div> : posts.length === 0 ? <div className="blog-state">{empty}</div> : (<div className="blog-grid">
+              {posts.map(post => (<article key={post.id || post.slug} className="blog-card">
+                  {post.coverImage && <img src={post.coverImage} alt={post.coverImageAlt || post.title}/>}
                   <div>
                     {post.category && <span className="pill">{post.category}</span>}
                     <h2>{post.title}</h2><p>{post.excerpt}</p>
                     <a href={siteHref(`/blog/${encodeURIComponent(post.slug)}`)}>{readMore} ↗</a>
                   </div>
-                </article>
-              ))}
-            </div>
-          )}
+                </article>))}
+            </div>)}
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>);
 }
-
 function BlogPostPage() {
-  const slug = currentSlug();
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const back = useContent("pages.blog.backLabel", "");
-  const empty = useContent("pages.blog.emptyMessage", "");
-
-  useEffect(() => {
-    let active = true;
-    fetchCorujaBlogPost(slug).then(data => { if (active) { setPost(data); setLoading(false); } });
-    return () => { active = false; };
-  }, [slug]);
-
-  if (loading) return <Layout><section className="section"><div className="container blog-state">Carregando…</div></section></Layout>;
-  if (!post) return <Layout><section className="section"><div className="container blog-state">{empty}</div></section></Layout>;
-
-  return (
-    <Layout post={post}>
+    const slug = currentSlug();
+    const post = savedPosts.find(p => p.slug === slug);
+    const loading = false;
+    const back = getValue("pages.blog.backLabel", "");
+    const empty = getValue("pages.blog.emptyMessage", "");
+    useEffect(() => {
+        let active = true;
+        fetchCorujaBlogPost(slug).then(data => { if (active) {
+            setPost(data);
+            setLoading(false);
+        } });
+        return () => { active = false; };
+    }, [slug]);
+    if (loading)
+        return <Layout><section className="section"><div className="container blog-state">Carregando…</div></section></Layout>;
+    if (!post)
+        return <Layout><section className="section"><div className="container blog-state">{empty}</div></section></Layout>;
+    return (<Layout post={post}>
       <article className="article">
         <div className="container article-head">
           <a href={siteHref("/blog")}>← {back}</a>
           {post.category && <span className="pill">{post.category}</span>}
           <h1>{post.title}</h1>
           {post.excerpt && <p>{post.excerpt}</p>}
-          {post.coverImage && <img src={post.coverImage} alt={post.coverImageAlt || post.title} />}
+          {post.coverImage && <img src={post.coverImage} alt={post.coverImageAlt || post.title}/>}
         </div>
-        <div className="container article-body" dangerouslySetInnerHTML={{ __html: post.contentHtml || String(post.content || "") }} />
+        <div className="container article-body" dangerouslySetInnerHTML={{ __html: post.contentHtml || String(post.content || "") }}/>
       </article>
-    </Layout>
-  );
+    </Layout>);
 }
-
 function NotFound() {
-  return <Layout><section className="not-found"><div><span>404</span><h1>Página não encontrada</h1><a className="btn btn-primary" href={siteHref("/")}>Voltar ao início</a></div></section></Layout>;
+    return <Layout><section className="not-found"><div><span>404</span><h1>Página não encontrada</h1><a className="btn btn-primary" href={siteHref("/")}>Voltar ao início</a></div></section></Layout>;
 }
-
 function RouterView() {
-  const route = currentRoute();
-  const blogEnabled = Boolean(useContent("blog.enabled", true));
-  if (route === "/") return <HomePage />;
-  if (route === "/servicos") return <ServicesPage />;
-  if (route === "/projetos") return <ProjectsPage />;
-  if (route === "/sobre") return <AboutPage />;
-  if (route === "/contato") return <ContactPage />;
-  if (route === "/blog" && blogEnabled) return <BlogPage />;
-  if (/^\/blog\/[^/]+$/.test(route) && blogEnabled) return <BlogPostPage />;
-  return <NotFound />;
+    const route = currentRoute();
+    const blogEnabled = Boolean(getValue("blog.enabled", true));
+    if (route === "/")
+        return <HomePage />;
+    if (route === "/servicos")
+        return <ServicesPage />;
+    if (route === "/projetos")
+        return <ProjectsPage />;
+    if (route === "/sobre")
+        return <AboutPage />;
+    if (route === "/contato")
+        return <ContactPage />;
+    if (route === "/blog" && blogEnabled)
+        return <BlogPage />;
+    if (/^\/blog\/[^/]+$/.test(route) && blogEnabled)
+        return <BlogPostPage />;
+    return <NotFound />;
 }
-
-export default function App() {
-  return <CorujaProvider><CorujaContentGate><RouterView /></CorujaContentGate></CorujaProvider>;
-}
+export default function App({path}={}) { const route=(path ?? (typeof window==='undefined'?'/':window.location.pathname)).replace(/\/+$/,'')||'/';return <RouteContext.Provider value={route}><RouterView/></RouteContext.Provider>; }

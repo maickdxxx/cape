@@ -1,0 +1,664 @@
+{
+  "global": {
+    "brand": {
+      "name": "CAPE Serviços e Consultoria",
+      "legalName": "",
+      "description": "Climatização, instalação e manutenção de ar-condicionado, PMOC, contratos de manutenção, projetos, manutenção e instalação elétrica, com engenheiro responsável registrado no CREA/RJ.",
+      "logoUrl": "/logo-cape-oficial.png",
+      "logoIconUrl": "/favicon.svg",
+      "faviconUrl": "/assets/saved-327e1f4e1d0cf124.svg",
+      "companyName": "CAPE Serviços e Consultoria",
+      "businessName": "CAPE Serviços e Consultoria",
+      "shortName": "CAPE Serviços e Consultoria",
+      "displayName": "CAPE Serviços e Consultoria",
+      "fullName": "",
+      "cnpj": "",
+      "taxId": "",
+      "tagline": "Engenharia responsável. Execução profissional.",
+      "slogan": "Engenharia responsável. Execução profissional.",
+      "logoAlt": "CAPE Serviços e Consultoria",
+      "whatsapp": "5521969783020",
+      "whatsappRaw": "5521969783020",
+      "whatsappDisplay": "(21) 96978-3020",
+      "phone": "(21) 96978-3020",
+      "phoneRaw": "5521969783020",
+      "email": "eng.rafael@yahoo.com",
+      "address": {
+        "full": "Av. Ernani do Amaral Peixoto, 60, Sala 811 – Centro, Niterói – RJ, CEP 24020-074",
+        "city": "Niterói",
+        "region": "RJ"
+      },
+      "clientFaviconUrl": "/assets/saved-327e1f4e1d0cf124.svg",
+      "clientFaviconExplicit": false
+    },
+    "contact": {
+      "phone": "(21) 96978-3020",
+      "phoneRaw": "5521969783020",
+      "whatsappRaw": "5521969783020",
+      "whatsappDisplay": "(21) 96978-3020",
+      "whatsappMessage": "Olá! Vim pelo site da CAPE e gostaria de solicitar um orçamento.",
+      "email": "eng.rafael@yahoo.com",
+      "address": "Av. Ernani do Amaral Peixoto, 60, Sala 811 – Centro, Niterói – RJ, CEP 24020-074",
+      "serviceArea": "Niterói, São Gonçalo, Itaboraí e Maricá",
+      "businessHoursWeek": "Consulte a disponibilidade pelo WhatsApp",
+      "businessHoursSaturday": "",
+      "cnpj": "60.737.840/0001-63",
+      "city": "Niterói",
+      "state": "RJ",
+      "whatsapp": "(21) 96978-3020",
+      "businessHours": "",
+      "hours": ""
+    },
+    "seo": {
+      "title": "CAPE Serviços e Consultoria | Climatização, Elétrica e PMOC em Niterói",
+      "description": "Climatização, instalação e manutenção de ar-condicionado, PMOC, contratos, projetos, elétrica e consultoria técnica em Niterói e região.",
+      "ogImage": "/hero-cape.svg",
+      "canonicalBase": "https://www.grupocape.com.br",
+      "faviconUrl": "/assets/saved-327e1f4e1d0cf124.svg",
+      "siteIcon": "/assets/saved-327e1f4e1d0cf124.svg",
+      "clientFaviconUrl": "/assets/saved-327e1f4e1d0cf124.svg",
+      "clientFaviconExplicit": false,
+      "clientFaviconVersion": "1786543067778",
+      "siteUrl": "https://www.grupocape.com.br"
+    },
+    "nav": {
+      "homeLabel": "Início",
+      "servicesLabel": "Serviços",
+      "projectsLabel": "Projetos",
+      "aboutLabel": "Sobre",
+      "blogLabel": "Blog",
+      "contactLabel": "Contato"
+    },
+    "footer": {
+      "tagline": "Climatização, elétrica e consultoria com responsabilidade técnica para residências, comércios e empresas.",
+      "copyright": "© 2026 CAPE Serviços e Consultoria. Todos os direitos reservados."
+    },
+    "social": {
+      "instagram": "",
+      "instagramLabel": "@grupocape",
+      "facebook": "",
+      "linkedin": "",
+      "youtube": ""
+    },
+    "cta": {
+      "headerLabel": "Solicitar orçamento",
+      "floatingTitle": "Fale com a CAPE",
+      "floatingText": "Envie sua necessidade e solicite uma avaliação.",
+      "floatingButtonLabel": "Abrir WhatsApp"
+    },
+    "theme": {
+      "colors": {
+        "primary": "#014D81",
+        "secondary": "#062F49",
+        "accent": "#E96711",
+        "background": "#F4F8FB",
+        "foreground": "#0B2130",
+        "surface": "#FFFFFF",
+        "muted": "#5E7382",
+        "border": "#D4E2EA",
+        "soft": "#E8F2F7",
+        "whatsapp": "#25D366"
+      }
+    },
+    "companyName": "CAPE Serviços e Consultoria",
+    "businessName": "CAPE Serviços e Consultoria",
+    "name": "CAPE Serviços e Consultoria",
+    "legalName": "",
+    "cnpj": "",
+    "taxId": "",
+    "slogan": "Engenharia responsável. Execução profissional.",
+    "tagline": "Engenharia responsável. Execução profissional.",
+    "description": "Climatização, instalação e manutenção de ar-condicionado, PMOC, contratos de manutenção, projetos, manutenção e instalação elétrica, com engenheiro responsável registrado no CREA/RJ.",
+    "city": "Niterói",
+    "state": "RJ",
+    "whatsapp": "5521969783020",
+    "phone": "5521969783020",
+    "email": "eng.rafael@yahoo.com",
+    "address": "Av. Ernani do Amaral Peixoto, 60, Sala 811 – Centro, Niterói – RJ, CEP 24020-074",
+    "businessHours": "",
+    "primaryColor": "#2563eb",
+    "business": {
+      "name": "CAPE Serviços e Consultoria",
+      "legalName": "",
+      "cnpj": "",
+      "taxId": "",
+      "category": "climatizacao",
+      "description": "Climatização, instalação e manutenção de ar-condicionado, PMOC, contratos de manutenção, projetos, manutenção e instalação elétrica, com engenheiro responsável registrado no CREA/RJ.",
+      "shortDescription": "Climatização, instalação e manutenção de ar-condicionado, PMOC, contratos de manutenção, projetos, manutenção e instalação elétrica, com engenheiro responsável registrado no CREA/RJ."
+    },
+    "location": {
+      "city": "Niterói",
+      "state": "RJ",
+      "address": "Av. Ernani do Amaral Peixoto, 60, Sala 811 – Centro, Niterói – RJ, CEP 24020-074"
+    },
+    "blog": {
+      "enabled": true
+    }
+  },
+  "pages": {
+    "home": {
+      "hero": {
+        "eyebrow": "CLIMATIZAÇÃO • ELÉTRICA • CONSULTORIA",
+        "title": "Soluções técnicas para ambientes que precisam funcionar com segurança.",
+        "titleAccent": "Engenharia responsável. Execução profissional.",
+        "description": "Instalação e manutenção de ar-condicionado, PMOC, contratos, projetos e serviços elétricos para residências, comércios e empresas em Niterói e região.",
+        "primaryCtaLabel": "Pedir orçamento",
+        "secondaryCtaLabel": "Conhecer serviços",
+        "image": "/hero-cape.svg",
+        "imageAlt": "Ilustração técnica de climatização e instalações elétricas da CAPE",
+        "sideLabel": "RESPONSABILIDADE TÉCNICA",
+        "sideTitle": "Engenheiro responsável registrado no CREA/RJ",
+        "sideText": "Atuação técnica com foco em segurança, conformidade e documentação adequada ao escopo do serviço."
+      },
+      "services": {
+        "eyebrow": "SOLUÇÕES CAPE",
+        "title": "Um só parceiro para climatização, elétrica e manutenção técnica.",
+        "description": "Atendimento integrado para instalação, manutenção preventiva e corretiva, projetos, PMOC e consultoria.",
+        "ctaLabel": "Ver todos os serviços"
+      },
+      "credentials": {
+        "eyebrow": "PADRÃO TÉCNICO",
+        "title": "Serviço pensado para reduzir improvisos e aumentar a segurança.",
+        "description": "A CAPE combina execução em campo, planejamento e responsabilidade técnica para atender necessidades residenciais, comerciais e empresariais."
+      },
+      "projects": {
+        "eyebrow": "ÁREAS DE ATUAÇÃO",
+        "title": "Projetos e serviços do diagnóstico à execução.",
+        "description": "Soluções que podem envolver instalação, manutenção, projeto, laudo, plano de manutenção ou acompanhamento técnico.",
+        "ctaLabel": "Conhecer projetos e atuação"
+      },
+      "clients": {
+        "eyebrow": "EXPERIÊNCIA",
+        "title": "Clientes apresentados no portfólio institucional.",
+        "description": "Empresas e instituições que fazem parte do histórico apresentado pela CAPE."
+      },
+      "brands": {
+        "eyebrow": "MARCAS CREDENCIADAS",
+        "title": "Atendimento técnico em marcas reconhecidas.",
+        "description": "Credenciamentos informados pela CAPE para atendimento de climatização."
+      },
+      "areas": {
+        "eyebrow": "ONDE ATENDEMOS",
+        "title": "Atendimento em Niterói e cidades da região.",
+        "description": "Consulte disponibilidade e condições para o seu endereço."
+      },
+      "finalCta": {
+        "eyebrow": "PRECISA DE UMA AVALIAÇÃO?",
+        "title": "Explique o que você precisa e fale com a equipe técnica.",
+        "description": "Envie uma mensagem pelo WhatsApp com o tipo de serviço, cidade e, se possível, fotos do local ou equipamento.",
+        "buttonLabel": "Chamar no WhatsApp",
+        "whatsappMessage": "Olá! Vim pelo site da CAPE e gostaria de solicitar uma avaliação técnica."
+      },
+      "seo": {
+        "title": "CAPE | Ar-condicionado, PMOC e Elétrica em Niterói",
+        "description": "Instalação e manutenção de ar-condicionado, PMOC, projetos, contratos e serviços elétricos em Niterói, São Gonçalo, Itaboraí e Maricá.",
+        "ogImage": "/hero-cape.svg"
+      }
+    },
+    "services": {
+      "hero": {
+        "eyebrow": "SERVIÇOS",
+        "title": "Soluções técnicas para climatização, elétrica e infraestrutura.",
+        "description": "Do atendimento pontual aos contratos de manutenção, a CAPE trabalha com serviços técnicos para residências, comércios e empresas."
+      },
+      "intro": {
+        "title": "Atuação completa, com escopo claro.",
+        "description": "Conheça as principais frentes de atendimento. O escopo final é definido conforme a necessidade do local, equipamento e documentação aplicável."
+      },
+      "detailsTitle": "Serviços e referências técnicas",
+      "process": {
+        "eyebrow": "COMO FUNCIONA",
+        "title": "Um processo simples para organizar cada atendimento."
+      },
+      "faqTitle": "Dúvidas frequentes",
+      "seo": {
+        "title": "Serviços | CAPE Serviços e Consultoria",
+        "description": "Climatização, PMOC, contratos, projetos, elétrica, energia solar, carregadores veiculares e consultoria técnica.",
+        "ogImage": "/project-climatizacao.svg"
+      }
+    },
+    "projects": {
+      "hero": {
+        "eyebrow": "PROJETOS & CONTRATOS",
+        "title": "Planejamento técnico para instalações, manutenção e adequações.",
+        "description": "A CAPE atua em projetos e serviços que exigem organização, documentação e acompanhamento técnico."
+      },
+      "intro": {
+        "title": "Soluções adaptadas ao tipo de operação.",
+        "description": "Cada projeto parte das condições reais do ambiente e do objetivo do cliente, evitando soluções genéricas."
+      },
+      "clientsTitle": "Histórico apresentado pela CAPE",
+      "ctaTitle": "Tem um projeto, contrato ou adequação para avaliar?",
+      "ctaText": "Envie as informações iniciais e converse com a equipe sobre o próximo passo.",
+      "ctaLabel": "Falar sobre meu projeto",
+      "whatsappMessage": "Olá! Gostaria de conversar sobre um projeto, contrato ou adequação técnica com a CAPE.",
+      "seo": {
+        "title": "Projetos e contratos | CAPE Serviços e Consultoria",
+        "description": "Projetos de climatização e elétrica, PMOC, contratos de manutenção, laudos e consultoria técnica em Niterói e região.",
+        "ogImage": "/project-eletrica.svg"
+      }
+    },
+    "about": {
+      "hero": {
+        "eyebrow": "SOBRE A CAPE",
+        "title": "Soluções técnicas com segurança, eficiência e responsabilidade.",
+        "description": "Conheça a proposta, os valores e a forma de atuação da CAPE Serviços e Consultoria."
+      },
+      "story": {
+        "title": "Quem somos",
+        "paragraph1": "A CAPE Serviços e Consultoria é especializada em soluções técnicas nas áreas de climatização, elétrica, energia solar e consultoria, atendendo empresas e residências.",
+        "paragraph2": "A atuação prioriza segurança, eficiência, sustentabilidade e conformidade com as normas técnicas aplicáveis, com profissionais capacitados e responsável técnico registrado no CREA/RJ."
+      },
+      "missionTitle": "Missão",
+      "missionText": "Oferecer soluções técnicas de qualidade em climatização, elétrica e consultoria, garantindo segurança, conforto e eficiência para os clientes.",
+      "visionTitle": "Visão",
+      "visionText": "Ser referência no mercado em serviços técnicos especializados, reconhecida pela competência, confiança e inovação.",
+      "valuesTitle": "Valores que orientam o trabalho",
+      "areasTitle": "Região de atendimento",
+      "ctaLabel": "Solicitar orçamento",
+      "seo": {
+        "title": "Sobre a CAPE | Serviços e Consultoria",
+        "description": "Conheça a CAPE, sua atuação em climatização, elétrica e consultoria e o compromisso com segurança, qualidade e responsabilidade técnica.",
+        "ogImage": "/hero-cape.svg"
+      }
+    },
+    "contact": {
+      "hero": {
+        "eyebrow": "CONTATO",
+        "title": "Fale com a CAPE sobre o seu serviço ou projeto.",
+        "description": "Atendimento para Niterói, São Gonçalo, Itaboraí e Maricá. Envie sua solicitação pelo WhatsApp ou use os canais abaixo."
+      },
+      "info": {
+        "title": "Canais de atendimento",
+        "description": "Para agilizar a avaliação, informe a cidade, o tipo de serviço e os principais detalhes do local ou equipamento."
+      },
+      "form": {
+        "enabled": true,
+        "title": "Solicite uma avaliação",
+        "description": "Preencha os dados e a mensagem será preparada para envio no WhatsApp.",
+        "nameLabel": "Nome",
+        "namePlaceholder": "Seu nome",
+        "phoneLabel": "Telefone",
+        "phonePlaceholder": "(21) 99999-9999",
+        "emailLabel": "E-mail",
+        "emailPlaceholder": "seu@email.com",
+        "serviceLabel": "Serviço",
+        "servicePlaceholder": "Selecione uma opção",
+        "messageLabel": "O que você precisa?",
+        "messagePlaceholder": "Descreva o serviço, equipamento, local ou projeto",
+        "submitText": "Enviar pelo WhatsApp",
+        "whatsappMessage": "Olá! Vim pelo site da CAPE e gostaria de solicitar uma avaliação."
+      },
+      "mapTitle": "Onde estamos",
+      "seo": {
+        "title": "Contato | CAPE Serviços e Consultoria",
+        "description": "Fale com a CAPE pelo WhatsApp e solicite avaliação para climatização, PMOC, elétrica, projetos e consultoria em Niterói e região.",
+        "ogImage": "/hero-cape.svg"
+      }
+    },
+    "blog": {
+      "eyebrow": "CONTEÚDO TÉCNICO",
+      "title": "Informação para cuidar melhor de equipamentos e instalações.",
+      "description": "Conteúdos sobre climatização, PMOC, manutenção, elétrica, eficiência e segurança.",
+      "emptyMessage": "Ainda não há artigos publicados.",
+      "readMoreLabel": "Ler artigo",
+      "backLabel": "Voltar ao Blog",
+      "seo": {
+        "title": "Blog | CAPE Serviços e Consultoria",
+        "description": "Conteúdos sobre ar-condicionado, PMOC, manutenção, elétrica e segurança técnica.",
+        "ogImage": "/hero-cape.svg"
+      },
+      "enabled": true
+    }
+  },
+  "collections": {
+    "stats": [
+      {
+        "id": "crea",
+        "label": "responsável técnico registrado",
+        "value": "CREA/RJ"
+      },
+      {
+        "id": "cidades",
+        "label": "região principal de atendimento",
+        "value": "4 cidades"
+      },
+      {
+        "id": "normas",
+        "label": "referências técnicas aplicáveis",
+        "value": "NBR / NR"
+      }
+    ],
+    "services": [
+      {
+        "id": "climatizacao",
+        "icon": "❄",
+        "title": "Climatização",
+        "ctaLabel": "Solicitar avaliação",
+        "highlight": "AR-CONDICIONADO",
+        "description": "Instalação e manutenção de sistemas de ar-condicionado residenciais, comerciais e industriais.",
+        "whatsappMessage": "Olá! Gostaria de solicitar avaliação para climatização ou ar-condicionado."
+      },
+      {
+        "id": "higienizacao",
+        "icon": "✦",
+        "title": "Higienização técnica",
+        "ctaLabel": "Pedir orçamento",
+        "highlight": "HIGIENIZAÇÃO",
+        "description": "Limpeza técnica e higienização de equipamentos de climatização, conforme a necessidade do sistema.",
+        "whatsappMessage": "Olá! Gostaria de orçamento para higienização de ar-condicionado."
+      },
+      {
+        "id": "pmoc",
+        "icon": "✓",
+        "title": "PMOC e contratos de manutenção",
+        "ctaLabel": "Falar sobre PMOC",
+        "highlight": "PMOC",
+        "description": "Plano de Manutenção, Operação e Controle e contratos para organizar rotinas preventivas e corretivas.",
+        "whatsappMessage": "Olá! Gostaria de informações sobre PMOC ou contrato de manutenção."
+      },
+      {
+        "id": "projetos-clima",
+        "icon": "▱",
+        "title": "Projetos de climatização",
+        "ctaLabel": "Falar sobre projeto",
+        "highlight": "PROJETOS",
+        "description": "Planejamento técnico de soluções de climatização conforme a necessidade do ambiente e da operação.",
+        "whatsappMessage": "Olá! Gostaria de conversar sobre um projeto de climatização."
+      },
+      {
+        "id": "eletrica",
+        "icon": "⚡",
+        "title": "Instalações elétricas",
+        "ctaLabel": "Solicitar avaliação",
+        "highlight": "ELÉTRICA",
+        "description": "Projetos, instalação de circuitos, adequações, aterramento e serviços elétricos conforme o escopo técnico.",
+        "whatsappMessage": "Olá! Gostaria de solicitar avaliação para instalação elétrica."
+      },
+      {
+        "id": "manutencao-eletrica",
+        "icon": "⚙",
+        "title": "Manutenção e inspeções elétricas",
+        "ctaLabel": "Pedir orçamento",
+        "highlight": "MANUTENÇÃO",
+        "description": "Manutenção preventiva e corretiva, inspeções, relatórios e recomendações para instalações elétricas.",
+        "whatsappMessage": "Olá! Preciso de manutenção ou inspeção elétrica."
+      },
+      {
+        "id": "consultoria",
+        "icon": "⌁",
+        "title": "Consultoria técnica",
+        "ctaLabel": "Falar com a equipe",
+        "highlight": "CONSULTORIA",
+        "description": "Laudos, vistorias, POPs, adequações normativas e emissão de ART ou TRT conforme profissional e escopo aplicável.",
+        "whatsappMessage": "Olá! Gostaria de informações sobre consultoria técnica, laudo ou documentação."
+      },
+      {
+        "id": "solar-recarga",
+        "icon": "☀",
+        "title": "Energia solar e recarga veicular",
+        "ctaLabel": "Solicitar avaliação",
+        "highlight": "ENERGIA",
+        "description": "Projeto e instalação de sistemas fotovoltaicos, monitoramento e soluções de recarga para veículos elétricos.",
+        "whatsappMessage": "Olá! Gostaria de conversar sobre energia solar ou carregador veicular."
+      }
+    ],
+    "credentials": [
+      {
+        "id": "crea",
+        "icon": "✓",
+        "title": "Responsabilidade técnica",
+        "description": "Engenheiro responsável registrado no CREA/RJ."
+      },
+      {
+        "id": "pmoc",
+        "icon": "▤",
+        "title": "PMOC e documentação",
+        "description": "Planos, laudos, vistorias e documentação técnica conforme o serviço contratado."
+      },
+      {
+        "id": "normas",
+        "icon": "⚙",
+        "title": "Normas técnicas",
+        "description": "Atuação considerando referências como NR10, NBR 5410 e NBR 5419 quando aplicáveis."
+      },
+      {
+        "id": "contratos",
+        "icon": "↻",
+        "title": "Manutenção contínua",
+        "description": "Contratos e rotinas preventivas e corretivas para reduzir falhas e manter a operação organizada."
+      }
+    ],
+    "projects": [
+      {
+        "id": "clima",
+        "image": "/project-climatizacao.svg",
+        "title": "Instalação, manutenção e projetos de climatização",
+        "category": "CLIMATIZAÇÃO",
+        "imageAlt": "Ilustração de sistema de climatização",
+        "description": "Soluções para ambientes residenciais, comerciais e industriais, incluindo higienização e manutenção."
+      },
+      {
+        "id": "eletrica",
+        "image": "/project-eletrica.svg",
+        "title": "Projetos, instalações e adequações elétricas",
+        "category": "ELÉTRICA",
+        "imageAlt": "Ilustração de projeto e quadro elétrico",
+        "description": "Circuitos, inspeções, aterramento, manutenção e recomendações corretivas conforme a necessidade da instalação."
+      },
+      {
+        "id": "consultoria",
+        "image": "/project-consultoria.svg",
+        "title": "Planos, contratos, laudos e acompanhamento técnico",
+        "category": "PMOC & CONSULTORIA",
+        "imageAlt": "Ilustração de consultoria e verificação técnica",
+        "description": "Organização de manutenção, vistorias e documentação para apoiar a segurança e a operação do cliente."
+      }
+    ],
+    "clients": [
+      {
+        "id": "azevedo",
+        "name": "Azevedo & Travassos"
+      },
+      {
+        "id": "deliciando",
+        "name": "Deliciando"
+      },
+      {
+        "id": "baby-clinica",
+        "name": "Baby Clínica"
+      },
+      {
+        "id": "uff",
+        "name": "Universidade Federal Fluminense (UFF)"
+      },
+      {
+        "id": "fec",
+        "name": "Fundação Euclides da Cunha (FEC)"
+      },
+      {
+        "id": "faria",
+        "name": "Diego Raphael C. de Faria Advogado"
+      },
+      {
+        "id": "mane",
+        "name": "Mané"
+      },
+      {
+        "id": "jp",
+        "name": "JP Refeições"
+      },
+      {
+        "id": "latelier",
+        "name": "L'Atelier"
+      },
+      {
+        "id": "shop-solar",
+        "name": "Shop Solar"
+      }
+    ],
+    "brands": [
+      {
+        "id": "agratto",
+        "name": "Agratto"
+      },
+      {
+        "id": "elgin",
+        "name": "Elgin"
+      },
+      {
+        "id": "hitachi",
+        "name": "Hitachi"
+      },
+      {
+        "id": "midea",
+        "name": "Midea"
+      },
+      {
+        "id": "philco",
+        "name": "Philco"
+      },
+      {
+        "id": "tcl",
+        "name": "TCL"
+      }
+    ],
+    "process": [
+      {
+        "id": "contato",
+        "step": "01",
+        "title": "Entendimento da necessidade",
+        "description": "Você informa o serviço, cidade e detalhes iniciais do ambiente, equipamento ou instalação."
+      },
+      {
+        "id": "avaliacao",
+        "step": "02",
+        "title": "Avaliação técnica",
+        "description": "A equipe identifica o melhor próximo passo e, quando necessário, programa avaliação no local."
+      },
+      {
+        "id": "proposta",
+        "step": "03",
+        "title": "Escopo e proposta",
+        "description": "São definidos serviços, condições e documentação aplicável antes da execução."
+      },
+      {
+        "id": "execucao",
+        "step": "04",
+        "title": "Execução e acompanhamento",
+        "description": "O trabalho é realizado com foco em segurança, organização e funcionamento adequado."
+      }
+    ],
+    "values": [
+      {
+        "id": "cliente",
+        "title": "Comprometimento com o cliente",
+        "description": "Entender a necessidade e propor uma solução tecnicamente adequada."
+      },
+      {
+        "id": "qualidade",
+        "title": "Qualidade e segurança",
+        "description": "Priorizar segurança, desempenho e boa execução nos serviços prestados."
+      },
+      {
+        "id": "etica",
+        "title": "Ética profissional",
+        "description": "Atuar com clareza, responsabilidade e respeito ao escopo contratado."
+      },
+      {
+        "id": "inovacao",
+        "title": "Inovação e sustentabilidade",
+        "description": "Buscar soluções eficientes e compatíveis com a evolução das tecnologias."
+      },
+      {
+        "id": "equipe",
+        "title": "Valorização da equipe técnica",
+        "description": "Reconhecer a capacitação e o trabalho dos profissionais envolvidos."
+      }
+    ],
+    "serviceAreas": [
+      {
+        "id": "niteroi",
+        "city": "Niterói",
+        "text": "Niterói",
+        "state": "RJ"
+      },
+      {
+        "id": "sao-goncalo",
+        "city": "São Gonçalo",
+        "text": "São Gonçalo",
+        "state": "RJ"
+      },
+      {
+        "id": "itaborai",
+        "city": "Itaboraí",
+        "text": "Itaboraí",
+        "state": "RJ"
+      },
+      {
+        "id": "marica",
+        "city": "Maricá",
+        "text": "Maricá",
+        "state": "RJ"
+      }
+    ],
+    "faq": [
+      {
+        "id": "regiao",
+        "answer": "A região principal informada inclui Niterói, São Gonçalo, Itaboraí e Maricá. Para outros locais, consulte a disponibilidade pelo WhatsApp.",
+        "question": "Quais cidades a CAPE atende?"
+      },
+      {
+        "id": "pmoc",
+        "answer": "Sim. A CAPE oferece PMOC e contratos de manutenção preventiva e corretiva, com escopo definido conforme o ambiente e os equipamentos.",
+        "question": "A CAPE trabalha com PMOC e contratos de manutenção?"
+      },
+      {
+        "id": "eletrica",
+        "answer": "Sim. O portfólio inclui projetos, instalações, manutenção, inspeções, aterramento e adequações elétricas.",
+        "question": "A CAPE também executa serviços elétricos?"
+      },
+      {
+        "id": "art",
+        "answer": "O portfólio prevê emissão de ART e TRT conforme o tipo de serviço, o profissional responsável e a documentação aplicável ao escopo.",
+        "question": "É possível emitir ART ou TRT?"
+      },
+      {
+        "id": "empresa",
+        "answer": "Sim. A CAPE informa atendimento para residências, comércios e empresas.",
+        "question": "Atendem empresas e residências?"
+      }
+    ],
+    "blog": [
+      {
+        "id": "41ce7e7b-59a1-40e9-8877-3d688dc87e82",
+        "title": "PMOC para empresas: o que é, quem precisa e como funciona",
+        "slug": "pmoc-para-empresas",
+        "excerpt": "Entenda quando o PMOC é exigido, o que o plano organiza e como a manutenção adequada contribui para a qualidade do ar e a confiabilidade da climatização.",
+        "description": "Entenda quando o PMOC é exigido, o que o plano organiza e como a manutenção adequada contribui para a qualidade do ar e a confiabilidade da climatização.",
+        "content": "<p>Em empresas, clínicas, lojas, escritórios e outros ambientes de uso coletivo, o ar-condicionado faz parte da rotina de trabalho. Para que o sistema opere com organização, segurança e atenção à qualidade do ar interior, existe o <strong>Plano de Manutenção, Operação e Controle (PMOC)</strong>.</p>\n<p>A <a href=\"https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13589.htm\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">Lei Federal nº 13.589/2018</a> determina que edifícios de uso público e coletivo com ambientes climatizados artificialmente disponham de PMOC. O objetivo declarado pela lei é eliminar ou minimizar riscos potenciais à saúde dos ocupantes.</p>\n<h2>O que é PMOC?</h2>\n<p>O PMOC é um plano que organiza as atividades de manutenção, operação e controle dos sistemas de climatização. Ele identifica os equipamentos, define procedimentos e periodicidades, atribui responsabilidades e mantém registros do que foi executado.</p>\n<p>Na prática, o documento ajuda a transformar intervenções isoladas em uma rotina técnica acompanhável. Isso permite verificar se filtros, serpentinas, bandejas, drenos, ventiladores, tomadas de ar externo e outros componentes estão sendo inspecionados e mantidos conforme o sistema e as normas aplicáveis.</p>\n<h2>Quem precisa de PMOC?</h2>\n<p>De acordo com a Lei nº 13.589/2018, a exigência alcança edifícios de uso público e coletivo que possuem ambientes de ar interior climatizado artificialmente. A lei também menciona ambientes climatizados de uso restrito, como os de processos produtivos, laboratoriais e hospitalares, que devem observar regulamentos específicos.</p>\n<p>Por isso, empresas com escritórios, comércios, clínicas, escolas, academias, condomínios com áreas coletivas e outros estabelecimentos devem avaliar o enquadramento de suas instalações. O escopo técnico e os requisitos aplicáveis dependem das características do local e do sistema instalado.</p>\n<h2>O que um bom plano deve organizar?</h2>\n<p>O conteúdo precisa refletir a instalação real. Entre os pontos normalmente considerados estão:</p>\n<ul><li>identificação dos ambientes e equipamentos de climatização;</li><li>cadastro de capacidade, localização e características dos aparelhos;</li><li>procedimentos e frequência de inspeção, limpeza e manutenção;</li><li>registro das atividades realizadas e das ocorrências encontradas;</li><li>avaliação do estado de conservação e funcionamento dos componentes;</li><li>definição dos responsáveis pelas atividades e pela documentação;</li><li>medidas relacionadas à qualidade do ar interior e à renovação de ar, quando aplicáveis.</li></ul>\n<p>A periodicidade não deve ser escolhida de forma genérica. Ela precisa considerar o fabricante, o tipo de equipamento, o uso do ambiente, as condições do local e as exigências técnicas e sanitárias pertinentes.</p>\n<h2>PMOC não é apenas limpeza de filtro</h2>\n<p>Limpar filtros é importante, mas não substitui um plano completo. A <a href=\"https://www.gov.br/anvisa/pt-br/assuntos/paf/fiscalizacao/fiscalizacao\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">Anvisa</a> informa que a inspeção de sistemas de climatização envolve verificar o estado de limpeza, remover sujidades por métodos adequados e manter a integridade e a eficiência dos componentes, além da análise documental relacionada à qualidade do ar climatizado.</p>\n<p>Um filtro limpo não confirma, sozinho, que drenos, bandejas, serpentinas, ventiladores, dutos ou renovação de ar estejam em condições adequadas. O PMOC existe justamente para organizar a visão do sistema como um todo.</p>\n<h2>Quais benefícios a manutenção planejada oferece?</h2>\n<p>Quando o plano é executado de forma consistente, a empresa passa a ter histórico das intervenções e mais previsibilidade para corrigir falhas. Isso pode ajudar a reduzir paradas inesperadas, identificar componentes desgastados, acompanhar o desempenho dos equipamentos e planejar serviços antes que pequenos problemas se tornem ocorrências maiores.</p>\n<p>A manutenção também contribui para preservar as condições de operação projetadas. Porém, economia de energia e aumento da vida útil não devem ser prometidos de maneira automática: os resultados dependem do estado do sistema, do dimensionamento, do uso, da instalação e das medidas corretivas adotadas.</p>\n<h2>Como começar o PMOC na sua empresa</h2>\n<ol><li><strong>Faça o levantamento dos equipamentos.</strong> Identifique aparelhos, capacidades, ambientes atendidos e condições aparentes.</li><li><strong>Realize uma avaliação técnica.</strong> Verifique instalação, conservação, funcionamento e documentação disponível.</li><li><strong>Defina o plano aplicável.</strong> Estabeleça atividades, periodicidades, registros e responsabilidades conforme o sistema.</li><li><strong>Execute e registre.</strong> O plano precisa sair do papel; cada atividade deve ser acompanhada e documentada.</li><li><strong>Revise quando houver mudanças.</strong> Reformas, substituição de equipamentos e alterações de uso podem exigir atualização.</li></ol>\n<h2>PMOC em Niterói e região</h2>\n<p>A CAPE Serviços e Consultoria atende empresas em Niterói, São Gonçalo, Itaboraí e Maricá com avaliação técnica, manutenção de sistemas de climatização, PMOC e contratos de manutenção. A empresa conta com engenheiro responsável registrado no CREA/RJ.</p>\n<p>Precisa avaliar o sistema de climatização da sua empresa? <strong>Fale com a CAPE pelo WhatsApp (21) 96978-3020</strong> e informe o tipo de estabelecimento, a cidade e a quantidade aproximada de equipamentos para iniciar o atendimento.</p>\n<h2>Fontes oficiais consultadas</h2>\n<ul><li><a href=\"https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13589.htm\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">Lei Federal nº 13.589/2018 — Presidência da República</a>.</li><li><a href=\"https://www.gov.br/anvisa/pt-br/assuntos/paf/fiscalizacao/fiscalizacao\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">Controle sanitário de sistemas de climatização — Anvisa</a>.</li><li><a href=\"https://bvs.saude.gov.br/bvs/saudelegis/anvisa/2003/rdc0009_16_01_2003.html\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">Resolução-RE nº 9/2003 — Anvisa/Ministério da Saúde</a>.</li></ul>",
+        "contentHtml": "<p>Em empresas, clínicas, lojas, escritórios e outros ambientes de uso coletivo, o ar-condicionado faz parte da rotina de trabalho. Para que o sistema opere com organização, segurança e atenção à qualidade do ar interior, existe o <strong>Plano de Manutenção, Operação e Controle (PMOC)</strong>.</p>\n<p>A <a href=\"https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13589.htm\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">Lei Federal nº 13.589/2018</a> determina que edifícios de uso público e coletivo com ambientes climatizados artificialmente disponham de PMOC. O objetivo declarado pela lei é eliminar ou minimizar riscos potenciais à saúde dos ocupantes.</p>\n<h2>O que é PMOC?</h2>\n<p>O PMOC é um plano que organiza as atividades de manutenção, operação e controle dos sistemas de climatização. Ele identifica os equipamentos, define procedimentos e periodicidades, atribui responsabilidades e mantém registros do que foi executado.</p>\n<p>Na prática, o documento ajuda a transformar intervenções isoladas em uma rotina técnica acompanhável. Isso permite verificar se filtros, serpentinas, bandejas, drenos, ventiladores, tomadas de ar externo e outros componentes estão sendo inspecionados e mantidos conforme o sistema e as normas aplicáveis.</p>\n<h2>Quem precisa de PMOC?</h2>\n<p>De acordo com a Lei nº 13.589/2018, a exigência alcança edifícios de uso público e coletivo que possuem ambientes de ar interior climatizado artificialmente. A lei também menciona ambientes climatizados de uso restrito, como os de processos produtivos, laboratoriais e hospitalares, que devem observar regulamentos específicos.</p>\n<p>Por isso, empresas com escritórios, comércios, clínicas, escolas, academias, condomínios com áreas coletivas e outros estabelecimentos devem avaliar o enquadramento de suas instalações. O escopo técnico e os requisitos aplicáveis dependem das características do local e do sistema instalado.</p>\n<h2>O que um bom plano deve organizar?</h2>\n<p>O conteúdo precisa refletir a instalação real. Entre os pontos normalmente considerados estão:</p>\n<ul><li>identificação dos ambientes e equipamentos de climatização;</li><li>cadastro de capacidade, localização e características dos aparelhos;</li><li>procedimentos e frequência de inspeção, limpeza e manutenção;</li><li>registro das atividades realizadas e das ocorrências encontradas;</li><li>avaliação do estado de conservação e funcionamento dos componentes;</li><li>definição dos responsáveis pelas atividades e pela documentação;</li><li>medidas relacionadas à qualidade do ar interior e à renovação de ar, quando aplicáveis.</li></ul>\n<p>A periodicidade não deve ser escolhida de forma genérica. Ela precisa considerar o fabricante, o tipo de equipamento, o uso do ambiente, as condições do local e as exigências técnicas e sanitárias pertinentes.</p>\n<h2>PMOC não é apenas limpeza de filtro</h2>\n<p>Limpar filtros é importante, mas não substitui um plano completo. A <a href=\"https://www.gov.br/anvisa/pt-br/assuntos/paf/fiscalizacao/fiscalizacao\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">Anvisa</a> informa que a inspeção de sistemas de climatização envolve verificar o estado de limpeza, remover sujidades por métodos adequados e manter a integridade e a eficiência dos componentes, além da análise documental relacionada à qualidade do ar climatizado.</p>\n<p>Um filtro limpo não confirma, sozinho, que drenos, bandejas, serpentinas, ventiladores, dutos ou renovação de ar estejam em condições adequadas. O PMOC existe justamente para organizar a visão do sistema como um todo.</p>\n<h2>Quais benefícios a manutenção planejada oferece?</h2>\n<p>Quando o plano é executado de forma consistente, a empresa passa a ter histórico das intervenções e mais previsibilidade para corrigir falhas. Isso pode ajudar a reduzir paradas inesperadas, identificar componentes desgastados, acompanhar o desempenho dos equipamentos e planejar serviços antes que pequenos problemas se tornem ocorrências maiores.</p>\n<p>A manutenção também contribui para preservar as condições de operação projetadas. Porém, economia de energia e aumento da vida útil não devem ser prometidos de maneira automática: os resultados dependem do estado do sistema, do dimensionamento, do uso, da instalação e das medidas corretivas adotadas.</p>\n<h2>Como começar o PMOC na sua empresa</h2>\n<ol><li><strong>Faça o levantamento dos equipamentos.</strong> Identifique aparelhos, capacidades, ambientes atendidos e condições aparentes.</li><li><strong>Realize uma avaliação técnica.</strong> Verifique instalação, conservação, funcionamento e documentação disponível.</li><li><strong>Defina o plano aplicável.</strong> Estabeleça atividades, periodicidades, registros e responsabilidades conforme o sistema.</li><li><strong>Execute e registre.</strong> O plano precisa sair do papel; cada atividade deve ser acompanhada e documentada.</li><li><strong>Revise quando houver mudanças.</strong> Reformas, substituição de equipamentos e alterações de uso podem exigir atualização.</li></ol>\n<h2>PMOC em Niterói e região</h2>\n<p>A CAPE Serviços e Consultoria atende empresas em Niterói, São Gonçalo, Itaboraí e Maricá com avaliação técnica, manutenção de sistemas de climatização, PMOC e contratos de manutenção. A empresa conta com engenheiro responsável registrado no CREA/RJ.</p>\n<p>Precisa avaliar o sistema de climatização da sua empresa? <strong>Fale com a CAPE pelo WhatsApp (21) 96978-3020</strong> e informe o tipo de estabelecimento, a cidade e a quantidade aproximada de equipamentos para iniciar o atendimento.</p>\n<h2>Fontes oficiais consultadas</h2>\n<ul><li><a href=\"https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13589.htm\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">Lei Federal nº 13.589/2018 — Presidência da República</a>.</li><li><a href=\"https://www.gov.br/anvisa/pt-br/assuntos/paf/fiscalizacao/fiscalizacao\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">Controle sanitário de sistemas de climatização — Anvisa</a>.</li><li><a href=\"https://bvs.saude.gov.br/bvs/saudelegis/anvisa/2003/rdc0009_16_01_2003.html\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">Resolução-RE nº 9/2003 — Anvisa/Ministério da Saúde</a>.</li></ul>",
+        "coverImageUrl": "/assets/saved-9b7e29f6126245ae.png",
+        "coverImage": "/assets/saved-9b7e29f6126245ae.png",
+        "image": "/assets/saved-9b7e29f6126245ae.png",
+        "cover": "/assets/saved-9b7e29f6126245ae.png",
+        "categoryName": "Climatização",
+        "category": "Climatização",
+        "categorySlug": "climatizacao",
+        "date": "2026-08-12T14:09:02.588826+00:00",
+        "publishedAt": "2026-08-12T14:09:02.588826+00:00",
+        "updatedAt": "2026-08-12T14:09:02.588826+00:00",
+        "seoTitle": "PMOC para empresas: entenda como funciona",
+        "seoDescription": "Entenda o que é PMOC, quem precisa do plano e como a manutenção de ar-condicionado ajuda empresas de Niterói e região.",
+        "seo": {
+          "title": "PMOC para empresas: entenda como funciona",
+          "description": "Entenda o que é PMOC, quem precisa do plano e como a manutenção de ar-condicionado ajuda empresas de Niterói e região."
+        }
+      }
+    ]
+  },
+  "blog": {
+    "enabled": true
+  },
+  "theme": {}
+}

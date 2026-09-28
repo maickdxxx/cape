@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "node scripts/select-site.mjs && vite build && vite build --ssr src/prerender.jsx --outDir .prerender && node scripts/prerender.mjs",
+    "preview": "vite preview",
+    "test": "node --test tests/site.test.mjs",
+    "quality": "npm run build && npm test"
   },
   "dependencies": {
     "react": "18.3.1",

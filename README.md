@@ -1,29 +1,11 @@
-# CAPE Serviços e Consultoria
+# Published websites
 
-Template exclusivo para a **CAPE Serviços e Consultoria**, preparado para o Coruja Host.
-
-## Estrutura
-
-- React + Vite
-- Contrato Coruja Host v2
-- Editor de textos, imagens, logo, cores, SEO, contato, serviços, regiões, clientes, marcas e demais coleções
-- Blog conectado ao conteúdo do Coruja Host
-- Formulário de orçamento com envio para WhatsApp
-- Mapa gerado a partir do endereço cadastrado
-- Rotas: `/`, `/servicos`, `/projetos`, `/sobre`, `/contato`, `/blog` e `/blog/:slug`
-- Preview compatível com `__CORUJA_PREVIEW_BASE_PATH__`
-
-## Exclusividade
-
-O `coruja.template.json` usa `visibility: private_client`, pois este modelo foi criado para um cliente específico e não deve entrar no catálogo público.
+This repository publishes CAPE Serviços e Consultoria. It no longer uses the retired visual template editor or loads company content from the editor API.
 
 ## Build
 
-```bash
-npm install
-npm run build
-```
+Run `npm ci` and `npm run quality` to build static HTML and validate the public routes, canonical URLs, sitemap, contact links and local assets.
 
-Saída: `dist/`.
+The existing `VITE_CORUJA_PROJECT_ID` build setting selects the saved publication from `sites/published.json`. A missing setting uses the primary customer website for local development; an unknown project ID stops the build. Each saved publication retains its own content, branding, routes, colors and real blog posts.
 
-> O repositório não inclui fallback SPA específico da Cloudflare. O Coruja Host controla o fluxo de publicação e o fallback no checkout temporário de deploy quando necessário.
+Update the selected publication in `sites/published.json`; generated files in `src/data`, the HTML shell and the CSS are refreshed during the build. Images are bundled with the website.

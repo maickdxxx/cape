@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile,stat} from 'node:fs/promises';
+const routes=JSON.parse(await readFile('scripts/routes.json','utf8'));
+const content=JSON.parse(await readFile('src/data/site-content.json','utf8'));
+const domain=content.global.seo.siteUrl;
+for(const route of routes)test('Public page '+route,async()=>{const html=await readFile('dist'+(route==='/'?'':route)+'/index.html','utf8');assert.equal((html.match(/<h1(?:\s|>)/g)||[]).length,1);assert.match(html,/<title[^>]*>[^<]+<\/title>/);const canonical=html.match(/<link[^>]*rel="canonical"[^>]*href="([^"]+)"/);assert.ok(canonical,'Public canonical');assert.equal(canonical[1].replace(/\/$/,''),(domain+route).replace(/\/$/,''));assert.match(html,/name="coruja-content-mode" content="repository"/);assert.doesNotMatch(html,/__CORUJA_|data-coruja-(?:path|editable)|coruja-visual-editor/);assert.ok(html.includes('wa.me/'+content.global.contact.whatsappRaw),'Correct WhatsApp');for(const match of html.matchAll(/(?:src|href)="(\/assets\/[^"?#]+)(?:[^"]*)"/g))await stat('dist'+match[1]);});
+test('404 is not indexed',async()=>assert.match(await readFile('dist/404.html','utf8'),/noindex/));
+test('Sitemap preserves every public page',async()=>{const xml=await readFile('dist/sitemap.xml','utf8');for(const r of routes)assert.ok(xml.includes(domain+r));assert.ok(!xml.includes('/404'));});
+test('Saved content and images are independent',()=>{const serialized=JSON.stringify(content);assert.ok(!serialized.includes('/storage/v1/object/public/'));assert.ok(!serialized.includes('/api/public/projects/'));assert.ok(content.global.contact.whatsappRaw);});
